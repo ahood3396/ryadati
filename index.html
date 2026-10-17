@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ff5fa2">
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="رياضتي">
+<title>رياضتي | تطبيق الرياضة واللياقة والسعرات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p1:#ff5fa2; --p2:#ff8fc2; --p3:#ffe3f0;
+  --card:#ffffff; --ink:#3a2230; --muted:#9b738a;
+  --bg1:#fff5fa; --bg2:#ffe6f2;
+  --grad:linear-gradient(135deg,#ff5fa2,#ff8fc2);
+  --ok:#25b06b; --warn:#ff8f3f; --star:#ffc53d;
+  --shadow:0 10px 30px rgba(255,95,162,.18);
+  --radius:20px;
+}
+body[data-g="m"]{
+  --p1:#2f7dfd; --p2:#6fa8ff; --p3:#e2eeff;
+  --ink:#1c2b40; --muted:#6f86a6;
+  --bg1:#f3f8ff; --bg2:#e2eeff;
+  --grad:linear-gradient(135deg,#1f6ae0,#5fa0ff);
+  --shadow:0 10px 30px rgba(47,125,253,.18);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Cairo',sans-serif;color:var(--ink);
+  background:radial-gradient(900px 500px at 100% -100px, var(--p3), transparent),
+             radial-gradient(700px 400px at 0% 110%, var(--p3), transparent),
+             linear-gradient(180deg,var(--bg1),var(--bg2));
+  min-height:100vh;padding-bottom:90px}
+h1,h2,h3{margin:0}
+button{font-family:inherit;cursor:pointer;border:none;border-radius:14px;font-weight:800;
+  background:var(--card);color:var(--ink);padding:12px 16px;font-size:1em;box-shadow:var(--shadow)}
+button:active{transform:scale(.97)}
+button.primary{background:var(--grad);color:#fff}
+button.ghost{background:transparent;border:2px solid var(--p1);color:var(--p1);box-shadow:none}
+input,select{font-family:inherit;font-size:1em;padding:11px 14px;border-radius:14px;
+  border:2px solid var(--p3);background:var(--card);color:var(--ink);width:100%}
+input:focus,select:focus{outline:none;border-color:var(--p1)}
+header{position:sticky;top:0;z-index:60;backdrop-filter:blur(12px);
+  background:color-mix(in srgb,var(--card) 85%,transparent);border-bottom:2px solid var(--p3)}
+.hd{max-width:1000px;margin:auto;display:flex;align-items:center;gap:10px;padding:10px 16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.15em}
+.logo .bdg{width:48px;height:48px;display:grid;place-items:center;border-radius:16px;font-size:26px;
+  background:var(--grad);box-shadow:var(--shadow)}
+.hd .right{margin-inline-start:auto;display:flex;gap:8px;align-items:center}
+.chip{background:var(--p3);color:var(--p1);border-radius:99px;padding:7px 14px;font-weight:800;font-size:.85em}
+main{max-width:1000px;margin:auto;padding:16px}
+.view{display:none;animation:fade .3s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:14px}
+.hero{background:var(--grad);color:#fff;border-radius:26px;padding:24px 20px;margin-bottom:14px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::after{content:"💪";position:absolute;font-size:130px;opacity:.15;left:-10px;bottom:-30px;transform:rotate(-15deg)}
+.hero h1{font-size:1.5em;line-height:1.7}
+.hero p{margin:.4em 0 0;opacity:.95;font-weight:600}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.sec-title{display:flex;align-items:center;gap:8px;font-weight:900;font-size:1.15em;margin:6px 0 12px}
+.sec-title .dot{width:12px;height:12px;border-radius:50%;background:var(--grad)}
+/* المهام */
+.task{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:18px;padding:14px;
+  box-shadow:var(--shadow);margin-bottom:10px;cursor:pointer;user-select:none;border:2px solid transparent;transition:.2s}
+.task.done{border-color:var(--ok);background:linear-gradient(180deg,#f0fff7,var(--card))}
+.task .tick{width:34px;height:34px;border-radius:12px;border:2px solid var(--p3);display:grid;place-items:center;
+  font-size:18px;color:#fff;background:transparent;flex:none;transition:.2s}
+.task.done .tick{background:var(--ok);border-color:var(--ok)}
+.task .info b{display:block}
+.task .info small{color:var(--muted);font-weight:600}
+.task .em{font-size:26px}
+.progress-ring{display:flex;align-items:center;gap:16px}
+.ring{width:96px;height:96px;flex:none;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .val{position:absolute;inset:0;display:grid;place-items:center;font-weight:900;font-size:1.2em}
+/* تمارين */
+.ex{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:14px;margin-bottom:10px;border-inline-start:6px solid var(--p1)}
+.ex .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ex .nm{font-weight:900;font-size:1.05em}
+.ex .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:.75em;font-weight:800;background:var(--p3);color:var(--p1);border-radius:99px;padding:4px 10px}
+.tag.g{background:#e6fff2;color:#128a52}
+.ex .tip{margin-top:8px;color:var(--muted);font-size:.9em;font-weight:600;line-height:1.9}
+.ex .sets{margin-inline-start:auto;font-weight:900;color:var(--p1);background:var(--p3);padding:6px 12px;border-radius:12px;white-space:nowrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filters button{padding:9px 14px;font-size:.9em;box-shadow:none;border:2px solid var(--p3);background:var(--card)}
+.filters button.on{background:var(--grad);color:#fff;border-color:transparent}
+/* الجدول */
+.day{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:14px;margin-bottom:10px;
+  display:flex;align-items:center;gap:12px;border-inline-start:6px solid var(--p2)}
+.day.today{border-inline-start-color:var(--p1);outline:2px solid var(--p1)}
+.day .dn{font-weight:900;min-width:62px}
+.day .df{font-weight:800;color:var(--p1)}
+.day .dm{color:var(--muted);font-size:.85em;font-weight:700}
+/* وجبات */
+.meal{background:var(--card);border-radius:18px;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+.meal .mh{padding:14px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.meal .mh .em{font-size:26px}
+.meal .mh b{font-size:1.05em}
+.meal .cal{margin-inline-start:auto;background:var(--p3);color:var(--p1);border-radius:99px;padding:5px 12px;font-weight:900;font-size:.85em;white-space:nowrap}
+.meal .mb{display:none;padding:0 14px 14px;border-top:1px dashed var(--p3)}
+.meal.open .mb{display:block}
+.meal h4{margin:12px 0 6px;color:var(--p1)}
+.meal ul,.meal ol{margin:0;padding-inline-start:22px;line-height:2}
+.cheat{background:linear-gradient(135deg,#fff7e0,#ffe9f5);border:2px dashed var(--star);border-radius:20px;padding:16px;margin-bottom:14px}
+body[data-g="m"] .cheat{background:linear-gradient(135deg,#eaf3ff,#e2eeff);border-color:var(--p1)}
+/* سعرات */
+.stat{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:14px;text-align:center}
+.stat b{display:block;font-size:1.5em;color:var(--p1)}
+.stat small{color:var(--muted);font-weight:700}
+.bar{height:12px;background:var(--p3);border-radius:99px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--grad);border-radius:99px}
+.logrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--p3);font-weight:700}
+.logrow .x{margin-inline-start:auto;background:#ffeef2;color:#e04a78;padding:5px 11px;border-radius:10px;font-size:.8em;box-shadow:none}
+body[data-g="m"] .logrow .x{background:#e7f0ff;color:#2f7dfd}
+/* تذكيرات */
+.rem{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:12px;margin-bottom:10px;flex-wrap:wrap}
+.rem b{min-width:110px}
+.sw{position:relative;width:56px;height:30px;border-radius:99px;background:#e3e3e3;flex:none;margin-inline-start:auto;cursor:pointer;transition:.2s}
+.sw::after{content:"";position:absolute;top:3px;right:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.sw.on{background:var(--ok)}
+.sw.on::after{right:29px}
+/* إنجازي */
+.month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.md{aspect-ratio:1;border-radius:10px;background:var(--p3);display:grid;place-items:center;font-size:.75em;font-weight:800;color:var(--muted)}
+.md.d0{background:#ffd9e6}.md.d1{background:#ffc0d8}.md.d2{background:var(--p2);color:#fff}
+.md.d3{background:var(--p1);color:#fff}.md.df{background:var(--ok);color:#fff}
+body[data-g="m"] .md.d0{background:#dbe9ff}body[data-g="m"] .md.d1{background:#bcd8ff}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--p3);color:var(--p1);
+  border-radius:14px;padding:8px 14px;font-weight:900;margin:4px}
+.reward{background:var(--grad);color:#fff;border-radius:24px;padding:22px;text-align:center;margin-top:12px}
+/* التنقل السفلي */
+nav{position:fixed;bottom:0;right:0;left:0;z-index:70;background:color-mix(in srgb,var(--card) 92%,transparent);
+  backdrop-filter:blur(14px);border-top:2px solid var(--p3);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.nav-in{max-width:1000px;margin:auto;display:flex;justify-content:space-around}
+nav button{background:none;box-shadow:none;display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-size:.68em;font-weight:800;color:var(--muted);padding:6px 4px;min-width:56px;border-radius:12px}
+nav button .i{font-size:22px}
+nav button.on{color:var(--p1);background:var(--p3)}
+/* شاشة البداية */
+#setup{position:fixed;inset:0;z-index:100;background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  display:flex;align-items:center;justify-content:center;padding:20px}
+#setup .\boxed{background:var(--card);border-radius:28px;box-shadow:var(--shadow);padding:26px;max-width:480px;width:100%;text-align:center}
+#setup h1{font-size:1.5em;margin-bottom:6px}
+#setup p{color:var(--muted);font-weight:700;margin:0 0 18px}
+.gpick{display:flex;gap:12px}
+.gpick button{flex:1;padding:22px 8px;border-radius:22px;border:3px solid var(--p3);display:flex;flex-direction:column;gap:6px;align-items:center}
+.gpick button .ic{font-size:44px}
+.gpick button.f:hover,.gpick button.f:focus{border-color:#ff5fa2;background:#fff0f7}
+.gpick button.m:hover,.gpick button.m:focus{border-color:#2f7dfd;background:#eff5ff}
+/* رسالة منبثقة */
+#toast{position:fixed;bottom:100px;right:50%;transform:translateX(50%) translateY(30px);z-index:90;
+  background:var(--ink);color:#fff;padding:14px 20px;border-radius:18px;font-weight:800;opacity:0;
+  transition:.3s;max-width:90vw;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+#toast.on{opacity:1;transform:translateX(50%) translateY(0)}
+.celebrate{position:fixed;inset:0;pointer-events:none;z-index:95;overflow:hidden}
+.cf{position:absolute;font-size:26px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}
+.muted{color:var(--muted);font-weight:700;font-size:.92em;line-height:1.9}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1;min-width:120px}
+.big{text-align:center;padding:16px;background:var(--grad);color:#fff;border-radius:20px;font-weight:900;font-size:1.1em;line-height:1.9}
+.ex .animBtn{margin-top:10px;width:100%;background:var(--p3);color:var(--p1);box-shadow:none;font-size:.9em}
+/* ==== نافذة الشرح المتحرك ==== */
+#animModal{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:16px;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+#animModal.on{display:flex}
+#animModal .panel{background:var(--card);border-radius:26px;max-width:520px;width:100%;max-height:92vh;overflow:auto;
+  box-shadow:0 24px 60px rgba(0,0,0,.3);padding:20px;position:relative;animation:pop .28s ease}
+@keyframes pop{from{transform:scale(.9) translateY(14px);opacity:0}to{transform:none;opacity:1}}
+#animModal .close{position:absolute;top:12px;inset-inline-start:12px;width:40px;height:40px;border-radius:50%;
+  background:var(--p3);color:var(--p1);font-size:20px;display:grid;place-items:center;box-shadow:none;padding:0}
+#animModal h3{font-size:1.2em;margin:6px 0 2px;text-align:center}
+#animModal .sub{text-align:center;color:var(--muted);font-weight:700;font-size:.9em;margin-bottom:8px}
+.stage{background:linear-gradient(180deg,var(--p3),#fff);border-radius:20px;padding:8px;margin:6px 0 12px;position:relative;overflow:hidden}
+.stage svg{display:block;width:100%;height:auto}
+.animCtl{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.animCtl button{flex:none;width:44px;height:44px;border-radius:14px;background:var(--p3);color:var(--p1);font-size:18px;box-shadow:none;padding:0}
+.animCtl .spd{flex:1}
+.animCtl .spd.on{background:var(--grad);color:#fff}
+.formBox{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.formBox div{background:var(--p3);border-radius:12px;padding:8px 10px;font-weight:700;font-size:.85em;display:flex;gap:6px;align-items:center}
+.formBox .no{background:#ffe3e6;color:#c62828}
+.formBox .yes{background:#e3f8ec;color:#128a52}
+.steps{margin:10px 0 0;padding-inline-start:20px;line-height:2;font-weight:600}
+.steps li::marker{color:var(--p1);font-weight:900}
+/* ==== تكيّف مع الجوال والتابلت ==== */
+@media (max-width:520px){
+  main{padding:10px}
+  nav button{min-width:0;flex:1;font-size:.6em;padding:5px 1px}
+  nav button .i{font-size:18px}
+  .nav-in{gap:1px}
+  .card{padding:14px;border-radius:16px}
+  .hero{padding:18px 14px;border-radius:20px}
+  .hero h1{font-size:1.25em}
+  #animModal{padding:8px}
+  #animModal .panel{padding:14px;border-radius:20px;max-height:94vh}
+  .formBox{grid-template-columns:1fr}
+  .ring{width:80px;height:80px}
+  .ring svg{width:80px;height:80px}
+  .filters button{padding:8px 11px;font-size:.82em}
+  .ex .sets{font-size:.8em;padding:5px 9px}
+  .meal .mh{flex-wrap:wrap}
+  .meal .cal{margin-inline-start:0;width:100%;text-align:center}
+  .step,.task{font-size:.95em}
+}
+@media (min-width:768px) and (max-width:1100px){ /* تابلت */
+  main{max-width:900px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1101px){ /* كمبيوتر */
+  main{max-width:1000px}
+  .exList .ex,.day,.meal{max-width:100%}
+}
+/* تحسين اللمس على الأجهزة اللمسية */
+@media (pointer:coarse){
+  button,.task,.meal .mh,.sw{min-height:48px}
+  input,select{font-size:16px} /* يمنع تكبير تلقائي على iOS */
+}
+/* رسم الشخصية المتحرك */
+.fig .torso,.fig .arm,.fig .leg,.fig .head{transition:none}
+svg .arm,svg .leg,svg .torso,svg .head{transform-box:view-box}
+</style>
+</head>
+<body>
+
+<!-- شاشة اختيار الجنس -->
+<div id="setup" style="display:none">
+  <div class="box">
+    <div style="font-size:56px">🌟</div>
+    <h1 id="setupTitle">أهلًا فيك في "رياضتي"</h1>
+    <p>اختر الجنس عشان نجهز لك التمارين والكلام والتصميم المناسب</p>
+    <div class="gpick">
+      <button class="f" onclick="pickGender('f')"><span class="ic">💅</span> أنثى 👩</button>
+      <button class="m" onclick="pickGender('m')"><span class="ic">💪</span> ذكر 👨</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="hd">
+    <div class="logo"><span class="bdg">🏃</span><span id="appName">رياضتي</span></div>
+    <div class="right">
+      <span class="chip" id="streakChip">🔥 0 يوم</span>
+      <button onclick="switchGender()" title="تغيير الجنس" style="padding:9px 12px">🔁</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============ اليوم ============ -->
+  <section class="view on" id="view-home">
+    <div class="hero">
+      <h1 id="heroMsg">...</h1>
+      <p id="heroSub">...</p>
+    </div>
+
+    <div class="card">
+      <div class="progress-ring">
+        <div class="ring">
+          <svg width="96" height="96">
+            <circle cx="48" cy="48" r="40" stroke="var(--p3)" stroke-width="11" fill="none"/>
+            <circle id="ringBar" cx="48" cy="48" r="40" stroke="url(#g1)" stroke-width="11" fill="none"
+              stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff5fa2"/><stop offset="1" stop-color="#ff8fc2"/>
+            </linearGradient></defs>
+          </svg>
+          <div class="val" id="ringVal">0%</div>
+        </div>
+        <div>
+          <b id="progTitle" style="font-size:1.1em">مهام اليوم</b>
+          <div class="muted" id="progSub">أنجزي مهامك اليوم وابدئي السلسلة 💖</div>
+          <div class="muted" id="nextRem" style="margin-top:4px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title"><span class="dot"></span><span id="tasksTitle">مهام اليوم</span></div>
+    <div id="tasksBox"></div>
+
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>ماء اليوم 💧</div>
+      <div class="row" id="waterBox"></div>
+    </div>
+
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>تمرين اليوم</div>
+      <div id="todayWorkout"></div>
+      <button class="primary" style="width:100%;margin-top:10px" onclick="go('workout')">📚 معرض التمارين الكامل</button>
+    </div>
+
+    <div class="card" style="text-align:center">
+      <div style="font-size:34px" id="quoteEm">✨</div>
+      <div style="font-weight:900;font-size:1.1em;line-height:2" id="quoteTxt">...</div>
+      <button class="ghost" style="margin-top:10px" onclick="newQuote()">اقتباس جديد 🔄</button>
+    </div>
+  </section>
+
+  <!-- ============ التمارين ============ -->
+  <section class="view" id="view-workout">
+    <div class="sec-title"><span class="dot"></span>معرض التمارين</div>
+    <div class="card">
+      <b>إعداداتي التدريبية</b>
+      <div class="row" style="margin-top:10px">
+        <select id="setEquip">
+          <option value="all">الكل (أثقال + بدون)</option>
+          <option value="weights">بالأثقال 🏋️</option>
+          <option value="body">بدون أثقال 🤸</option>
+        </select>
+        <select id="setPlace">
+          <option value="all">الكل (نادى + بيت)</option>
+          <option value="gym">في النادى 🏢</option>
+          <option value="home">في البيت 🏠</option>
+        </select>
+      </div>
+      <div class="filters" id="muscleFilters"></div>
+      <div id="exList"></div>
+    </div>
+  </section>
+
+  <!-- ============ الجدول ============ -->
+  <section class="view" id="view-schedule">
+    <div class="sec-title"><span class="dot"></span>الجدول الأسبوعي</div>
+    <div class="card">
+      <b>اختر نظام التمارين</b>
+      <select id="tplSel" style="margin-top:10px">
+        <option value="six">٦ أيام (صدر، ظهر، أرجل...)</option>
+        <option value="four">٤ أيام (تمرين مزدوج)</option>
+        <option value="three">٣ أيام (خفيف)</option>
+        <option value="home">بيت بدون معدات</option>
+      </select>
+      <p class="muted">النظام يتغير فورًا حسب اختيارك، والتمارين تتكيّف تلقائيًا مع إعداداتك (أثقال/بدون، نادى/بيت).</p>
+    </div>
+    <div id="weekBox"></div>
+  </section>
+
+  <!-- ============ السعرات ============ -->
+  <section class="view" id="view-cal">
+    <div class="sec-title"><span class="dot"></span>حاسبة السعرات</div>
+    <div class="card">
+      <div class="row">
+        <div><label>العمر</label><input type="number" id="cAge" value="25"></div>
+        <div><label>الطول (سم)</label><input type="number" id="cH" value="165"></div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div><label>الوزن (كجم)</label><input type="number" id="cW" value="70"></div>
+        <div><label>النشاط اليومي</label>
+          <select id="cAct">
+            <option value="1.2">خامل (عمل مكتبي)</option>
+            <option value="1.375">نشاط خفيف (١-٣ أيام)</option>
+            <option value="1.55" selected>متوسط (٣-٥ أيام)</option>
+            <option value="1.725">عالٍ (٦-٧ أيام)</option>
+            <option value="1.9">شديد (عمل بدني + تمارين)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div><label>الهدف</label>
+          <select id="cGoal">
+            <option value="lose">تخسيس الدهون</option>
+            <option value="keep" selected>ثبات الوزن</option>
+            <option value="gain">بناء العضلات</option>
+          </select>
+        </div>
+        <div style="display:flex;align-items:flex-end">
+          <button class="primary" style="width:100%" onclick="calcCal()">احسب 🧮</button>
+        </div>
+      </div>
+    </div>
+    <div id="calOut"></div>
+
+    <div class="sec-title"><span class="dot"></span>سجل أكلي اليوم 🍽️</div>
+    <div class="card">
+      <div class="row">
+        <select id="foodSel"></select>
+        <button class="primary" onclick="addFood()">أضف 👈</button>
+      </div>
+      <div id="foodLog"></div>
+    </div>
+  </section>
+
+  <!-- ============ الوجبات ============ -->
+  <section class="view" id="view-meals">
+    <div class="sec-title"><span class="dot"></span>الوجبات الصحية ووصفاتها</div>
+    <div class="cheat" id="cheatBox"></div>
+    <div class="filters" id="mealFilters"></div>
+    <div id="mealList"></div>
+  </section>
+
+  <!-- ============ التذكيرات ============ -->
+  <section class="view" id="view-rem">
+    <div class="sec-title"><span class="dot"></span>التذكيرات ⏰</div>
+    <div class="card">
+      <p class="muted">فعّل التنبيهات عشان نذكرك بالتمارين والمشي وقياس الوزن (الموقع لازم يكون مفتوح بالخلفية عشان التذكير يشتغل بالوقت المحدد).</p>
+      <button class="primary" style="width:100%" onclick="askNotify()">🔔 فعّل التنبيهات</button>
+    </div>
+    <div id="remBox"></div>
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>قياس الوزن 📉</div>
+      <div class="row">
+        <input type="number" id="wIn" step="0.1" placeholder="وزنك اليوم (كجم)">
+        <button class="primary" onclick="saveWeight()">سجّل الوزن</button>
+      </div>
+      <div id="wHist" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <!-- ============ إنجازي ============ -->
+  <section class="view" id="view-ach">
+    <div class="sec-title"><span class="dot"></span>إنجازي هذا الشهر 🏆</div>
+    <div class="grid g3" id="achStats"></div>
+    <div class="card">
+      <b id="monthName"></b>
+      <div class="muted" style="margin-bottom:8px">
+        🟩 جزء من المهام &nbsp; 🟩🟩 نصف &nbsp; 🟩🟩🟩 كامل &nbsp; ⭐ يوم كامل
+      </div>
+      <div class="month-grid" id="monthGrid"></div>
+    </div>
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>سلسلة الالتزام 🔥</div>
+      <div id="streakBox"></div>
+    </div>
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>مكافآت الشهر 🎁</div>
+      <div id="rewardBox"></div>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <div class="nav-in">
+    <button class="on" data-v="home" onclick="go('home')"><span class="i">🏠</span>اليوم</button>
+    <button data-v="workout" onclick="go('workout')"><span class="i">🏋️</span>التمارين</button>
+    <button data-v="schedule" onclick="go('schedule')"><span class="i">📅</span>الجدول</button>
+    <button data-v="cal" onclick="go('cal')"><span class="i">🔥</span>السعرات</button>
+    <button data-v="meals" onclick="go('meals')"><span class="i">🥗</span>الوجبات</button>
+    <button data-v="rem" onclick="go('rem')"><span class="i">⏰</span>التذكيرات</button>
+    <button data-v="ach" onclick="go('ach')"><span class="i">🏆</span>إنجازي</button>
+  </div>
+</nav>
+
+<!-- نافذة الشرح المتحرك للتمرين -->
+<div id="animModal" onclick="if(event.target===this)closeAnim()">
+  <div class="panel">
+    <button class="close" onclick="closeAnim()">✕</button>
+    <h3 id="animTitle">التمرين</h3>
+    <div class="sub" id="animSub">—</div>
+    <div class="stage"><div id="animStage"></div></div>
+    <div class="animCtl">
+      <button onclick="animTogglePlay()" id="animPlayBtn">⏸</button>
+      <button onclick="animStep()">⏭</button>
+      <button class="spd on" onclick="animSpeed(1,this)">×١</button>
+      <button class="spd" onclick="animSpeed(.5,this)">×٠٫٥</button>
+      <button class="spd" onclick="animSpeed(.25,this)">بطيء</button>
+    </div>
+    <div id="animStages"></div>
+    <div class="formBox" id="animForm"></div>
+    <ol class="steps" id="animSteps"></ol>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div class="celebrate" id="celebrate"></div>
+
+<script>
+/* ================== البيانات ================== */
+const DAYS = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+const MUSCLES = {
+  chest:{n:'صدر',e:'🫁'}, back:{n:'ظهر',e:'🦒'}, legs:{n:'أرجل',e:'🦵'},
+  shoulders:{n:'أكتاف',e:'🏔️'}, arms:{n:'ذراعات',e:'💪'}, abs:{n:'بطن',e:'🎯'}, cardio:{n:'كارديو',e:'❤️‍🔥'}
+};
+
+/* التمارين: eq: weights/body — pl: gym/home/both */
+const EX = [
+  // صدر
+  {n:'ضغط صدر (رفعة كاملة)', m:'chest', eq:'body', pl:'both', s:4, r:'15-20', t:'انزل لين صدرك تلمس الأرض وارفع بثبات، خُذ نفس عند النزول وزفير عند الرفع.'},
+  {n:'ضغط مع رفع الرجل', m:'chest', eq:'body', pl:'home', s:3, r:'12-15', t:'ارفع رجلك فوق كرسي، يزيد التركيز على صدرك العلوي.'},
+  {n:'ضغط ضيق (Diamond)', m:'chest', eq:'body', pl:'both', s:3, r:'10-15', t:'يدك مغمورة بشكل مثلث تحت صدرك، يشتغل الصدر والترايسبس معًا.'},
+  {n:'دمبل بنش (مقعد مستوٍ)', m:'chest', eq:'weights', pl:'gym', s:4, r:'10-12', t:'بينزل الدمبل لين مستوى صدرك وترفعه بثبات بدون ما تصفق.'},
+  {n:'دمبل بنش مائل', m:'chest', eq:'weights', pl:'gym', s:4, r:'10-12', t:'المقعد مائل 45 درجة، يركز على الصدر العلوي.'},
+  {n:'سكاي بنش بأرضية', m:'chest', eq:'weights', pl:'home', s:3, r:'12-15', t:'استلقِ على ظهرك وارفع الدمبلين للأعلى ببطء.'},
+  {n:'كابل كروس أوفر', m:'chest', eq:'weights', pl:'gym', s:3, r:'12-15', t:'اجمع يدينك أمام صدرك ببطء وتحكّم كامل بالحركة.'},
+  // ظهر
+  {n:'سحب علوي (Lat Pulldown)', m:'back', eq:'weights', pl:'gym', s:4, r:'10-12', t:'اسحب الكيبل لصدرك وافتح صدرك، لا تنسحب بظهرك مقوّس.'},
+  {n:'تجديف (Row)', m:'back', eq:'weights', pl:'gym', s:4, r:'10-12', t:'اسحب لبطنك وأنت تثبّت ظهرك مستقيم.'},
+  {n:'درفلة رومانية', m:'back', eq:'weights', pl:'gym', s:4, r:'8-10', t:'ظهرك مستقيم والحركة من الورك، تشعر بالشد في ظهرك السفلي.'},
+  {n:'سوبرمان', m:'back', eq:'body', pl:'home', s:3, r:'15', t:'استلقِ على بطنك وارفع يديك ورجليك معًا واثبت ثانيتين.'},
+  {n:'بيرد دوج', m:'back', eq:'body', pl:'home', s:3, r:'12 لكل طرف', t:'ارفع اليد المقابلة للرجل ببطء مع تثبيت البطن.'},
+  {n:'سحب بحمالة أو حبل', m:'back', eq:'body', pl:'home', s:3, r:'12', t:'لو عندك حبل مقاومة أو حقيبة مليانة كتب، اسحبها لبطنك.'},
+  {n:'دِدليفت (Deadlift)', m:'back', eq:'weights', pl:'gym', s:4, r:'8-10', t:'من أهم تمارين الظهر والأرجل، خُذ مساعدة أول مرة عشان الأداء.'},
+  // أرجل
+  {n:'سكوات بدون أثقال', m:'legs', eq:'body', pl:'both', s:4, r:'20', t:'ارجلك بعرض كتفك ونزول لين موازي مع الأرض مع إبقاء الصدر مرفوع.'},
+  {n:'سكوات جانبي', m:'legs', eq:'body', pl:'home', s:3, r:'15 لكل طرف', t:'خطوة جانبية ونزول ببطء، يركز على الفخذ الجانبي.'},
+  {n:'لانج (خطوة أمامية)', m:'legs', eq:'body', pl:'both', s:4, r:'12 لكل رجل', t:'ركبتك ما تطلع فوق أصابع قدمك، والظهر مستقيم.'},
+  {n:'سكوات بحمل (غولط)', m:'legs', eq:'weights', pl:'gym', s:4, r:'10-12', t:'احمل الغولط عند صدرك أو خلف رقبتك مع الحفاظ على استقامة الظهر.'},
+  {n:'ديدليفت روماني بالأحمال', m:'legs', eq:'weights', pl:'gym', s:4, r:'10-12', t:'أرجل شبه مستقيمة والحركة انحناء من الورك.'},
+  {n:'رفع ربلة (Calf Raise)', m:'legs', eq:'weights', pl:'both', s:4, r:'15-20', t:'ارفع كعبك ببطء واثبت في الأعلى ثانيتين.'},
+  {n:'جلسة أرجل (Leg Press)', m:'legs', eq:'weights', pl:'gym', s:4, r:'12-15', t:'ما تثبت ركبتك تماماً عند الدفع.'},
+  // أكتاف
+  {n:'ضغط علوي بدمبل', m:'shoulders', eq:'weights', pl:'both', s:4, r:'10-12', t:'ارفع الدمبلين فوق رأسك ببطء بدون ما تقوّس ظهرك.'},
+  {n:'أجنحة جانبية', m:'shoulders', eq:'weights', pl:'both', s:4, r:'12-15', t:'ارفع لين مستوى كتفك ببطء، لا تستخدم التحريك الجسدي.'},
+  {n:'ضغط برية (Plank Shoulder Tap)', m:'shoulders', eq:'body', pl:'home', s:3, r:'20 لمسة', t:'من وضع البلانك المسند، المس الكتف المقابل مع تثبيت الحوض.'},
+  {n:'فرنط بدمبل (Face Pull)', m:'shoulders', eq:'weights', pl:'gym', s:3, r:'12-15', t:'يساعد على صحة مفصل الكتف ووضعية الجسم.'},
+  // ذراعات
+  {n:'كيرل بدمبل (بايسبس)', m:'arms', eq:'weights', pl:'both', s:4, r:'12', t:'ثبّت مرفقك وارفع ببطء بدون تحريك الجسم.'},
+  {n:'ضغط ترايسبس على أرضية', m:'arms', eq:'body', pl:'home', s:3, r:'15', t:'يدك بعرض كتفك قريبة من الجسم.'},
+  {n:'دِيبز على كرسي', m:'arms', eq:'body', pl:'home', s:3, r:'12-15', t:'استند على كرسي ثابت وانزل ببطء.'},
+  {n:'إكستنشن ترايسبس بالكيبل', m:'arms', eq:'weights', pl:'gym', s:3, r:'12-15', t:'مرفقك ثابت وجسمك مائل قليل للأمام.'},
+  {n:'مطرقة بدمبل (Hammer)', m:'arms', eq:'weights', pl:'both', s:3, r:'12', t:'قبضتك للأعلى، يركز على الساعد والبايسبس.'},
+  // بطن
+  {n:'بلانك', m:'abs', eq:'body', pl:'both', s:4, r:'30-60 ثانية', t:'جسمك خط مستقيم وبطنك مشدود طول الوقت.'},
+  {n:'كراونش', m:'abs', eq:'body', pl:'home', s:4, r:'20', t:'ارفع كتفك بس، لا تسحب رقبتك.'},
+  {n:'ليج ريز (رفع أرجل)', m:'abs', eq:'body', pl:'home', s:3, r:'15', t:'ارفع رجليك لين 90 درجة مع إبقاء أسفل ظهرك على الأرض.'},
+  {n:'ماونتن كليمر', m:'abs', eq:'body', pl:'both', s:4, r:'30 ثانية', t:'سرعة متوسطة مع إبقاء الحوض ثابت.'},
+  {n:'جسر ورك', m:'abs', eq:'body', pl:'home', s:3, r:'20', t:'ارفع حوضك للأعلى واثبت ثانيتين.'},
+  {n:'تويست (Russian Twist)', m:'abs', eq:'weights', pl:'both', s:3, r:'20', t:'دور جسمك من الحوض ببطء، لو معك دمبل أحسن.'},
+  // كارديو
+  {n:'مشي سريع 30 دقيقة', m:'cardio', eq:'body', pl:'both', s:1, r:'30 دقيقة', t:'المشي اليومي أساس النجاح، حاول تمشي بخطوة سريعة.'},
+  {n:'جري خفيف', m:'cardio', eq:'body', pl:'both', s:1, r:'15-20 دقيقة', t:'ابدأ بتسخين ومشي دقيقتين قبل الجري.'},
+  {n:'نط الحبل', m:'cardio', eq:'body', pl:'home', s:4, r:'دقيقة + 30 ث راحة', t:'من أسرع حرق للسعرات في وقت قصير.'},
+  {n:'جاكنجمب (Jumping Jacks)', m:'cardio', eq:'body', pl:'both', s:4, r:'دقيقة', t:'حرك كامل جسمك وتنفّس بانتظام.'},
+  {n:'بيربيز (Burpees)', m:'cardio', eq:'body', pl:'home', s:4, r:'10-12', t:'من أقوى تمارين الحرق المتكاملة.'},
+  {n:'دراجة ثابتة', m:'cardio', eq:'weights', pl:'gym', s:1, r:'20-30 دقيقة', t:'مقاومة متوسطة وسرعة ثابتة.'},
+  {n:'إطالة وتهدئة', m:'cardio', eq:'body', pl:'both', s:1, r:'5-10 دقائق', t:'بعد كل تمرين، يقلل الألم ويحسّن المرونة.'}
+];
+
+const TPL = {
+  six:[ // index = getDay() : 0=الأحد
+    {f:'صدر + ترايسبس', ms:['chest','arms']},
+    {f:'ظهر + بايسبس', ms:['back','arms']},
+    {f:'أرجل', ms:['legs']},
+    {f:'كارديو + بطن', ms:['cardio','abs']},
+    {f:'أكتاف + ذراعات', ms:['shoulders','arms']},
+    {f:'أرجل + بطن', ms:['legs','abs']},
+    {f:'راحة نشطة (مشي + إطالة)', ms:['cardio']}
+  ],
+  four:[
+    {f:'صدر + أكتاف', ms:['chest','shoulders']},
+    {f:'ظهر + بطن', ms:['back','abs']},
+    {f:'أرجل + ذراعات', ms:['legs','arms']},
+    {f:'كارديو + بطن', ms:['cardio','abs']},
+    {f:'راحة', ms:[]},
+    {f:'أرجل + أكتاف', ms:['legs','shoulders']},
+    {f:'راحة نشطة (مشي + إطالة)', ms:['cardio']}
+  ],
+  three:[
+    {f:'الجسم العلوي (صدر + ظهر + أكتاف)', ms:['chest','back','shoulders']},
+    {f:'كارديو + بطن', ms:['cardio','abs']},
+    {f:'أرجل + ذراعات', ms:['legs','arms']},
+    {f:'راحة', ms:[]},
+    {f:'الجسم العلوي (صدر + ظهر + أكتاف)', ms:['chest','back','shoulders']},
+    {f:'كارديو كامل', ms:['cardio']},
+    {f:'راحة نشطة (مشي + إطالة)', ms:['cardio']}
+  ],
+  home:[
+    {f:'ضغط وصدر (بدون معدات)', ms:['chest','arms']},
+    {f:'أرجل + بطن', ms:['legs','abs']},
+    {f:'كارديو سريع', ms:['cardio']},
+    {f:'ظهر (سحب وسوبرمان)', ms:['back']},
+    {f:'أكتاف + ذراعات', ms:['shoulders','arms']},
+    {f:'بطن + مشي 30 دقيقة', ms:['abs','cardio']},
+    {f:'راحة نشطة (إطالة)', ms:['cardio']}
+  ]
+};
+
+const MEALS = [
+  {ty:'breakfast', e:'🥣', n:'شوفان بالحليب والفاكهة', cal:350, p:14,
+   ing:['نصف كوب شوفان','كوب حليب (قريب الدسم أو نباتي)','نصف موزة مقطعة','ملعقة عسل','رشة قرفة'],
+   st:['انقع الشوفان بالحليب 10 دقائق.','قطّع الموز وحطه فوق الشوفان.','أضف العسل والقرفة وحرّك.','خلّه يرتاح دقيقتين وتقدّمه.']},
+  {ty:'breakfast', e:'🥚', n:'بيض مسلوق مع أفوكادو وخبز أسمر', cal:380, p:20,
+   ing:['بيضتان مسلوقتان','ربع أفوكادو مهروس','شريحة خبز أسمر','رشة ملح وليمون'],
+   st:['سلّق البيض 7-8 دقائق.','اهرس الأفوكادو مع الليمون والملح.','وزّع الأفوكادو على الخبز وحط البيض فوقه.','أضف شرائح طماطم لو حاب.']},
+  {ty:'breakfast', e:'🥛', n:'زبادي يوناني مع جوز وعسل', cal:300, p:22,
+   ing:['كوب زبادي يوناني','ملعقة جوز مجروش','ملعقة عسل','ملعقة بذور شيا'],
+   st:['حط الزبادي في صحن.','أضف الجوز والشيا.','رشّ العسل فوقه.','تناوله فورًا.']},
+  {ty:'breakfast', e:'🫘', n:'فول بزيت الزيتون والخبز الأسمر', cal:400, p:18,
+   ing:['كوب فول مطبوخ','ملعقة زيت زيتون','ليمون وكمون','خضار مفروم (خيار/طماطم)'],
+   st:['سخّن الفول وحط الكمون.','رشّ زيت الزيتون والليمون.','قدّمه مع الخضار الطازجة والخبز الأسمر.']},
+  {ty:'lunch', e:'🍗', n:'صدر دجاج مشوي مع أرز بني وسلطة', cal:550, p:45,
+   ing:['قطعة صدر دجاج (٢٠٠غ)','كوب أرز بني','سلطة خضار متنوعة','ملعقة زيت زيتون','بهارات دجاج'],
+   st:['تبّل الدجاج بالبهارات وزيت الزيتون لساعة.','اشويه على الشواية أو المقلاة 10 دقائق لكل وجه.','اطبخ الأرز البني وغسله قبل الطبخ.','قدّم الدجاج مع الأرز والسلطة.']},
+  {ty:'lunch', e:'🐟', n:'سمك مشوي مع خضار سوتيه', cal:480, p:40,
+   ing:['قطعة فيليه سمك (٢٠٠غ)','كوب خضار مشكلة (بروكلي/جزر/فاصوليا)','ثوم وليمون','ملعقة زيت زيتون'],
+   st:['تبّل السمك بالليمون والثوم والملح.','اشويه في الفرن 200 درجة ل 20 دقيقة.','شوّه الخضار في زيت الزيتون 5 دقائق.','قدّم السمك فوق الخضار.']},
+  {ty:'lunch', e:'🌯', n:'صحن دجاج مع بطاطا حلوة', cal:520, p:38,
+   ing:['قطعة دجاج مشوي','بطاطا حلوة مقطعة مكعبات','رشة بابريكا وزيت زيتون','سلطة جانبية'],
+   st:['قطّع البطاطا الحلوة ورشّ الزيت والبابريكا.','اخبزها في الفرن 25 دقيقة على 200 درجة.','قطّع الدجاج وحطه فوقها.','قدّمه مع السلطة.']},
+  {ty:'lunch', e:'🍝', n:'مكرونة قمح كامل بالتونة', cal:540, p:32,
+   ing:['١٥٠غ مكرونة قمح كامل','علبة تونة بالماء','طماطم وثوم','ملعقة زيت زيتون','جبن بارميزان (اختياري)'],
+   st:['اسلّق المكرونة حسب التعليمات.','حمّر الثوم والطماطم بزيت الزيتون.','أضف التونة وحرّك دقيقتين.','اسكب المكرونة وقلّبها مع الصوص.']},
+  {ty:'dinner', e:'🍲', n:'شوربة عدس + سلطة', cal:380, p:20,
+   ing:['كوب عدس','بصلة وجزر','كمون وليمون','ملعقة زيت زيتون'],
+   st:['اطبخ العدس مع البصلة والجزر ل 30 دقيقة.','اهرس الخليط أو اتركه كما هو.','أضف الكمون والليمون.','قدّمه مع سلطة خضار.']},
+  {ty:'dinner', e:'🥚', n:'أومليت خضار + خبز أسمر', cal:350, p:24,
+   ing:['٣ بيضات','فلفل ومشروم وبصل مفروم','رشة جبن قليل الدسم','شريحة خبز أسمر'],
+   st:['اخفق البيض مع الملح.','حمّر الخضار دقيقتين وأضف البيض.','اطوِ الأومليت واطبخها 3 دقائق.','قدّمها مع الخبز.']},
+  {ty:'dinner', e:'🥗', n:'سلطة تونة كبيرة', cal:320, p:28,
+   ing:['علبة تونة','خس وطماطم وخيار','زيتون','ملعقة زيت زيتون وخل'],
+   st:['قطّع الخضار قطع كبيرة.','أضف التونة والزيتون.','اخلط زيت الزيتون والخل ورشّها.','حرّكها وتناولها فورًا.']},
+  {ty:'dinner', e:'🥙', n:'ساندويتش دجاج مشوي', cal:400, p:32,
+   ing:['خبز أسمر صغير','قطعة دجاج مشوي','خس وطماطم','مايونيز قليل الدسم (اختياري)'],
+   st:['اشوي الدجاج وقطّعه شرائح.','افتح الخبز ووزّع الخضار.','حط الدجاج وأغلق الساندويتش.','لفه بورق وأكله ببطء.']},
+  {ty:'snack', e:'🍎', n:'تفاحة بالزبدة الفولية', cal:200, p:6,
+   ing:['تفاحة متوسطة','ملعقة زبدة فولية','رشة قرفة'],
+   st:['قطّع التفاحة شرائح.','وزّع الزبدة الفولية ورشّ القرفة.','تناولها كوجبة خفيفة.']},
+  {ty:'snack', e:'🥜', n:'مخلوط مكسرات (٣٠غ)', cal:180, p:6,
+   ing:['٣٠غ لوز وكاجو وبندق'],
+   st:['اختر مكسرات بدون ملح أو سكر.','وزنها عشان ما تزيد عن 30غ.','تناولها مع كوب ماء.']},
+  {ty:'snack', e:'🍿', n:'فشار منزلي بدون زيت', cal:150, p:4,
+   ing:['نصف كوب ذرة فشار','رشة ملح خفيف'],
+   st:['حط الذرة في قدر محكم مع غطاء.','على نار متوسطة حتى تتوقف الأصوات.','أضف الملح وحرّك.','استمتع بها بدون ذنب 😄']},
+  {ty:'snack', e:'🥕', n:'خضار مقرمشة مع حمص', cal:170, p:8,
+   ing:['جزر وخيار وكرفس مقطعة','٣ ملاعق حمص','رشة بابريكا'],
+   st:['قطّع الخضار أصابع.','حضّر الحمص ورشّ البابريك.','غمس وصف.']}
+];
+
+const CHEATS = [
+  {e:'🍔', n:'برجر لحم مع بطاطا مقرمشة', d:'الوجبة المثالية بعد أسبوع من الانضباط — استمتع فيها بلا شعور بالذنب!'},
+  {e:'🍕', n:'بيتزا مارغريتا بالحجم الكبير', d:'شريحتين لذيذتين + سلطة جانبية = توازن ممتاز.'},
+  {e:'🌯', n:'شاورما دجاج مع بطاطا وصلصة الثوم', d:'كلاسيكية لا تُقاوم بعد أسبوع صعب.'},
+  {e:'🍝', n:'مكرونة كربونارا بالكريمة', d:'دفء carbs تستحقه بعد الالتزام.'},
+  {e:'🍣', n:'طبق سوشي متنوع', d:'خيار ممتاز وغني بالبروتين — حتى وجبة المكافأة تكون مفيدة!'},
+  {e:'🥞', n:'بان كيك بالشوكولاتة والموز', d:'وجبة فطور مفصلة آخر الأسبوع، حلا وطاقة في نفس الوقت.'},
+  {e:'🍢', n:'كباب ومشاوي مع تنور', d:'لحم مشوي طازج + خبز ساخن = مكافأة من القلب.'},
+  {e:'🍦', n:'آيس كريم مع صوص شوكولاتة', d:'حلوى صغيرة تكفي… خذ وقتك وتذوقها ببطء.'}
+];
+
+const Q = {
+  f:['كل تمرين اليوم خطوة أقرب لنسخة أقوى منكِ 💪','الالتزام مو يوم واحد… عادة تصنع صحّتكِ ومستقبلكِ','ما تحسين بثمرة التمرين إلا بعد ما تخلصينه','جسمكِ يستاهل اهتمامكِ، ما تنسينه اليوم','الانضباط جميل… والأجمل إنكِ ما كسرتي سلسلتكِ','بطيء وأنتِ ثابتة أسرع من سريعة وتفشلين','ما أحد بيكمل عنكِ… بس أنتِ تقدرين','تذكري إنكِ بدأتِ من الصفر، وما يناسبكِ توقفين الحين','كل خطوة مشي اليوم استثمار بصحتكِ','افتتحي يومكِ بالحركة… والباقي يتغير معه','ما تحتاجين جيم فخم… تحتاجين تبدأين اليوم','أوقات ما تبين تتمرينين؟ ابدئي دقيقتين وبس 💖'],
+  m:['القوة تُبنى في اللحظة اللي تبي توقف فيها','ما تجيك النتيجة إلا بالعرق والالتزام','كل جلسة تمرين تبني نسخة أقوى منك','الأبطال ما ينحذرون من التعب','استمر حتى يصير التمرين عادة، بعدها يصعب توقف','الألم مؤقت… والإنجاز يبقى','تمرين اليوم = غدًا أقوى','لا تبحث عن الحافز، ابحث عن النظام','كل مرة تضغط فيها نفسك خطوة للأمام','الحجم والأداء ما يجيين بالحظ… يجيين بالعرق فقط','الذين يكملون هم الاستثناء، كن منهم','المزاج يجي ويروح… والانضباط يبقى']
+};
+
+/* ================== الحالة والتخزين ================== */
+const LS = {
+  get(k, d){ try{ const v = localStorage.getItem('fit_'+k); return v===null?d:JSON.parse(v);}catch(e){return d} },
+  set(k, v){ try{ localStorage.setItem('fit_'+k, JSON.stringify(v)); }catch(e){} }
+};
+
+let ST = {
+  g: LS.get('g', null),
+  name: LS.get('name', ''),
+  tpl: LS.get('tpl', 'six'),
+  logs: LS.get('logs', {}),
+  weights: LS.get('weights', []),
+  calProf: LS.get('calProf', null),
+  eaten: LS.get('eaten', {}),
+  reminders: LS.get('reminders', {workout:{on:true,t:'18:00'}, walk:{on:true,t:'17:00'}, weigh:{on:true, day:5, t:'09:00'}}),
+  monthReward: LS.get('monthReward', {}),
+  fired: {}
+};
+
+const F = s => s; // placeholder for gender text switching (handled per call)
+
+function saveAll(){
+  LS.set('g',ST.g); LS.set('name',ST.name); LS.set('tpl',ST.tpl); LS.set('logs',ST.logs);
+  LS.set('weights',ST.weights); LS.set('calProf',ST.calProf); LS.set('eaten',ST.eaten);
+  LS.set('reminders',ST.reminders); LS.set('monthReward',ST.monthReward);
+}
+
+const todayKey = () => new Date().toISOString().slice(0,10);
+function getLog(k){ if(!ST.logs[k]) ST.logs[k]={}; return ST.logs[k]; }
+const isF = () => ST.g === 'f';
+
+/* ================== الإعداد الأولي ================== */
+function pickGender(g){
+  ST.g = g; saveAll();
+  document.getElementById('setup').style.display='none';
+  applyGender(); renderAll(); celebrate();
+  toast(g==='f' ? 'أهلًا وسهلًا يا بطلة! 💖 جهزنا لكِ كل شي بالوردي' : 'أهلًا وسهلًا يا بطل! 💪 جهزنا لك كل شي بالأزرق');
+}
+function switchGender(){
+  ST.g = isF()?'m':'f'; saveAll(); applyGender(); renderAll();
+  toast(isF()? 'تم التحويل للنمط الوردي 💖':'تم التحويل للنمط الأزرق 💙');
+}
+function applyGender(){
+  document.body.dataset.g = ST.g;
+  const m = isF();
+  document.getElementById('appName').textContent = m ? 'رياضتي يا بطلة 💖' : 'رياضتي يا بطل 💪';
+  document.querySelector('meta[name=theme-color]').content = m ? '#ff5fa2' : '#2f7dfd';
+}
+
+/* ================== التنقل ================== */
+function go(v){
+  document.querySelectorAll('.view').forEach(s=>s.classList.remove('on'));
+  document.getElementById('view-'+v).classList.add('on');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===v));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(v==='ach') renderAch();
+  if(v==='rem') renderWeights();
+  if(v==='cal') renderFood();
+  if(v==='meals') renderMeals();
+}
+
+/* ================== الرسائل ================== */
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove('on'), 3500);
+}
+function celebrate(emojis){
+  const box = document.getElementById('celebrate');
+  const em = emojis && emojis.length ? emojis : (isF()? ['💖','🌸','✨','🎀','💗'] : ['💪','⭐','🔥','🏅','💙']);
+  for(let i=0;i<28;i++){
+    const s = document.createElement('span');
+    s.className='cf'; s.textContent = em[Math.floor(Math.random()*em.length)];
+    s.style.right = Math.random()*100+'vw';
+    s.style.top = '-40px';
+    s.style.animationDuration = (2+Math.random()*2)+'s';
+    s.style.animationDelay = (Math.random()*.7)+'s';
+    box.appendChild(s);
+    setTimeout(()=>s.remove(), 5000);
+  }
+}
+function newQuote(){
+  const arr = Q[isF()?'f':'m'];
+  const el = document.getElementById('quoteTxt');
+  el.style.opacity=0;
+  setTimeout(()=>{ el.textContent = arr[Math.floor(Math.random()*arr.length)]; el.style.opacity=1; },200);
+  el.style.transition='.3s';
+}
+
+/* ================== التمارين ================== */
+let filterMuscle = 'all';
+function matchEx(e, equipPref, placePref){
+  if(equipPref==='body' && e.eq!=='body') return false;
+  if(placePref==='gym' && e.pl!=='gym' && e.pl!=='both') return false;
+  if(placePref==='home' && e.pl!=='home' && e.pl!=='both') return false;
+  return true;
+}
+function exCard(e){
+  const tags = [];
+  tags.push(e.eq==='weights'?'<span class="tag">🏋️ بأثقال</span>':'<span class="tag g">🤸 بدون أثقال</span>');
+  tags.push(e.pl==='gym'?'<span class="tag">🏢 نادى</span>':(e.pl==='home'?'<span class="tag g">🏠 بيت</span>':'<span class="tag g">🏠🏢 الكل</span>'));
+  tags.push(`<span class="tag">${MUSCLES[e.m].e} ${MUSCLES[e.m].n}</span>`);
+  return `<div class="ex">
+    <div class="top"><span class="nm">${e.n}</span><span class="sets">${e.s} × ${e.r}</span></div>
+    <div class="tags">${tags.join('')}</div>
+    <div class="tip">💡 ${e.t}</div>
+    <button class="animBtn" onclick="openAnim(${JSON.stringify(e.n)})">▶ شاهد الحركة كيف تُؤدّى</button>
+  </div>`;
+}
+function renderMuscleFilters(){
+  const box = document.getElementById('muscleFilters');
+  let h = `<button class="${filterMuscle==='all'?'on':''}" onclick="setMuscle('all')">الكل</button>`;
+  for(const k in MUSCLES) h += `<button class="${filterMuscle===k?'on':''}" onclick="setMuscle('${k}')">${MUSCLES[k].e} ${MUSCLES[k].n}</button>`;
+  box.innerHTML = h;
+}
+function setMuscle(m){ filterMuscle=m; renderMuscleFilters(); renderExList(); }
+function renderExList(){
+  const eq = document.getElementById('setEquip').value;
+  const pl = document.getElementById('setPlace').value;
+  const list = EX.filter(e => (filterMuscle==='all'||e.m===filterMuscle) && matchEx(e,eq,pl));
+  document.getElementById('exList').innerHTML = list.length
+    ? list.map(exCard).join('')
+    : '<p class="muted">ما فيه تمارين بهذا الاختيار، جرّب تغيّر الفلاتر 😉</p>';
+}
+
+/* ================== المهام ================== */
+function todayPlan(){
+  const d = new Date().getDay();
+  return TPL[ST.tpl][d];
+}
+function weighToday(){
+  const r = ST.reminders.weigh;
+  return r && r.on && r.day === new Date().getDay();
+}
+function tasksList(){
+  const t = todayKey();
+  const log = getLog(t);
+  const list = [
+    {k:'workout', e:'🏋️', n:isF()?'تمرين اليوم':'تمرين اليوم', d:todayPlan().f},
+    {k:'walk', e:'🚶', n:'المشي لمدة 30 دقيقة', d:'خطوة صحية يومية'},
+    {k:'water', e:'💧', n:'شرب 8 أكواب ماء', d:(log.water||0) + ' / 8 كوب'},
+  ];
+  if (weighToday()) list.push({k:'weigh', e:'⚖️', n:'قياس الوزن اليومي', d:'سجّل وزنك في قسم التذكيرات'});
+  return list;
+}
+function renderTasks(){
+  const box = document.getElementById('tasksBox');
+  const t = todayKey();
+  const log = getLog(t);
+  let html = '';
+  list = tasksList();
+  list.forEach(item=>{
+    const done = !!log[item.k];
+    html += `<div class="task ${done?'done':''}" onclick="toggleTask('${item.k}')">
+      <div class="tick">${done?'✓':''}</div>
+      <div class="em">${item.e}</div>
+      <div class="info"><b>${item.n}</b><small>${item.d}</small></div>
+    </div>`;
+  });
+  box.innerHTML = html;
+}
+function toggleTask(k){
+  const log = getLog(todayKey());
+  log[k] = !log[k];
+  saveAll(); renderTasks(); updateProgress();
+  if(log[k]){
+    toast(isF()?'أحسنتِ! تم إنجاز المهمة 💖':'أحسنت! تم إنجاز المهمة 💪');
+    celebrate();
+  }
+}
+function renderWater(){
+  const box = document.getElementById('waterBox');
+  const log = getLog(todayKey());
+  const n = log.water || 0;
+  let html = '';
+  for(let i=1;i<=8;i++){
+    const filled = i<=n;
+    html += `<button onclick="setWater(${i})" style="background:${filled?'var(--grad)':'var(--p3)'};color:${filled?'#fff':'var(--p1)'};min-width:40px">${i}</button>`;
+  }
+  html += `<button onclick="addWater()" style="background:var(--grad);color:#fff;min-width:40px">+1</button>`;
+  box.innerHTML = html;
+}
+function setWater(n){
+  const log = getLog(todayKey());
+  log.water = n; saveAll(); renderWater(); renderTasks();
+}
+function addWater(){
+  const log = getLog(todayKey());
+  log.water = (log.water||0)+1; saveAll(); renderWater(); renderTasks();
+  if(log.water>=8) toast(isF()?'وصلتي 8 أكواب! رهيييبة 💖':'وصلت 8 أكواب! ممتاز 💪');
+}
+function renderTodayWorkout(){
+  const p = todayPlan();
+  const box = document.getElementById('todayWorkout');
+  if (p.ms.length===0){
+    box.innerHTML = '<div class="muted">راحة نشطة 🌴 — استمتع بمشي خفيف وإطالة.</div>';
+    return;
+  }
+  let html = '<div class="sec-title"><span class="dot"></span>'+p.f+'</div>';
+  const list = EX.filter(e=>p.ms.includes(e.m));
+  list.forEach(e=>{
+    html += exCard(e);
+  });
+  box.innerHTML = html;
+}
+
+/* ================== الجدول الأسبوعي ================== */
+function renderWeek(){
+  const box = document.getElementById('weekBox');
+  const today = new Date().getDay();
+  let html = '';
+  const plan = TPL[ST.tpl];
+  plan.forEach((p,i)=>{
+    const isToday = i===today;
+    html += `<div class="day ${isToday?'today':''}">
+      <div class="dn">${DAYS[i]}</div>
+      <div>
+        <div class="df">${p.f}</div>
+        <div class="dm">${p.ms.length?p.ms.map(m=>MUSCLES[m].e+' '+MUSCLES[m].n).join(' • '):'🌴 راحة'}</div>
+      </div>
+      ${isToday?'<div class="badge" style="margin-inline-start:auto;background:var(--grad);color:#fff">اليوم</div>':''}
+    </div>`;
+  });
+  box.innerHTML = html;
+}
+
+/* ================== السعرات ================== */
+function renderFood(){
+  const sel = document.getElementById('foodSel');
+  let html = '';
+  MEALS.forEach((m,i)=>{
+    html += `<option value="${i}">${m.e} ${m.n} — ${m.cal} سعرة</option>`;
+  });
+  sel.innerHTML = html;
+  renderFoodLog();
+}
+function addFood(){
+  const sel = document.getElementById('foodSel');
+  const i = parseInt(sel.value);
+  const m = MEALS[i];
+  const log = getLog(todayKey());
+  if(!log.food) log.food = [];
+  log.food.push({n:m.n, cal:m.cal, p:m.p});
+  saveAll(); renderFoodLog(); toast('تم إضافة '+m.n+' ✅');
+}
+function renderFoodLog(){
+  const log = getLog(todayKey());
+  const box = document.getElementById('foodLog');
+  if(!log.food || log.food.length===0){
+    box.innerHTML = '<div class="muted">لم تُضف أي وجبة بعد.</div>';
+    return;
+  }
+  let total=0, prot=0;
+  let html = '<div class="logrow"><span>المجموع</span><b style="color:var(--p1)">'+log.food.reduce((s,f)=>s+f.cal,0)+' سعرة</b><span>'+log.food.reduce((s,f)=>s+f.p,0)+' غ بروتين</span></div>';
+  log.food.forEach((f,idx)=>{
+    html += `<div class="logrow"><span>${f.n}</span><span>${f.cal} سعرة • ${f.p}غ</span><button class="x" onclick="rmFood(${idx})">✕</button></div>`;
+  });
+  box.innerHTML = html;
+}
+function rmFood(i){
+  const log = getLog(todayKey());
+  log.food.splice(i,1); saveAll(); renderFoodLog();
+}
+function calcCal(){
+  const age = parseInt(document.getElementById('cAge').value)||25;
+  const h = parseInt(document.getElementById('cH').value)||165;
+  const w = parseInt(document.getElementById('cW').value)||70;
+  const act = parseFloat(document.getElementById('cAct').value)||1.55;
+  const goal = document.getElementById('cGoal').value;
+  const sex = isF()? -161 : 5;
+  const bmr = 10*w + 6.25*h - 5*age + sex;
+  const tdee = bmr * act;
+  let target = tdee;
+  if(goal==='lose') target = tdee - 400;
+  if(goal==='gain') target = tdee + 300;
+  const protein = Math.round(w * 1.8);
+  const fat = Math.round(target*0.27/9);
+  const carbs = Math.round((target - protein*4 - fat*9)/4);
+  const bmi = (w/((h/100)**2)).toFixed(1);
+  const bmiCat = bmi<18.5?'نحافة':(bmi<25?'وزن طبيعي':(bmi<30?'زيادة وزن':'سمنة'));
+  const box = document.getElementById('calOut');
+  box.innerHTML = `
+  <div class="grid g2" style="margin-top:12px">
+    <div class="stat"><b>${Math.round(bmr)}</b><small>سعرات الاستراحة (BMR)</small></div>
+    <div class="stat"><b>${Math.round(tdee)}</b><small>الاحتياج اليومي (TDEE)</small></div>
+    <div class="stat"><b>${Math.round(target)}</b><small>الهدف اليومي</small></div>
+    <div class="stat"><b>${bmi}</b><small>مؤشر كتلة الجسم (${bmiCat})</small></div>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <b>توزيع الماكروز</b>
+    <div class="row" style="margin-top:10px">
+      <div class="stat"><b>${protein}غ</b><small>بروتين</small></div>
+      <div class="stat"><b>${carbs}غ</b><small>كارب</small></div>
+      <div class="stat"><b>${fat}غ</b><small>دهون</small></div>
+    </div>
+  </div>`;
+  ST.calProf = {age,h,w,act,goal}; saveAll();
+}
+
+/* ================== الوجبات ================== */
+let filterMeal = 'all';
+function renderMeals(){
+  const box = document.getElementById('mealList');
+  const list = MEALS.filter(m=>filterMeal==='all'||m.ty===filterMeal);
+  let html = '';
+  list.forEach(m=>{
+    html += `<div class="meal">
+      <div class="mh" onclick="this.parentElement.classList.toggle('open')">
+        <span class="em">${m.e}</span>
+        <b>${m.n}</b>
+        <span class="cal">${m.cal} سعرة</span>
+      </div>
+      <div class="mb">
+        <h4>المكونات:</h4>
+        <ul>${m.ing.map(i=>'<li>'+i+'</li>').join('')}</ul>
+        <h4>طريقة التحضير:</h4>
+        <ol>${m.st.map(s=>'<li>'+s+'</li>').join('')}</ol>
+      </div>
+    </div>`;
+  });
+  box.innerHTML = html;
+}
+function setMealFilter(f){
+  filterMeal=f;
+  document.querySelectorAll('#mealFilters button').forEach(b=>b.classList.toggle('on', b.textContent.includes(f==='all'?'الكل':f)));
+  renderMeals();
+}
+function renderCheat(){
+  const box = document.getElementById('cheatBox');
+  const log = getLog(todayKey());
+  const t = todayKey();
+  const weekStart = new Date(); weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+  let done=0, total=0;
+  for(let i=0;i<7;i++){
+    const d = new Date(); d.setDate(d.getDate() - d.getDay() + i);
+    const key = d.toISOString().slice(0,10);
+    const l = getLog(key);
+    const tasks = ['workout','walk','water'];
+    if(weighToday()) tasks.push('weigh');
+    const dn = tasks.filter(k=>l[k]).length;
+    if(dn>=3) done++;
+    total++;
+  }
+  const pct = Math.round(done/total*100);
+  if(pct>=80){
+    const ch = CHEATS[Math.floor(Math.random()*CHEATS.length)];
+    box.innerHTML = `<div style="font-size:30px">${ch.e}</div><b style="font-size:1.1em">${ch.n}</b><div class="muted">${ch.d}</div>
+    <button class="primary" style="width:100%;margin-top:10px" onclick="openCheat()">استمتع بها 🍽️</button>`;
+  } else {
+    box.innerHTML = `<div style="font-size:30px">🔒</div><b style="font-size:1.1em">وجبة الأسبوع مقفلة</b><div class="muted">أكمل 80%+ من مهام هذا الأسبوع عشان تنفتح وجبة المكافأة.</div><div class="bar" style="margin-top:8px"><i style="width:${pct}%"></i></div><div class="muted" style="text-align:center">${pct}%</div>`;
+  }
+}
+function openCheat(){
+  const ch = CHEATS[Math.floor(Math.random()*CHEATS.length)];
+  toast(ch.e+' '+ch.n+' — استمتع! 😋');
+  celebrate(['🍔','🍕','🌯','🍣','🥞']);
+}
+
+/* ================== التذكيرات ================== */
+function renderRem(){
+  const box = document.getElementById('remBox');
+  let html = '';
+  const rem = ST.reminders;
+  html += `<div class="rem"><span style="font-size:24px">🏋️</span><b>وقت التمرين</b><input type="time" value="${rem.workout.t}" onchange="setRemTime('workout',this.value)" style="width:120px"><div class="sw ${rem.workout.on?'on':''}" onclick="toggleRem('workout')"></div></div>`;
+  html += `<div class="rem"><span style="font-size:24px">🚶</span><b>وقت المشي</b><input type="time" value="${rem.walk.t}" onchange="setRemTime('walk',this.value)" style="width:120px"><div class="sw ${rem.walk.on?'on':''}" onclick="toggleRem('walk')"></div></div>`;
+  html += `<div class="rem"><span style="font-size:24px">⚖️</span><b>يوم قياس الوزن</b><select onchange="setRemDay(this.value)" style="width:140px">${DAYS.map((d,i)=>`<option value="${i}" ${rem.weigh.day===i?'selected':''}>${d}</option>`).join('')}</select><input type="time" value="${rem.weigh.t}" onchange="setRemTime('weigh',this.value)" style="width:120px"><div class="sw ${rem.weigh.on?'on':''}" onclick="toggleRem('weigh')"></div></div>`;
+  box.innerHTML = html;
+}
+function toggleRem(k){
+  ST.reminders[k].on = !ST.reminders[k].on; saveAll(); renderRem();
+}
+function setRemTime(k,t){
+  ST.reminders[k].t = t; saveAll();
+}
+function setRemDay(d){
+  ST.reminders.weigh.day = parseInt(d); saveAll();
+}
+function askNotify(){
+  if(!('Notification' in window)){
+    toast('متصفحك لا يدعم الإشعارات');
+    return;
+  }
+  Notification.requestPermission().then(p=>{
+    if(p==='granted') toast('تم! بنذكرك بالتمارين والمشي وقياس الوزن 💪');
+    else toast('لم يتم تفعيل التنبيهات');
+  });
+}
+function checkReminders(){
+  const now = new Date();
+  const hh = now.getHours().toString().padStart(2,'0');
+  const mm = now.getMinutes().toString().padStart(2,'0');
+  const time = hh+':'+mm;
+  const rem = ST.reminders;
+  if(rem.workout.on && rem.workout.t===time) fireNotif('حان وقت التمرين! 💪');
+  if(rem.walk.on && rem.walk.t===time) fireNotif('وقت المشي! 🚶');
+  if(rem.weigh.on && rem.weigh.t===time && rem.weigh.day===now.getDay()) fireNotif('حان وقت قياس الوزن! ⚖️');
+}
+function fireNotif(msg){
+  toast(msg);
+  if(Notification.permission==='granted'){
+    new Notification('رياضتي 🏃', {body: msg});
+  }
+  celebrate();
+}
+function renderWeights(){
+  const box = document.getElementById('wHist');
+  if(ST.weights.length===0){
+    box.innerHTML = '<div class="muted">لم تسجّل أي وزن بعد.</div>';
+    return;
+  }
+  let html = '';
+  ST.weights.slice(-7).reverse().forEach(w=>{
+    html += `<div class="logrow"><span>${w.d}</span><b style="color:var(--p1)">${w.w} كجم</b></div>`;
+  });
+  box.innerHTML = html;
+}
+function saveWeight(){
+  const inp = document.getElementById('wIn');
+  const val = parseFloat(inp.value);
+  if(!val){ toast('من فضلك أدخل وزنًا صحيحًا'); return; }
+  const d = todayKey();
+  const idx = ST.weights.findIndex(x=>x.d===d);
+  if(idx>=0) ST.weights[idx].w = val;
+  else ST.weights.push({d, w:val});
+  saveAll(); renderWeights(); toast('تم تسجيل الوزن ✅');
+  inp.value='';
+}
+
+/* ================== إنجازي ================== */
+function renderAch(){
+  const now = new Date();
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+  const grid = document.getElementById('monthGrid');
+  let html = '';
+  let totalDone=0, totalTasks=0, fullDays=0;
+  for(let i=1;i<=daysInMonth;i++){
+    const d = new Date(now.getFullYear(), now.getMonth(), i);
+    const key = d.toISOString().slice(0,10);
+    const log = getLog(key);
+    const tasks = ['workout','walk','water'];
+    if(weighToday()) tasks.push('weigh');
+    const done = tasks.filter(k=>log[k]).length;
+    totalDone += done;
+    totalTasks += tasks.length;
+    if(done>=tasks.length) fullDays++;
+    const cls = done===0?'d0':(done===1?'d1':(done===2?'d2':(done>=3?'d3':'')));
+    const star = done>=tasks.length?'⭐':'';
+    html += `<div class="md ${cls}">${i}${star}</div>`;
+  }
+  grid.innerHTML = html;
+  document.getElementById('monthName').textContent = now.toLocaleDateString('ar-SA',{month:'long',year:'numeric'});
+  const pct = totalTasks? Math.round(totalDone/totalTasks*100):0;
+  const statsBox = document.getElementById('achStats');
+  statsBox.innerHTML = `
+    <div class="stat"><b>${totalDone}</b><small>مهمة منجزة</small></div>
+    <div class="stat"><b>${fullDays}</b><small>يوم كامل</small></div>
+    <div class="stat"><b>${pct}%</b><small>نسبة الإنجاز</small></div>`;
+  const streak = calcStreak();
+  const streakBox = document.getElementById('streakBox');
+  streakBox.innerHTML = `<div class="big">🔥 ${streak} يوم متتالي</div><div class="muted" style="text-align:center">استمر يا ${isF()?'بطلة':'بطل'}!</div>`;
+  document.getElementById('streakChip').textContent = '🔥 '+streak+' يوم';
+  const rewardBox = document.getElementById('rewardBox');
+  if(pct>=85){
+    const mKey = now.getFullYear()+'-'+now.getMonth();
+    if(!ST.monthReward[mKey]){
+      rewardBox.innerHTML = `<div class="reward"><div style="font-size:40px">🎁</div><b style="font-size:1.2em">تهانينا! حصلت على مكافأة الشهر</b><div style="margin-top:8px">${isF()?'اشتري لنفسكِ شيئًا تحبينه — فستان، عطر، أو جلسة سبا 💖':'كافئ نفسك — حذاء رياضي جديد، ساعة، أو جلسة لعب مع الأصدقاء 💪'}</div><button class="primary" style="width:100%;margin-top:12px;background:#fff;color:var(--p1)" onclick="claimReward('${mKey}')">استلم المكافأة 🎉</button></div>`;
+    } else {
+      rewardBox.innerHTML = '<div class="muted">تم استلام مكافأة هذا الشهر 🎁</div>';
+    }
+  } else {
+    rewardBox.innerHTML = `<div class="muted">أكمل 85% من مهام هذا الشهر عشان تحصل على المكافأة 🎁</div>`;
+  }
+}
+function calcStreak(){
+  let streak = 0;
+  const now = new Date();
+  for(let i=0;i<30;i++){
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const key = d.toISOString().slice(0,10);
+    const log = getLog(key);
+    const tasks = ['workout','walk','water'];
+    if(weighToday()) tasks.push('weigh');
+    const done = tasks.filter(k=>log[k]).length;
+    if(done>=3) streak++;
+    else if(i>0) break;
+  }
+  return streak;
+}
+function claimReward(k){
+  ST.monthReward[k] = true; saveAll(); toast('تم استلام المكافأة! 🎉'); celebrate(['🎁','🎉','🎊']);
+  renderAch();
+}
+
+/* ================== التشغيل ================== */
+function renderAll(){
+  renderTasks(); renderWater(); renderTodayWorkout(); renderWeek(); renderCheat(); renderRem(); renderWeights(); renderAch(); renderFood(); renderMeals(); renderMuscleFilters(); renderExList();
+  document.getElementById('quoteEm').textContent = '✨';
+  document.getElementById('quoteTxt').textContent = Q[isF()?'f':'m'][Math.floor(Math.random()*12)];
+  const today = new Date();
+  const dayName = DAYS[today.getDay()];
+  document.getElementById('heroMsg').textContent = isF()? 'مرحبًا يا بطلة! اليوم '+dayName : 'مرحبًا يا بطل! اليوم '+dayName;
+  document.getElementById('heroSub').textContent = isF()? 'كل تمرين اليوم خطوة أقرب لجسم أقوى' : 'كل تمرين اليوم خطوة أقرب لجسم أقوى';
+  document.getElementById('progSub').textContent = isF()? 'أنجزي مهامك اليوم وابدئي السلسلة 💖' : 'أنجز مهامك اليوم وابدأ السلسلة 💪';
+  updateProgress();
+}
+function updateProgress(){
+  const t = todayKey();
+  const log = getLog(t);
+  const tasks = ['workout','walk','water'];
+  if(weighToday()) tasks.push('weigh');
+  const done = tasks.filter(k=>log[k]).length;
+  const pct = Math.round(done/tasks.length*100);
+  const ring = document.getElementById('ringBar');
+  const r = 40;
+  const c = 2*Math.PI*r;
+  ring.style.strokeDasharray = c;
+  ring.style.strokeDashoffset = c - (pct/100)*c;
+  document.getElementById('ringVal').textContent = pct+'%';
+}
+function renderNextRem(){
+  const now = new Date();
+  const rem = ST.reminders;
+  const items = [
+    {k:'workout', t:rem.workout.t, on:rem.workout.on, e:'🏋️'},
+    {k:'walk', t:rem.walk.t, on:rem.walk.on, e:'🚶'},
+    {k:'weigh', t:rem.weigh.t, on:rem.weigh.on, day:rem.weigh.day, e:'⚖️'}
+  ];
+  let best=null, bestDiff=Infinity;
+  items.forEach(i=>{
+    if(!i.on) return;
+    if(i.k==='weigh' && i.day!==now.getDay()) return;
+    const [h,m] = i.t.split(':').map(Number);
+    const target = new Date(now); target.setHours(h,m,0,0);
+    let diff = target - now;
+    if(diff<0) diff += 24*3600*1000;
+    if(diff<bestDiff){ bestDiff=diff; best=i; }
+  });
+  if(best){
+    const hrs = Math.floor(bestDiff/3600000);
+    const mins = Math.floor((bestDiff%3600000)/60000);
+    document.getElementById('nextRem').textContent = best.e+' بعد '+hrs+' س '+mins+' د';
+  } else {
+    document.getElementById('nextRem').textContent = '';
+  }
+}
+function init(){
+  if(!ST.g){
+    document.getElementById('setup').style.display='flex';
+    document.getElementById('setupTitle').textContent = 'أهلًا فيك في "رياضتي"';
+    return;
+  }
+  applyGender(); renderAll();
+  setInterval(()=>{checkReminders(); renderNextRem();}, 60000);
+  renderNextRem();
+}
+init();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
