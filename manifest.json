@@ -1,0 +1,18 @@
+{
+  "name": "رياضتي - رياضة ولياقة وسعرات",
+  "short_name": "رياضتي",
+  "description": "تطبيق رياضة ولياقة: جدول تمارين أسبوعي، حاسبة سعرات، وجبات صحية بوصفات، تذكيرات، ومكافآت",
+  "dir": "rtl",
+  "lang": "ar",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff5fa",
+  "theme_color": "#ff5fa2",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
