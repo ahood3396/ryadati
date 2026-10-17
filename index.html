@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -169,30 +169,13 @@ nav button.on{color:var(--p1);background:var(--p3)}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .row>*{flex:1;min-width:120px}
 .big{text-align:center;padding:16px;background:var(--grad);color:#fff;border-radius:20px;font-weight:900;font-size:1.1em;line-height:1.9}
-.ex .animBtn{margin-top:10px;width:100%;background:var(--p3);color:var(--p1);box-shadow:none;font-size:.9em}
-/* ==== نافذة الشرح المتحرك ==== */
-#animModal{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:16px;
-  background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
-#animModal.on{display:flex}
-#animModal .panel{background:var(--card);border-radius:26px;max-width:520px;width:100%;max-height:92vh;overflow:auto;
-  box-shadow:0 24px 60px rgba(0,0,0,.3);padding:20px;position:relative;animation:pop .28s ease}
-@keyframes pop{from{transform:scale(.9) translateY(14px);opacity:0}to{transform:none;opacity:1}}
-#animModal .close{position:absolute;top:12px;inset-inline-start:12px;width:40px;height:40px;border-radius:50%;
-  background:var(--p3);color:var(--p1);font-size:20px;display:grid;place-items:center;box-shadow:none;padding:0}
-#animModal h3{font-size:1.2em;margin:6px 0 2px;text-align:center}
-#animModal .sub{text-align:center;color:var(--muted);font-weight:700;font-size:.9em;margin-bottom:8px}
-.stage{background:linear-gradient(180deg,var(--p3),#fff);border-radius:20px;padding:8px;margin:6px 0 12px;position:relative;overflow:hidden}
-.stage svg{display:block;width:100%;height:auto}
-.animCtl{display:flex;gap:8px;align-items:center;margin-bottom:10px}
-.animCtl button{flex:none;width:44px;height:44px;border-radius:14px;background:var(--p3);color:var(--p1);font-size:18px;box-shadow:none;padding:0}
-.animCtl .spd{flex:1}
-.animCtl .spd.on{background:var(--grad);color:#fff}
-.formBox{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.formBox div{background:var(--p3);border-radius:12px;padding:8px 10px;font-weight:700;font-size:.85em;display:flex;gap:6px;align-items:center}
-.formBox .no{background:#ffe3e6;color:#c62828}
-.formBox .yes{background:#e3f8ec;color:#128a52}
-.steps{margin:10px 0 0;padding-inline-start:20px;line-height:2;font-weight:600}
-.steps li::marker{color:var(--p1);font-weight:900}
+/* ==== روابط يوتيوب ==== */
+.ytBtn{display:block;margin-top:10px;width:100%;text-decoration:none;text-align:center;font-family:inherit;
+  padding:12px 16px;border-radius:14px;font-weight:800;font-size:.9em;background:var(--p3);color:var(--p1);box-sizing:border-box}
+.ytBtn.red{background:linear-gradient(135deg,#ff2d55,#ff5f6d);color:#fff}
+.ytBtn:active{transform:scale(.97)}
+.ytLink{display:inline-flex;align-items:center;gap:4px;color:var(--p1);font-weight:800;font-size:.82em;
+  text-decoration:none;background:var(--p3);border-radius:99px;padding:6px 12px;margin-top:8px}
 /* ==== تكيّف مع الجوال والتابلت ==== */
 @media (max-width:520px){
   main{padding:10px}
@@ -202,9 +185,6 @@ nav button.on{color:var(--p1);background:var(--p3)}
   .card{padding:14px;border-radius:16px}
   .hero{padding:18px 14px;border-radius:20px}
   .hero h1{font-size:1.25em}
-  #animModal{padding:8px}
-  #animModal .panel{padding:14px;border-radius:20px;max-height:94vh}
-  .formBox{grid-template-columns:1fr}
   .ring{width:80px;height:80px}
   .ring svg{width:80px;height:80px}
   .filters button{padding:8px 11px;font-size:.82em}
@@ -448,26 +428,6 @@ svg .arm,svg .leg,svg .torso,svg .head{transform-box:view-box}
     <button data-v="ach" onclick="go('ach')"><span class="i">🏆</span>إنجازي</button>
   </div>
 </nav>
-
-<!-- نافذة الشرح المتحرك للتمرين -->
-<div id="animModal" onclick="if(event.target===this)closeAnim()">
-  <div class="panel">
-    <button class="close" onclick="closeAnim()">✕</button>
-    <h3 id="animTitle">التمرين</h3>
-    <div class="sub" id="animSub">—</div>
-    <div class="stage"><div id="animStage"></div></div>
-    <div class="animCtl">
-      <button onclick="animTogglePlay()" id="animPlayBtn">⏸</button>
-      <button onclick="animStep()">⏭</button>
-      <button class="spd on" onclick="animSpeed(1,this)">×١</button>
-      <button class="spd" onclick="animSpeed(.5,this)">×٠٫٥</button>
-      <button class="spd" onclick="animSpeed(.25,this)">بطيء</button>
-    </div>
-    <div id="animStages"></div>
-    <div class="formBox" id="animForm"></div>
-    <ol class="steps" id="animSteps"></ol>
-  </div>
-</div>
 
 <div id="toast"></div>
 <div class="celebrate" id="celebrate"></div>
@@ -738,6 +698,12 @@ function matchEx(e, equipPref, placePref){
   if(placePref==='home' && e.pl!=='home' && e.pl!=='both') return false;
   return true;
 }
+/* ==== روابط يوتيوب ==== */
+function ytURL(q){ return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q); }
+function ytMuscles(ms){
+  const names = (ms||[]).map(m=>MUSCLES[m].n);
+  return ytURL(names.length? ('تمرين ' + names.join(' و ') + ' كامل') : 'تمارين إطالة وراحة نشطة');
+}
 function exCard(e){
   const tags = [];
   tags.push(e.eq==='weights'?'<span class="tag">🏋️ بأثقال</span>':'<span class="tag g">🤸 بدون أثقال</span>');
@@ -747,7 +713,7 @@ function exCard(e){
     <div class="top"><span class="nm">${e.n}</span><span class="sets">${e.s} × ${e.r}</span></div>
     <div class="tags">${tags.join('')}</div>
     <div class="tip">💡 ${e.t}</div>
-    <button class="animBtn" onclick="openAnim(${JSON.stringify(e.n)})">▶ شاهد الحركة كيف تُؤدّى</button>
+    <a class="ytBtn" href="${ytURL('تمرين '+e.n)}" target="_blank" rel="noopener">🎥 فيديو التمرين على يوتيوب</a>
   </div>`;
 }
 function renderMuscleFilters(){
@@ -864,6 +830,7 @@ function renderTodayWorkout(){
   }
   el.innerHTML = `
     <div class="big">${new Intl.NumberFormat('ar-EG',{weekday:'long'}).format(new Date())} — ${plan.f} ${isF()?'💖':'💪'}</div>
+    <a class="ytBtn red" href="${ytMuscles(plan.ms)}" target="_blank" rel="noopener">🎥 شاهد تمرين اليوم كامل على يوتيوب (${plan.f})</a>
     <div class="filters" style="margin-top:10px">
       <button class="${eq==='weights'?'on':''}" onclick="wSet('wEquip','weights')">🏋️ بالأثقال</button>
       <button class="${eq==='body'?'on':''}" onclick="wSet('wEquip','body')">🤸 بدون أثقال</button>
@@ -883,7 +850,8 @@ function renderWeek(){
     <div class="day ${i===d?'today':''}">
       <span class="dn">${DAYS[i]}</span>
       <div><div class="df">${x.f}</div>
-      <div class="dm">${x.ms.length? x.ms.map(m=>MUSCLES[m].e+MUSCLES[m].n).join(' • ') : 'راحة 💤'}</div></div>
+      <div class="dm">${x.ms.length? x.ms.map(m=>MUSCLES[m].e+MUSCLES[m].n).join(' • ') : 'راحة 💤'}</div>
+      <a class="ytLink" href="${ytMuscles(x.ms)}" target="_blank" rel="noopener">🎥 فيديو اليوم</a></div>
       ${i===d?'<span class="tag" style="margin-inline-start:auto">اليوم ⭐</span>':''}
     </div>`).join('');
 }
@@ -1185,381 +1153,6 @@ function renderAch(){
        <div style="margin-top:10px">${rewards.map(r=>`<span class="badge" style="opacity:.55">${r}</span>`).join('')}</div>`;
   renderStreak();
 }
-
-/* ================== الرسوم المتحركة للتمارين ==================
-   كل رسم عبارة عن شخص بسيط (SVG) يأدي حركة التمرين.
-   البنية: {type:'down-up'|'hold'|'cardio', ...} */
-const SKIN='#f2b98c', SKIN2='#e0a074', HAIR='#3a2b28';
-
-// شخص واقف/مستلقٍ — n: وضعية البداية، rot: لزاوية الجسم
-function figStanding(extra=''){
-  return `<g class="fig">
-    <circle class="head" cx="150" cy="70" r="20" fill="${SKIN}"/>
-    <path d="M130 62 q20 -22 40 0" fill="${HAIR}"/>
-    <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)"/>
-    <g class="armL"><rect x="126" y="94" width="12" height="46" rx="6" fill="${SKIN2}"/></g>
-    <g class="armR"><rect x="162" y="94" width="12" height="46" rx="6" fill="${SKIN2}"/></g>
-    <g class="legL"><rect x="139" y="140" width="12" height="56" rx="6" fill="#4a5568"/></g>
-    <g class="legR"><rect x="157" y="140" width="12" height="56" rx="6" fill="#4a5568"/></g>
-    ${extra}
-  </g>`;
-}
-// شخص مستلقي على ظهره (للضغط ورفع الأثقال)
-function figLying(extra=''){
-  return `<g class="fig">
-    <circle class="head" cx="60" cy="120" r="18" fill="${SKIN}"/>
-    <rect class="torso" x="78" y="108" width="110" height="24" rx="10" fill="var(--p1)"/>
-    <g class="armL"><rect x="96" y="86" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
-    <g class="armR"><rect x="126" y="86" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
-    <g class="legL"><rect x="184" y="106" width="12" height="50" rx="6" fill="#4a5568" transform="rotate(30 190 112)"/></g>
-    <g class="legR"><rect x="196" y="106" width="12" height="50" rx="6" fill="#4a5568" transform="rotate(30 202 112)"/></g>
-    ${extra}
-  </g>`;
-}
-// شخص على أربعة أذرع (للسكوات/اللانج نستخدم واقف، للبلانك/الماونتن)
-function figPlank(extra=''){
-  return `<g class="fig">
-    <circle class="head" cx="60" cy="90" r="16" fill="${SKIN}"/>
-    <rect class="torso" x="76" y="80" width="120" height="22" rx="10" fill="var(--p1)" transform="rotate(6 136 91)"/>
-    <g class="armL"><rect x="66" y="98" width="11" height="46" rx="6" fill="${SKIN2}"/></g>
-    <g class="legL"><rect x="192" y="96" width="12" height="50" rx="6" fill="#4a5568"/></g>
-    ${extra}
-  </g>`;
-}
-function ground(){ return '<rect x="20" y="196" width="260" height="6" rx="3" fill="#d8c3d0"/>'; }
-function bench(x=90,y=150,w=110){ return `<rect x="${x}" y="${y}" width="${w}" height="12" rx="4" fill="#8a6f84"/><rect x="${x+8}" y="${y+12}" width="10" height="34" fill="#8a6f84"/><rect x="${x+w-18}" y="${y+12}" width="10" height="34" fill="#8a6f84"/>`; }
-function dumbbell(cx,cy){ return `<g><rect x="${cx-22}" y="${cy-3}" width="44" height="6" fill="#555"/><rect x="${cx-30}" y="${cy-9}" width="8" height="18" rx="3" fill="#333"/><rect x="${cx+22}" y="${cy-9}" width="8" height="18" rx="3" fill="#333"/></g>`; }
-
-/* كل تعريف: title, sub, build(HTML ثابت), frames: array of keyframe CSS per frame,
-   form (نقاط صحيحة/خاطئة), steps (خطوات) */
-const ANIM = {};
-
-// ---- ضغط صدر (Push-up) : أنماط قياس قياسي وقلب -----
-function mk(name, def){ ANIM[name]=def; }
-
-mk('down-up', { // نموذج عام: نزول ورفع
-  build:()=> `<g transform="translate(0,10)">${figStanding()}${ground()}</g>`,
-  kf:{
-    '.armL, .armR':'',
-    '.torso':'',
-  }
-});
-
-/* نبني تعريفات حسب نوع الحركة: نوع + محاور جزء الجسم */
-const DEFS = {
-  /* ===== صدر ===== */
-  'ضغط صدر (رفعة كاملة)':{
-    kind:'pushup',
-    sub:'صدر • ترايسبس • أمام الكتف',
-    stages:['الوضعية العليا (ذراعان ممدودتان)','النزول (صدر يقترب من الأرض)'],
-    form:[['yes','ظهر مستقيم من الرأس للعقب'],['yes','المرفقان بزاوية ~45° للجسم'],['no','رفع المؤخرة للأعلى'],['no','هبوط سريع بدون تحكم']],
-    steps:['ادخل وضعية الضغط: اليدين بعرض الكتفين، الجسم خط مستقيم.','انزل ببطء حتى يقترب صدرك من الأرض (١-٢ ثانية).','ادفع الأرض بكففك وارفع بقوة (١ ثانية).','شدّ بطنك طوال الحركة وتنفّس صح.'] },
-  'ضغط مع رفع الرجل':{ kind:'pushup', sub:'صدر علوي • توازن', stages:['وضعية الضغط','النزول مع رجل مرفوعة'], form:[['yes','ثبّت الرجل المرفوعة'],['no','هبوط الحوض للأسفل'],['yes','بطن مشدود']], steps:['ارفع رجلك فوق كرسي قبل البدء.','انزل ببطء كما في الضغط العادي.','حافظ على توازنك وثبات الحوض.','أكمل العدد ثم بدّل الرجل.'] },
-  'ضغط ضيق (Diamond)':{ kind:'pushup', sub:'ترايسبس • صدر داخلي', stages:['اليدان متقابلتان بشكل مثلث','النزول'], form:[['no','مرفقان متباعدان'],['yes','اليدان تحت الصدر مباشرة']], steps:['ضع يديك بشكل مثلث مباشرة تحت صدرك.','انزل ببطء مع إبقاء المرفقين ملتصقين بالجسم.','ادفع للأعلى وشد الترايسبس.'] },
-  'دمبل بنش (مقعد مستوٍ)':{ kind:'benchpress', sub:'صدر • أمام الكتف', stages:['الدمبلان فوق الصدر','النزول لمستوى الكتف'], form:[['yes','الكتفان ملتصقان بالمقعد'],['no','دفع الدمبل بالركل'],['yes','ثبات وتحكم بالحركة']], steps:['استلقِ والكتفان ملتصقان بالمقعد.','انزل الدمبل ببطء حتى مستوى الكتف.','ادفع للأعلى بدون تصفير المرفقين.'] },
-  'دمبل بنش مائل':{ kind:'benchpress', sub:'صدر علوي', stages:['المقعد مائل ٤٥°','الرفع'], form:[['yes','زاوية المقعد ثابتة'],['no','دفع بأقدامك بالقوة']], steps:['اضبط المقعد على زاوية ٤٥ درجة.','انزل الدمبل لصدرك العلوي.','ارفع بثبات مع شد الصدر.'] },
-  'سكاي بنش بأرضية':{ kind:'benchpress', sub:'صدر • تثبيت', stages:['استلقاء على الأرض والدمبل للأعلى','النزول'], form:[['yes','أسفل الظهر على الأرض'],['no','رفع الظهر عن الأرض']], steps:['استلقِ على ظهرك ودمك ممدودان للأعلى.','انزل الدمبل حتى يلمس المرفق الأرض.','ارفع بقوة مع الحفاظ على ثبات الجذع.'] },
-  'كابل كروس أوفر':{ kind:'cable', sub:'صدر داخلي • شد', stages:['اليدان متباعدتان','الجمع أمام الصدر'], form:[['no','سحب بالجسد بالكامل'],['yes','ثبات الجذع وحركة من الكتف']], steps:['قف واثبت جذعك، الكتفان للخلف.','اسحب الحبال ببطء لتلتقي يداك أمام صدرك.','ثبّت ثانيتين عند الشدّ ثم عد ببطء.'] },
-
-  /* ===== ظهر ===== */
-  'سحب علوي (Lat Pulldown)':{ kind:'pulldown', sub:'الظهر العريض • بايسبس', stages:['السحب لصدرك','العودة للأعلى بتحكم'], form:[['no','الانحناء بالظهر'],['yes','فتح الصدر والسحب للصدر']], steps:['امسك العارضة بعرض أوسع من كتفك.','اسحبها ببطء لمستوى صدرك مع فتح الصدر.','عُد للأعلى ببطء مع تحكم كامل.'] },
-  'تجديف (Row)':{ kind:'row', sub:'الظهر • سمك العضلة', stages:['الشدّ نحو البطن','العودة الأمامية'], form:[['no','تقليب الظهر'],['yes','ظهر مستقيم وتثبيت']], steps:['أمسك المقبض وظهرك مستقيم.','اسحب نحو بطنك مع تثبيت الجذع.','أعد ببطء مع إبقاء الشدّ على الظهر.'] },
-  'درفلة رومانية':{ kind:'deadlift', sub:'ظهر سفلي • أوتار الركبة', stages:['الوقوف مستقيمًا','الانحناء من الورك'], form:[['no','تقليب الظهر (قوس)'],['yes','الظهر مسطّح والحركة من الورك']], steps:['قف والظهر مسطّح وكتفاك للخلف.','انحنِ من الورك مع نزول الوزن على الساقين.','ارفع بالورك وشدّ المؤخرة في الأعلى.'] },
-  'سوبرمان':{ kind:'superman', sub:'ظهر سفلي • توازن', stages:['استلقاء على البطن','رفع اليدين والرجلين'], form:[['yes','النظر للأرض (رقبة محايدة)'],['no','رفع أعلى من اللازم']], steps:['استلقِ على بطنك ويمدّ يديك للأمام.','ارفع ذراعيك ورجليك عن الأرض معًا.','اثبت ثانيتين ثم انزل ببطء.'] },
-  'بيرد دوج':{ kind:'birddog', sub:'ظهر • توازن', stages:['وضعية الأربعة','رفع اليد والرجل المتقابلين'], form:[['yes','الجذع ثابت لا يميل'],['no','الدوران بالحوض']], steps:['خذ وضعية الأربعة وظهرك مستقيم.','ارفع اليد اليمنى واليسرى معًا حتى يستويان.','اثبت ثم بدّل الجانب.'] },
-  'سحب بحمالة أو حبل':{ kind:'row', sub:'ظهر • بديل منزلي', stages:['الشدّ للجسم','العودة'], form:[['yes','ثبات الجذع'],['no','الانحناء بالظهر']], steps:['امسك الحبل أو الحقيبة بظهر مستقيم.','اسحبها لبطنك مع ثبات الجذع.','عُد ببطء دون إرخاء الظهر.'] },
-  'دِدليفت (Deadlift)':{ kind:'deadlift', sub:'ظهر • أرجل • قوة', stages:['الرفع من الأرض','النزول المسيطر'], form:[['yes','الظهر مسطّح'],['no','قوس الظهر'],['yes','الوزن قريب من الجسم']], steps:['قف أمام الوزن والقدمان بعرض الورك.','امسك والظهر مسطّح والبطن مشدود.','ارفع بالورك مع إبقاء الوزن قريبًا من الجسم.'] },
-
-  /* ===== أرجل ===== */
-  'سكوات بدون أثقال':{ kind:'squat', sub:'فخذ • مؤخرة', stages:['الوقوف','النزول حتى موازي'], form:[['yes','الركبتان باتجاه أصابع القدم'],['no','الهبوط بظهر مقوّس'],['yes','الصدر مرفوع']], steps:['قف والقدمان بعرض الكتفين.','انزل بمؤخرتك للخلف كما تجلس على كرسي.','انزل حتى موازي ثم ادفع بالأرض وقف.'] },
-  'سكوات جانبي':{ kind:'squat', sub:'الفخذ الجانبي', stages:['الوقوف','خطوة جانبية ونزول'], form:[['yes','ثبات القدم الأخرى'],['no','ميل الجذع للأمام بكثرة']], steps:['قف معتدلًا وخذ خطوة جانبية.','انزل في السكوات مع بقاء الساق الأخرى ممدودة.','ادفع للعودة وكرر بالجهة المقابلة.'] },
-  'لانج (خطوة أمامية)':{ kind:'lunge', sub:'فخذ • مؤخرة • توازن', stages:['الوقوف','الخطوة والنزول'], form:[['yes','الركبة الأمامية فوق الكعب'],['no','الركبة تتجاوز الأصابع'],['yes','الظهر مستقيم']], steps:['خذ خطوة أمامية كبيرة.','انزل حتى تقترب ركبك الخلفية من الأرض.','ادفع بكعبك الأمامي للعودة.'] },
-  'سكوات بحمل (غولط)':{ kind:'squat', sub:'فخذ • حمل', stages:['الحمل عند الصدر','النزول'], form:[['yes','الحمل مثبّت عند الصدر'],['no','الانحناء للأمام']], steps:['احمل الغولط عند صدرك.','انزل ببطء كما في السكوات.','ادفع بالأرض مع الحفاظ على استقامة الظهر.'] },
-  'ديدليفت روماني بالأحمال':{ kind:'deadlift', sub:'أوتار الركبة • خلف الفخذ', stages:['الوقوف','الانحناء مع ساقين شبه ممتدتين'], form:[['no','ثني الركبتين كثيرًا'],['yes','الحركة من الورك']], steps:['قف والوزن أمام فخذيك.','انحنِ من الورك مع إبقاء ساقيك شبه ممتدتين.','شعر بالشدّ خلف الفخذ ثم ارفع.'] },
-  'رفع ربلة (Calf Raise)':{ kind:'calf', sub:'الربلة (ساق)', stages:['الوقوف','رفع الكعبين'], form:[['yes','ثبات وتحكم بالأعلى'],['no','الهبوط السريع']], steps:['قف على أطراف أقدامك.','ارفع كعبيك ببطء للأعلى.','اثبت ثانيتين ثم انزل بالتحكم.'] },
-  'جلسة أرجل (Leg Press)':{ kind:'legpress', sub:'فخذ • حمل', stages:['دفع الحمل','العودة بالتحكم'], form:[['no','قفل الركبتين تمامًا'],['yes','ثني جزئي مع تحكم']], steps:['اضبط مقعدك بحيث لا تنزل كثيرًا.','ادفع الحمل بكفي قدميك.','لا تُقفل ركبتك تمامًا في الأعلى.'] },
-
-  /* ===== أكتاف ===== */
-  'ضغط علوي بدمبل':{ kind:'overhead', sub:'أكتاف • ترايسبس', stages:['الدمبلان فوق الرأس','النزول لجانبي الرأس'], form:[['no','قوس الظهر'],['yes','البطن مشدود والجذع ثابت']], steps:['ارفع الدمبلين فوق رأسك.','انزلهما ببطء حتى مستوى أذنيك.','ادفع للأعلى مع شد البطن لحماية ظهرك.'] },
-  'أجنحة جانبية':{ kind:'lateral', sub:'الكتف الجانبي', stages:['النزول بجانبك','الرفع حتى مستوى الكتف'], form:[['no','الرفع أعلى من الكتف'],['no','استخدام تحريك الجسد']], steps:['قف والذراعان بجانبك مع ميل خفيف.','ارفع حتى مستوى الكتف فقط.','انزل ببطء وتحكم.'] },
-  'ضغط برية (Plank Shoulder Tap)':{ kind:'shouldertap', sub:'كتف • استقرار', stages:['وضعية البلانك','المس الكتف المقابل'], form:[['yes','الحوض ثابت لا يميل'],['no','تأرجح الجسد']], steps:['خذ وضعية الضغط العلوي.','المس كتفك المقابل بيديك.','ثبّت الحوض وأعد بالجهة المقابلة.'] },
-  'فرنط بدمبل (Face Pull)':{ kind:'facepull', sub:'الكتف الخلفي • وضعية', stages:['الشدّ نحو الوجه','العودة'], form:[['yes','سحب الكتفين للخلف'],['no','الحجز بالساعد فقط']], steps:['امسك الحبل بمستوى عينيك.','اسحبه نحو وجهك مع فتح الكتفين.','ثبّت ثم عد ببطء.'] },
-
-  /* ===== ذراعات ===== */
-  'كيرل بدمبل (بايسبس)':{ kind:'curl', sub:'بايسبس', stages:['الذراع ممدودة','الرفع والشدّ'], form:[['no','تقلب الجسد للمساعدة'],['yes','المرفق مثبّت بجانبك']], steps:['قف والذراعان بجانبك والمرفقان مثبتان.','ارفع الوزن ببطء مع شدّ البايسبس.','أنزل ببطء حتى استواء الذراعين.'] },
-  'ضغط ترايسبس على أرضية':{ kind:'pushup', sub:'ترايسبس', stages:['اليدان بعرض الكتف','النزول'], form:[['yes','المرفقان ملتصقان بالجسم'],['no','تباعد المرفقين']], steps:['ضع يديك بعرض كتفك مباشرة تحت الكتفين.','انزل مع إبقاء المرفقين ملتصقين بالجسم.','ادفع للأعلى وشدّ الترايسبس.'] },
-  'دِيبز على كرسي':{ kind:'dips', sub:'ترايسبس', stages:['الاستناد على الكرسي','النزول والرفع'], form:[['no','النزول عميق جدًا'],['yes','ثني جزئي مع تحكم']], steps:['استند على كرسي ثابت وقدمك أمامك.','انزل ببطء حتى يثني مرفقك ~90°.','ادفع بالمرفقين للعودة.'] },
-  'إكستنشن ترايسبس بالكيبل':{ kind:'triceps', sub:'ترايسبس', stages:['المرفق ثابت','الإمتداد'], form:[['no','حركة المرفق'],['yes','المرفق مثبّت']], steps:['أمسك الحبل ومرفقك مثبت بجانبك.','أمدّ ذراعك للأسفل مع شد الترايسبس.','أعد ببطء دون تحريك المرفق.'] },
-  'مطرقة بدمبل (Hammer)':{ kind:'hammer', sub:'ساعد • بايسبس', stages:['القبض للداخل','الرفع'], form:[['yes','المرفق مثبّت'],['no','الرفع بالاندفاع']], steps:['امسك الدمبل بقبضة مطرقة (اليد للداخل).','ارفع مع إبقاء المرفق ثابتًا.','أنزل ببطء.'] },
-
-  /* ===== بطن ===== */
-  'بلانك':{ kind:'plank', sub:'البطن • استقرار', stages:['الوضعية المثالية (خط مستقيم)'], form:[['no','رفع المؤخرة'],['no','هبوط الحوض'],['yes','الجسم خط مستقيم']], steps:['ادعِ على ساقيك ومرفقيك.','اجعل جسمك خطًا مستقيمًا من الرأس للعقب.','شدّ بطنك وتنفّس بانتظام واثبت.'] },
-  'كراونش':{ kind:'crunch', sub:'البطن العلوي', stages:['الاستلقاء','رفع الكتفين'], form:[['yes','رفع الكتفين فقط'],['no','شد الرقبة باليد']], steps:['استلقِ وركبتكما مثنيتان.','ارفع كتفك عن الأرض فقط بشهيق.','أعد ببطء دون سحب رقبتك.'] },
-  'ليج ريز (رفع أرجل)':{ kind:'legraise', sub:'البطن السفلي', stages:['الاستلقاء','رفع الركبتين للصدر'], form:[['no','قوس أسفل الظهر'],['yes','الظهر ملتصق بالأرض']], steps:['استلقِ وظهرك ملتصق بالأرض.','ارفع رجليك ببطء حتى 90°.','أنزل ببطء دون لمس الأرض.'] },
-  'ماونتن كليمر':{ kind:'climber', sub:'بطن • كارديو', stages:['وضعية الضغط','سحب الركبة للصدر'], form:[['yes','الحوض ثابت'],['no','رفع المؤخرة']], steps:['خذ وضعية الضغط العلوي.','اسحب ركبتك نحو صدرك بالتناوب.','حافظ على سرعة متوسطة وحوض ثابت.'] },
-  'جسر ورك':{ kind:'bridge', sub:'مؤخرة • بطن', stages:['الاستلقاء','رفع الحوض'], form:[['yes','الضغط بالكعبين'],['no','القوس الزائد للظهر']], steps:['استلقِ وركبتكما مثنيتان.','ارفع حوضك حتى يشكل جسمك خطًا مستقيمًا.','اثبت ثم انزل ببطء.'] },
-  'تويست (Russian Twist)':{ kind:'twist', sub:'البطن الجانبي', stages:['الجلسة مائلة للخلف','الدوران للجانب'], form:[['yes','الدوران من الجذع'],['no','الدوران من الذراع فقط']], steps:['اجلس واميل جسمك للخلف قليلًا.','ارفع قدميك إن أمكن.','دور جذعك لليمين ثم لليسار.'] },
-
-  /* ===== كارديو ===== */
-  'مشي سريع30 دقيقة':{ kind:'walk', sub:'كارديو • صحة عامة', stages:['الخطوة الأمامية','تبادل الخطوة'], form:[['yes','خطوة سريعة مع رفرفة الذراعين'],['no','الوقوف بلا حركة']], steps:['ابدأ بخطوة مريحة دقيقتين.','زد السرعة لخطوة سريعة ترفع نبضك.','حافظ على تبادل الذراعين مع الخطوة.','استمر 30 دقيقة مع تنفّس منتظم.'] },
-  'جري خفيف':{ kind:'walk', sub:'كارديو • تحمل', stages:['الجري','تبادل الخطوة'], form:[['yes','هبوط خفيف على القدم'],['no','الجري بكعب القدم']], steps:['ابدأ بمشي دقيقتين للتسخين.','انتقل لجري خفيف يرفع نبضك.','حافظ على إيقاع ثابت.','اختم بإطالة.'] },
-  'نط الحبل':{ kind:'jump', sub:'كارديو • حرق', stages:['القفز','الهبوط'], form:[['yes','الهبوط بطرف القدم'],['no','القفز عاليًا جدًا']], steps:['قفز خفيفًا مع تدوير الحبل من المعصم.','اهبط بطرف قدميك وركبتان قليلة الانثناء.','حافظ على إيقاع ثابت.'] },
-  'جاكنجمب (Jumping Jacks)':{ kind:'jack', sub:'كارديو •全身', stages:['الوضعية المغلقة','فتح الرجلين والذراعين'], form:[['yes','فتح كامل للذراعين'],['no','رفع الذراعين نصف كفو']], steps:['قف والذراعان بجانبك.','اقفز وافتح رجليك مع رفع ذراعيك فوق رأسك.','اقفز للعودة للوضعية المغلقة.'] },
-  'بيربيز (Burpees)':{ kind:'burpee', sub:'كارديو • متكامل', stages:['الاندفاع للأرض','القفز للأعلى'], form:[['yes','حركة سلسة متتابعة'],['no','القفز بدون تحكم']], steps:['قف ثم اندفاع للوضعية العلوية.','أعد الرجلين للصدر.','اقفز للأعلى مع رفع الذراعين.'] },
-  'دراجة ثابتة':{ kind:'cycle', sub:'كارديو • تحمل', stages:['الدورة الأمامية','الدورة الخلفية'], form:[['yes','مقاومة وسرعة ثابتة'],['no','مقاومة عالية جدًا']], steps:['اختر مقاومة متوسطة.','ثبّت سرعة متساوية.','استمر 20-30 دقيقة مع تنفّس منتظم.'] },
-  'إطالة وتهدئة':{ kind:'stretch', sub:'مرونة • تعافٍ', stages:['الإطالة الجانبية','العودة'], form:[['yes','إطالة ببطء بدون ألم حاد'],['no','التحريك بالركل']], steps:['ثبّت جسمك وتمدد ببطء.','اثبت على نقطة الشدّ 20-30 ثانية.','تنفّس بعمق ولا تتألم.'] }
-};
-
-/* بناء رسم SVG حسب نوع التمرين + توليد إطارات الحركة */
-function buildStage(kind){
-  switch(kind){
-    case 'pushup': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">
-        <circle class="head" cx="40" cy="150" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="56" y="138" width="150" height="22" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:66px 160px"><rect x="60" y="152" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL"><rect x="196" y="150" width="12" height="46" rx="6" fill="#4a5568"/></g>
-      </g></svg>`;
-    case 'benchpress': return `<svg viewBox="0 0 300 220">${bench(70,140,150)}${ground()}
-      <g id="fig">
-        <circle class="head" cx="66" cy="128" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="82" y="120" width="120" height="22" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:110px 120px"><rect x="104" y="86" width="12" height="40" rx="6" fill="${SKIN2}"/></g>
-        <g class="armR" style="transform-origin:130px 120px"><rect x="124" y="86" width="12" height="40" rx="6" fill="${SKIN2}"/></g>
-        <g id="weight">${dumbbell(120,84)}</g>
-      </g></svg>`;
-    case 'squat': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig" transform="translate(0,0)">${figStanding()}</g></svg>`;
-    case 'lunge': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}</g></svg>`;
-    case 'pulldown': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="40" y="20" width="220" height="8" rx="4" fill="#8a6f84"/>
-      <g id="fig">
-        <circle class="head" cx="150" cy="70" r="18" fill="${SKIN}"/>
-        <rect class="torso" x="138" y="90" width="24" height="70" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:142px 92px"><rect x="122" y="30" width="11" height="64" rx="6" fill="${SKIN2}"/></g>
-        <g class="armR" style="transform-origin:158px 92px"><rect x="167" y="30" width="11" height="64" rx="6" fill="${SKIN2}"/></g>
-        <g id="bar"><rect x="116" y="26" width="68" height="6" rx="3" fill="#555"/></g>
-        <g class="legL"><rect x="139" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
-        <g class="legR"><rect x="157" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
-      </g></svg>`;
-    case 'row': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">
-        <circle class="head" cx="120" cy="70" r="18" fill="${SKIN}"/>
-        <rect class="torso" x="108" y="90" width="24" height="70" rx="10" fill="var(--p1)" transform="rotate(15 120 125)"/>
-        <g class="armL" style="transform-origin:120px 96px"><rect x="114" y="96" width="11" height="52" rx="6" fill="${SKIN2}"/></g>
-        <g id="weight">${dumbbell(120,150)}</g>
-        <g class="legL"><rect x="112" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
-        <g class="legR"><rect x="128" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
-      </g></svg>`;
-    case 'deadlift': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(150,180)}</g></g></svg>`;
-    case 'superman': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">
-        <circle class="head" cx="90" cy="150" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="106" y="142" width="110" height="22" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:110px 148px"><rect x="60" y="142" width="48" height="11" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL" style="transform-origin:210px 150px"><rect x="214" y="142" width="52" height="11" rx="6" fill="#4a5568"/></g>
-      </g></svg>`;
-    case 'birddog': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">
-        <circle class="head" cx="80" cy="120" r="15" fill="${SKIN}"/>
-        <rect class="torso" x="96" y="112" width="120" height="20" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:100px 118px"><rect x="94" y="120" width="11" height="44" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL" style="transform-origin:212px 118px"><rect x="206" y="120" width="12" height="44" rx="6" fill="#4a5568"/></g>
-        <g class="armR" style="transform-origin:110px 118px"><rect x="104" y="88" width="11" height="40" rx="6" fill="${SKIN}"/></g>
-        <g class="legR" style="transform-origin:200px 118px"><rect x="196" y="90" width="12" height="40" rx="6" fill="#394150"/></g>
-      </g></svg>`;
-    case 'cable': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="240" y="20" width="10" height="180" fill="#8a6f84"/>
-      <g id="fig">${figStanding()}<g class="armL" style="transform-origin:130px 96px"><rect x="236" y="96" width="11" height="52" rx="6" fill="${SKIN2}" transform="rotate(-70 240 120)"/></g></g></svg>`;
-    case 'curl': case 'hammer': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(126,120)}${dumbbell(174,120)}</g></g></svg>`;
-    case 'overhead': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(130,60)}${dumbbell(170,60)}</g></g></svg>`;
-    case 'lateral': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(120,120)}${dumbbell(180,120)}</g></g></svg>`;
-    case 'facepull': case 'triceps': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="30" y="20" width="10" height="180" fill="#8a6f84"/>
-      <g id="fig">${figStanding()}<g class="armR" style="transform-origin:170px 96px"><rect x="40" y="96" width="11" height="50" rx="6" fill="${SKIN2}"/></g></g></svg>`;
-    case 'dips': return `<svg viewBox="0 0 300 220">${bench(90,140,110)}${ground()}
-      <g id="fig" transform="translate(30,0)">
-        <circle class="head" cx="150" cy="90" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="138" y="106" width="24" height="46" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:136px 110px"><rect x="128" y="106" width="11" height="40" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL"><rect x="139" y="150" width="12" height="46" rx="6" fill="#4a5568" transform="rotate(20 145 160)"/></g>
-      </g></svg>`;
-    case 'plank': case 'shouldertap': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figPlank()}</g></svg>`;
-    case 'crunch': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">
-        <g class="head" style="transform-origin:120px 140px"><circle cx="120" cy="140" r="16" fill="${SKIN}"/></g>
-        <rect class="torso" x="136" y="140" width="90" height="22" rx="10" fill="var(--p1)"/>
-        <g class="legL"><rect x="220" y="120" width="12" height="46" rx="6" fill="#4a5568" transform="rotate(-40 226 140)"/></g>
-      </g></svg>`;
-    case 'legraise': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">
-        <circle class="head" cx="70" cy="150" r="15" fill="${SKIN}"/>
-        <rect class="torso" x="86" y="140" width="120" height="22" rx="10" fill="var(--p1)"/>
-        <g class="legL" style="transform-origin:204px 150px"><rect x="200" y="106" width="12" height="46" rx="6" fill="#4a5568"/></g>
-      </g></svg>`;
-    case 'climber': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figPlank()}<g class="legR" style="transform-origin:198px 100px"><rect x="182" y="96" width="12" height="40" rx="6" fill="#394150"/></g></g></svg>`;
-    case 'bridge': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">
-        <circle class="head" cx="80" cy="152" r="15" fill="${SKIN}"/>
-        <g class="torso" style="transform-origin:150px 150px"><rect x="96" y="140" width="120" height="22" rx="10" fill="var(--p1)"/></g>
-        <g class="legL"><rect x="210" y="118" width="12" height="44" rx="6" fill="#4a5568"/></g>
-      </g></svg>`;
-    case 'twist': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig" style="transform-origin:150px 180px">
-        <circle class="head" cx="150" cy="90" r="16" fill="${SKIN}"/>
-        <g class="torso" style="transform-origin:150px 150px"><rect x="138" y="106" width="24" height="52" rx="10" fill="var(--p1)"/></g>
-        <g class="armR" style="transform-origin:150px 110px"><rect x="162" y="106" width="40" height="11" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL"><rect x="139" y="156" width="12" height="40" rx="6" fill="#4a5568" transform="rotate(-40 145 160)"/></g>
-      </g></svg>`;
-    case 'walk': case 'stretch': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}</g></svg>`;
-    case 'jump': case 'jack': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}</g></svg>`;
-    case 'burpee': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}</g></svg>`;
-    case 'cycle': return `<svg viewBox="0 0 300 220">${ground()}
-      <circle cx="120" cy="160" r="34" fill="none" stroke="#8a6f84" stroke-width="6"/>
-      <g id="fig">${figStanding()}<g class="legR" style="transform-origin:157px 146px"><rect x="152" y="146" width="12" height="40" rx="6" fill="#4a5568"/></g></g></svg>`;
-    case 'calf': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(126,120)}${dumbbell(174,120)}</g></g></svg>`;
-    case 'legpress': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="230" y="60" width="16" height="120" rx="4" fill="#8a6f84"/>
-      <g id="fig" style="transform-origin:120px 160px">
-        <circle class="head" cx="80" cy="120" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="60" y="136" width="90" height="22" rx="10" fill="var(--p1)"/>
-        <g class="legR" style="transform-origin:150px 146px"><rect x="146" y="120" width="70" height="12" rx="6" fill="#4a5568"/></g>
-      </g></svg>`;
-    default: return `<svg viewBox="0 0 300 220">${ground()}${figStanding()}</svg>`;
-  }
-}
-
-/* توليد إطارات الحركة (CSS animation) حسب النوع */
-function animCSS(kind, dur){
-  const D = dur+'s', E='ease-in-out', I='infinite alternate';
-  const base = `#fig{animation-duration:${D};animation-timing-function:${E};animation-iteration-count:${I};}`;
-  switch(kind){
-    case 'pushup': return base+`#fig .torso,#fig .head{animation:pu-torso ${D} ${E} ${I}}
-      #fig .armL{animation:pu-arm ${D} ${E} ${I};transform-origin:66px 160px}`;
-    case 'benchpress': return base+`#fig .armL,#fig .armR,#weight{animation:bp ${D} ${E} ${I}}
-      #fig .armL{transform-origin:110px 120px}#fig .armR{transform-origin:130px 120px}#weight{transform-origin:120px 84px}`;
-    case 'squat': case 'lunge': return base+`#fig{animation:sq ${D} ${E} ${I}}`;
-    case 'pulldown': return base+`#fig .armL,#fig .armR,#bar{animation:pd ${D} ${E} ${I}}
-      #fig .armL{transform-origin:142px 92px}#fig .armR{transform-origin:158px 92px}`;
-    case 'row': return base+`#fig .armL,#weight{animation:rw ${D} ${E} ${I}}#fig .armL{transform-origin:120px 96px}`;
-    case 'deadlift': return base+`#fig,#weight{animation:dl ${D} ${E} ${I}}`;
-    case 'superman': return base+`#fig .armL,#fig .legL,#fig .head,#fig .torso{animation:sm ${D} ${E} ${I}}
-      #fig .armL{transform-origin:110px 148px}#fig .legL{transform-origin:210px 150px}`;
-    case 'birddog': return base+`#fig .armR,#fig .legR{animation:bd ${D} ${E} ${I}}`;
-    case 'curl': case 'hammer': return base+`#weight{animation:cu ${D} ${E} ${I};transform-origin:150px 120px}`;
-    case 'overhead': case 'lateral': return base+`#weight{animation:ov ${D} ${E} ${I};transform-origin:150px 100px}`;
-    case 'plank': return base+`#fig{animation:pl ${D} ${E} ${I}}`;
-    case 'crunch': return base+`#fig .head,#fig .torso{animation:cr ${D} ${E} ${I};transform-origin:150px 150px}`;
-    case 'legraise': return base+`#fig .legL{animation:lr ${D} ${E} ${I};transform-origin:204px 150px}`;
-    case 'climber': return base+`#fig .legL,#fig .legR{animation:cl ${D} ${E} ${I}}`;
-    case 'bridge': return base+`#fig .torso{animation:br ${D} ${E} ${I};transform-origin:150px 150px}`;
-    case 'twist': return base+`#fig .torso,#fig .armR{animation:tw ${D} ${E} ${I};transform-origin:150px 150px}`;
-    case 'walk': return base+`#fig .legL,#fig .armR{animation:wk ${D} ${E} ${I}}#fig .legL{transform-origin:145px 146px}#fig .armR{transform-origin:168px 96px}`;
-    case 'jump': case 'jack': return base+`#fig{animation:jm ${D} ${E} ${I}}`;
-    case 'burpee': return base+`#fig{animation:bp2 ${D} ${E} ${I}}`;
-    case 'cycle': return base+`#fig .legR{animation:cy ${D} ${E} ${I};transform-origin:157px 146px}`;
-    case 'calf': return base+`#fig{animation:cf ${D} ${E} ${I}}`;
-    case 'legpress': return base+`#fig .legR{animation:lp ${D} ${E} ${I};transform-origin:150px 146px}`;
-    case 'stretch': return base+`#fig{animation:st ${D} ${E} ${I}}`;
-    case 'cable': case 'facepull': case 'triceps': return base+`#fig .armL,#fig .armR{animation:cb ${D} ${E} ${I}}`;
-    case 'dips': return base+`#fig{animation:dp ${D} ${E} ${I}}`;
-    case 'shouldertap': return base+`#fig .armR{animation:stap ${D} ${E} ${I};transform-origin:110px 118px}`;
-    default: return base+`#fig{animation:st ${D} ${E} ${I}}`;
-  }
-}
-const KEYFRAMES = `
-@keyframes pu-torso{from{transform:translateY(0)}to{transform:translateY(18px)}}
-@keyframes pu-arm{from{transform:scaleY(1)}to{transform:scaleY(.72)}}
-@keyframes bp{from{transform:translateY(0)}to{transform:translateY(34px)}}
-@keyframes sq{from{transform:translateY(0) scaleY(1)}to{transform:translateY(26px) scaleY(.86)}}
-@keyframes pd{from{transform:translateY(0)}to{transform:translateY(46px)}}
-@keyframes rw{from{transform:translateY(-30px)}to{transform:translateY(0)}}
-@keyframes dl{from{transform:translateY(0) rotate(0)}to{transform:translateY(20px) rotate(24deg)}}
-@keyframes sm{from{transform:translateY(0)}to{transform:translateY(-20px)}}
-@keyframes bd{from{transform:rotate(0)}to{transform:rotate(48deg)}}
-@keyframes cu{from{transform:translateY(46px)}to{transform:translateY(-6px)}}
-@keyframes ov{from{transform:translateY(0)}to{transform:translateY(-38px)}}
-@keyframes pl{from{transform:translateY(0)}to{transform:translateY(4px)}}
-@keyframes cr{from{transform:rotate(0)}to{transform:rotate(-30deg)}}
-@keyframes lr{from{transform:rotate(0)}to{transform:rotate(-70deg)}}
-@keyframes cl{from{transform:translateY(0) translateX(0)}to{transform:translateY(-10px) translateX(-40px)}}
-@keyframes br{from{transform:translateY(0)}to{transform:translateY(-26px)}}
-@keyframes tw{from{transform:rotate(0)}to{transform:rotate(24deg)}}
-@keyframes wk{from{transform:rotate(28deg)}to{transform:rotate(-28deg)}}
-@keyframes jm{from{transform:translateY(0)}to{transform:translateY(-34px)}}
-@keyframes bp2{from{transform:translateY(0) scaleY(1)}to{transform:translateY(30px) scaleY(.7)}}
-@keyframes cy{from{transform:rotate(-30deg)}to{transform:rotate(30deg)}}
-@keyframes cf{from{transform:translateY(0)}to{transform:translateY(-10px)}}
-@keyframes lp{from{transform:translateX(0)}to{transform:translateX(-26px)}}
-@keyframes st{from{transform:rotate(0)}to{transform:rotate(8deg)}}
-@keyframes cb{from{transform:rotate(0)}to{transform:rotate(30deg)}}
-@keyframes dp{from{transform:translateY(0)}to{transform:translateY(24px)}}
-@keyframes stap{from{transform:rotate(0)}to{transform:rotate(50deg)}}
-`;
-// حقن الـ keyframes مرة واحدة
-(function(){ const s=document.createElement('style'); s.textContent=KEYFRAMES; document.head.appendChild(s); })();
-
-/* ===== تشغيل/عرض النافذة ===== */
-let ANIM_STATE={play:true, dur:2.2};
-function openAnim(name){
-  const d = DEFS[name] || {kind:'default', sub:'', stages:['الحركة'], form:[['yes','حركة صحيحة']], steps:['أدِ التمرين ببطء مع التركيز على الشكل.']};
-  _curKind = d.kind || 'default';
-  document.getElementById('animTitle').textContent = name;
-  document.getElementById('animSub').textContent = d.sub || '';
-  document.getElementById('animStage').innerHTML = buildStage(d.kind);
-  const st = document.getElementById('animStages');
-  st.innerHTML = `<div style="display:flex;gap:6px;margin:2px 0 8px">${(d.stages||['حركة']).map((s,i)=>`<span class="tag" style="flex:1;text-align:center">${i+1}. ${s}</span>`).join('')}</div>`;
-  document.getElementById('animForm').innerHTML = (d.form||[]).map(([ok,txt])=>`<div class="${ok}">${ok==='yes'?'✔':'✘'} ${txt}</div>`).join('');
-  document.getElementById('animSteps').innerHTML = (d.steps||[]).map(s=>`<li>${s}</li>`).join('');
-  // تطبيق الحركة
-  applyAnim(d.kind, 2.2, true);
-  document.getElementById('animPlayBtn').textContent='⏸';
-  ANIM_STATE.play=true; ANIM_STATE.dur=2.2;
-  document.getElementById('animModal').classList.add('on');
-}
-function applyAnim(kind, dur, play){
-  const stage = document.getElementById('animStage');
-  // نضع الكلاس على العنصر الموجود
-  const fig = stage.querySelector('#fig') || stage.querySelector('.fig');
-  if(!fig) return;
-  // نبني style ديناميكي
-  let s = stage.querySelector('style');
-  if(!s){ s=document.createElement('style'); stage.appendChild(s); }
-  s.textContent = play? animCSS(kind, dur) : '';
-}
-function animTogglePlay(){
-  const b=document.getElementById('animPlayBtn');
-  ANIM_STATE.play=!ANIM_STATE.play;
-  b.textContent = ANIM_STATE.play?'⏸':'▶';
-  applyAnim(currentAnimKind(), ANIM_STATE.dur, ANIM_STATE.play);
-}
-let _curKind='default';
-function currentAnimKind(){ return _curKind; }
-function animStep(){ // إعادة تشغيل من البداية
-  const stage=document.getElementById('animStage');
-  const fig = stage.querySelector('#fig'); if(!fig){return}
-  fig.style.animation='none'; void fig.offsetWidth; fig.style.animation='';
-  applyAnim(_curKind, ANIM_STATE.dur, ANIM_STATE.play);
-}
-function animSpeed(sp, btn){
-  ANIM_STATE.dur = 2.2/sp;
-  document.querySelectorAll('.animCtl .spd').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  applyAnim(_curKind, ANIM_STATE.dur, ANIM_STATE.play);
-}
-function closeAnim(){ document.getElementById('animModal').classList.remove('on'); }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAnim(); });
 
 /* ================== تشغيل ================== */
 function renderAll(){
