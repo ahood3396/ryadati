@@ -1,5 +1,5 @@
 /* رياضتي — Service Worker للعمل كتطبيق بدون إنترنت */
-const CACHE = 'ryadati-v1';
+const CACHE = 'ryadati-v2';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
