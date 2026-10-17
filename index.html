@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -488,7 +488,7 @@ const EX = [
   {n:'ضغط مع رفع الرجل', m:'chest', eq:'body', pl:'home', s:3, r:'12-15', t:'ارفع رجلك فوق كرسي، يزيد التركيز على صدرك العلوي.'},
   {n:'ضغط ضيق (Diamond)', m:'chest', eq:'body', pl:'both', s:3, r:'10-15', t:'يدك مغمورة بشكل مثلث تحت صدرك، يشتغل الصدر والترايسبس معًا.'},
   {n:'دمبل بنش (مقعد مستوٍ)', m:'chest', eq:'weights', pl:'gym', s:4, r:'10-12', t:'بينزل الدمبل لين مستوى صدرك وترفعه بثبات بدون ما تصفق.'},
-  {n:'دمبل بنش مائل', m:'chest', eq:'weights', pl:'gym', s:4, r:'10-12', t:'المقعد مائل 45 درجة، يركز على الصدر العلوي.'},
+  {n:'دمبل بنش مائل', m:'chest', eq:'weights', pl:'gym', s:4, r:'10-12', t:'المقعد مائل٤٥ درجة، يركز على الصدر العلوي.'},
   {n:'سكاي بنش بأرضية', m:'chest', eq:'weights', pl:'home', s:3, r:'12-15', t:'استلقِ على ظهرك وارفع الدمبلين للأعلى ببطء.'},
   {n:'كابل كروس أوفر', m:'chest', eq:'weights', pl:'gym', s:3, r:'12-15', t:'اجمع يدينك أمام صدرك ببطء وتحكّم كامل بالحركة.'},
   // ظهر
@@ -521,14 +521,14 @@ const EX = [
   // بطن
   {n:'بلانك', m:'abs', eq:'body', pl:'both', s:4, r:'30-60 ثانية', t:'جسمك خط مستقيم وبطنك مشدود طول الوقت.'},
   {n:'كراونش', m:'abs', eq:'body', pl:'home', s:4, r:'20', t:'ارفع كتفك بس، لا تسحب رقبتك.'},
-  {n:'ليج ريز (رفع أرجل)', m:'abs', eq:'body', pl:'home', s:3, r:'15', t:'ارفع رجليك لين 90 درجة مع إبقاء أسفل ظهرك على الأرض.'},
+  {n:'ليج ريز (رفع أرجل)', m:'abs', eq:'body', pl:'home', s:3, r:'15', t:'ارفع رجليك لين90 درجة مع إبقاء أسفل ظهرك على الأرض.'},
   {n:'ماونتن كليمر', m:'abs', eq:'body', pl:'both', s:4, r:'30 ثانية', t:'سرعة متوسطة مع إبقاء الحوض ثابت.'},
   {n:'جسر ورك', m:'abs', eq:'body', pl:'home', s:3, r:'20', t:'ارفع حوضك للأعلى واثبت ثانيتين.'},
   {n:'تويست (Russian Twist)', m:'abs', eq:'weights', pl:'both', s:3, r:'20', t:'دور جسمك من الحوض ببطء، لو معك دمبل أحسن.'},
   // كارديو
-  {n:'مشي سريع 30 دقيقة', m:'cardio', eq:'body', pl:'both', s:1, r:'30 دقيقة', t:'المشي اليومي أساس النجاح، حاول تمشي بخطوة سريعة.'},
+  {n:'مشي سريع30 دقيقة', m:'cardio', eq:'body', pl:'both', s:1, r:'30 دقيقة', t:'المشي اليومي أساس النجاح، حاول تمشي بخطوة سريعة.'},
   {n:'جري خفيف', m:'cardio', eq:'body', pl:'both', s:1, r:'15-20 دقيقة', t:'ابدأ بتسخين ومشي دقيقتين قبل الجري.'},
-  {n:'نط الحبل', m:'cardio', eq:'body', pl:'home', s:4, r:'دقيقة + 30 ث راحة', t:'من أسرع حرق للسعرات في وقت قصير.'},
+  {n:'نط الحبل', m:'cardio', eq:'body', pl:'home', s:4, r:'دقيقة +30 ث راحة', t:'من أسرع حرق للسعرات في وقت قصير.'},
   {n:'جاكنجمب (Jumping Jacks)', m:'cardio', eq:'body', pl:'both', s:4, r:'دقيقة', t:'حرك كامل جسمك وتنفّس بانتظام.'},
   {n:'بيربيز (Burpees)', m:'cardio', eq:'body', pl:'home', s:4, r:'10-12', t:'من أقوى تمارين الحرق المتكاملة.'},
   {n:'دراجة ثابتة', m:'cardio', eq:'weights', pl:'gym', s:1, r:'20-30 دقيقة', t:'مقاومة متوسطة وسرعة ثابتة.'},
@@ -569,7 +569,7 @@ const TPL = {
     {f:'كارديو سريع', ms:['cardio']},
     {f:'ظهر (سحب وسوبرمان)', ms:['back']},
     {f:'أكتاف + ذراعات', ms:['shoulders','arms']},
-    {f:'بطن + مشي 30 دقيقة', ms:['abs','cardio']},
+    {f:'بطن + مشي30 دقيقة', ms:['abs','cardio']},
     {f:'راحة نشطة (إطالة)', ms:['cardio']}
   ]
 };
@@ -577,10 +577,10 @@ const TPL = {
 const MEALS = [
   {ty:'breakfast', e:'🥣', n:'شوفان بالحليب والفاكهة', cal:350, p:14,
    ing:['نصف كوب شوفان','كوب حليب (قريب الدسم أو نباتي)','نصف موزة مقطعة','ملعقة عسل','رشة قرفة'],
-   st:['انقع الشوفان بالحليب 10 دقائق.','قطّع الموز وحطه فوق الشوفان.','أضف العسل والقرفة وحرّك.','خلّه يرتاح دقيقتين وتقدّمه.']},
+   st:['انقع الشوفان بالحليب10 دقائق.','قطّع الموز وحطه فوق الشوفان.','أضف العسل والقرفة وحرّك.','خلّه يرتاح دقيقتين وتقدّمه.']},
   {ty:'breakfast', e:'🥚', n:'بيض مسلوق مع أفوكادو وخبز أسمر', cal:380, p:20,
    ing:['بيضتان مسلوقتان','ربع أفوكادو مهروس','شريحة خبز أسمر','رشة ملح وليمون'],
-   st:['سلّق البيض 7-8 دقائق.','اهرس الأفوكادو مع الليمون والملح.','وزّع الأفوكادو على الخبز وحط البيض فوقه.','أضف شرائح طماطم لو حاب.']},
+   st:['سلّق البيض7-8 دقائق.','اهرس الأفوكادو مع الليمون والملح.','وزّع الأفوكادو على الخبز وحط البيض فوقه.','أضف شرائح طماطم لو حاب.']},
   {ty:'breakfast', e:'🥛', n:'زبادي يوناني مع جوز وعسل', cal:300, p:22,
    ing:['كوب زبادي يوناني','ملعقة جوز مجروش','ملعقة عسل','ملعقة بذور شيا'],
    st:['حط الزبادي في صحن.','أضف الجوز والشيا.','رشّ العسل فوقه.','تناوله فورًا.']},
@@ -589,22 +589,22 @@ const MEALS = [
    st:['سخّن الفول وحط الكمون.','رشّ زيت الزيتون والليمون.','قدّمه مع الخضار الطازجة والخبز الأسمر.']},
   {ty:'lunch', e:'🍗', n:'صدر دجاج مشوي مع أرز بني وسلطة', cal:550, p:45,
    ing:['قطعة صدر دجاج (٢٠٠غ)','كوب أرز بني','سلطة خضار متنوعة','ملعقة زيت زيتون','بهارات دجاج'],
-   st:['تبّل الدجاج بالبهارات وزيت الزيتون لساعة.','اشويه على الشواية أو المقلاة 10 دقائق لكل وجه.','اطبخ الأرز البني وغسله قبل الطبخ.','قدّم الدجاج مع الأرز والسلطة.']},
+   st:['تبّل الدجاج بالبهارات وزيت الزيتون لساعة.','اشويه على الشواية أو المقلاة10 دقائق لكل وجه.','اطبخ الأرز البني وغسله قبل الطبخ.','قدّم الدجاج مع الأرز والسلطة.']},
   {ty:'lunch', e:'🐟', n:'سمك مشوي مع خضار سوتيه', cal:480, p:40,
    ing:['قطعة فيليه سمك (٢٠٠غ)','كوب خضار مشكلة (بروكلي/جزر/فاصوليا)','ثوم وليمون','ملعقة زيت زيتون'],
-   st:['تبّل السمك بالليمون والثوم والملح.','اشويه في الفرن 200 درجة ل 20 دقيقة.','شوّه الخضار في زيت الزيتون 5 دقائق.','قدّم السمك فوق الخضار.']},
+   st:['تبّل السمك بالليمون والثوم والملح.','اشويه في الفرن200 درجة ل20 دقيقة.','شوّه الخضار في زيت الزيتون5 دقائق.','قدّم السمك فوق الخضار.']},
   {ty:'lunch', e:'🌯', n:'صحن دجاج مع بطاطا حلوة', cal:520, p:38,
    ing:['قطعة دجاج مشوي','بطاطا حلوة مقطعة مكعبات','رشة بابريكا وزيت زيتون','سلطة جانبية'],
-   st:['قطّع البطاطا الحلوة ورشّ الزيت والبابريكا.','اخبزها في الفرن 25 دقيقة على 200 درجة.','قطّع الدجاج وحطه فوقها.','قدّمه مع السلطة.']},
+   st:['قطّع البطاطا الحلوة ورشّ الزيت والبابريكا.','اخبزها في الفرن25 دقيقة على200 درجة.','قطّع الدجاج وحطه فوقها.','قدّمه مع السلطة.']},
   {ty:'lunch', e:'🍝', n:'مكرونة قمح كامل بالتونة', cal:540, p:32,
    ing:['١٥٠غ مكرونة قمح كامل','علبة تونة بالماء','طماطم وثوم','ملعقة زيت زيتون','جبن بارميزان (اختياري)'],
    st:['اسلّق المكرونة حسب التعليمات.','حمّر الثوم والطماطم بزيت الزيتون.','أضف التونة وحرّك دقيقتين.','اسكب المكرونة وقلّبها مع الصوص.']},
   {ty:'dinner', e:'🍲', n:'شوربة عدس + سلطة', cal:380, p:20,
    ing:['كوب عدس','بصلة وجزر','كمون وليمون','ملعقة زيت زيتون'],
-   st:['اطبخ العدس مع البصلة والجزر ل 30 دقيقة.','اهرس الخليط أو اتركه كما هو.','أضف الكمون والليمون.','قدّمه مع سلطة خضار.']},
+   st:['اطبخ العدس مع البصلة والجزر ل30 دقيقة.','اهرس الخليط أو اتركه كما هو.','أضف الكمون والليمون.','قدّمه مع سلطة خضار.']},
   {ty:'dinner', e:'🥚', n:'أومليت خضار + خبز أسمر', cal:350, p:24,
    ing:['٣ بيضات','فلفل ومشروم وبصل مفروم','رشة جبن قليل الدسم','شريحة خبز أسمر'],
-   st:['اخفق البيض مع الملح.','حمّر الخضار دقيقتين وأضف البيض.','اطوِ الأومليت واطبخها 3 دقائق.','قدّمها مع الخبز.']},
+   st:['اخفق البيض مع الملح.','حمّر الخضار دقيقتين وأضف البيض.','اطوِ الأومليت واطبخها3 دقائق.','قدّمها مع الخبز.']},
   {ty:'dinner', e:'🥗', n:'سلطة تونة كبيرة', cal:320, p:28,
    ing:['علبة تونة','خس وطماطم وخيار','زيتون','ملعقة زيت زيتون وخل'],
    st:['قطّع الخضار قطع كبيرة.','أضف التونة والزيتون.','اخلط زيت الزيتون والخل ورشّها.','حرّكها وتناولها فورًا.']},
@@ -616,7 +616,7 @@ const MEALS = [
    st:['قطّع التفاحة شرائح.','وزّع الزبدة الفولية ورشّ القرفة.','تناولها كوجبة خفيفة.']},
   {ty:'snack', e:'🥜', n:'مخلوط مكسرات (٣٠غ)', cal:180, p:6,
    ing:['٣٠غ لوز وكاجو وبندق'],
-   st:['اختر مكسرات بدون ملح أو سكر.','وزنها عشان ما تزيد عن 30غ.','تناولها مع كوب ماء.']},
+   st:['اختر مكسرات بدون ملح أو سكر.','وزنها عشان ما تزيد عن30غ.','تناولها مع كوب ماء.']},
   {ty:'snack', e:'🍿', n:'فشار منزلي بدون زيت', cal:150, p:4,
    ing:['نصف كوب ذرة فشار','رشة ملح خفيف'],
    st:['حط الذرة في قدر محكم مع غطاء.','على نار متوسطة حتى تتوقف الأصوات.','أضف الملح وحرّك.','استمتع بها بدون ذنب 😄']},
@@ -776,431 +776,821 @@ function weighToday(){
   return r && r.on && r.day === new Date().getDay();
 }
 function tasksList(){
-  const t = todayKey();
-  const log = getLog(t);
-  const list = [
-    {k:'workout', e:'🏋️', n:isF()?'تمرين اليوم':'تمرين اليوم', d:todayPlan().f},
-    {k:'walk', e:'🚶', n:'المشي لمدة 30 دقيقة', d:'خطوة صحية يومية'},
-    {k:'water', e:'💧', n:'شرب 8 أكواب ماء', d:(log.water||0) + ' / 8 كوب'},
+  const plan = todayPlan();
+  const arr = [
+    {k:'workout', em:'🏋️', n:`تمرين اليوم: ${plan.f}`,
+     d: plan.ms.length? (isF()? 'أكملي الجلسة كاملة وسجّلي إنجازك' : 'أكمل الجلسة كاملة وسجّل إنجازك') : 'راحة نشطة: مشي30 دقيقة + إطالة'},
+    {k:'walk', em: isF()? '🚶‍♀️' : '🚶‍♂️', n: 'المشي30 دقيقة', d:'نَفّسي برا أو على جهاز المشي 🌳'},
+    {k:'water', em:'💧', n:'شرب8 أكواب ماء', d:'الترطيب أساس اللياقة والحمية'}
   ];
-  if (weighToday()) list.push({k:'weigh', e:'⚖️', n:'قياس الوزن اليومي', d:'سجّل وزنك في قسم التذكيرات'});
-  return list;
+  if(weighToday()) arr.push({k:'weigh', em:'⚖️', n:'قياس الوزن وتسجيله', d:'من التذكيرات: قياس أسبوعي في نفس اليوم والوقت'});
+  return arr;
 }
 function renderTasks(){
+  const log = getLog(todayKey());
   const box = document.getElementById('tasksBox');
-  const t = todayKey();
-  const log = getLog(t);
-  let html = '';
-  list = tasksList();
-  list.forEach(item=>{
-    const done = !!log[item.k];
-    html += `<div class="task ${done?'done':''}" onclick="toggleTask('${item.k}')">
-      <div class="tick">${done?'✓':''}</div>
-      <div class="em">${item.e}</div>
-      <div class="info"><b>${item.n}</b><small>${item.d}</small></div>
-    </div>`;
-  });
-  box.innerHTML = html;
+  box.innerHTML = tasksList().map(t=>`
+    <div class="task ${log[t.k]?'done':''}" onclick="toggleTask('${t.k}')">
+      <span class="em">${t.em}</span>
+      <div class="info"><b>${t.n}</b><small>${t.d}</small></div>
+      <span class="tick">✔</span>
+    </div>`).join('');
+  // water
+  const w = log.waterN||0;
+  document.getElementById('waterBox').innerHTML = Array.from({length:8},(_,i)=>
+    `<button class="${i<w?'primary':''}" style="min-width:44px;padding:10px" onclick="setWater(${i+1})">${i<w?'💧':'🥛'}</button>`).join('');
+  // progress
+  const ts = tasksList();
+  const done = ts.filter(t=>log[t.k]).length;
+  const pct = ts.length? Math.round(done/ts.length*100):0;
+  document.getElementById('ringBar').style.strokeDashoffset = 251.2 - 251.2*pct/100;
+  document.getElementById('ringVal').textContent = pct+'%';
+  document.getElementById('progSub').textContent = pct===100
+    ? (isF()? 'خلصتِ كل مهام اليوم! 👏 يا بطلة والله 💖' : 'أنجزت كل مهام اليوم! 👏 هذا اسمه انضباط يا بطل 💪')
+    : (isF()? `${done} من ${ts.length} مهام — باقي شوية يا بطلة!` : `${done} من ${ts.length} مهام — باقي شوية يا بطل!`);
+  renderStreak();
 }
 function toggleTask(k){
   const log = getLog(todayKey());
+  const wasAll = tasksList().every(t=>log[t.k]);
   log[k] = !log[k];
-  saveAll(); renderTasks(); updateProgress();
-  if(log[k]){
-    toast(isF()?'أحسنتِ! تم إنجاز المهمة 💖':'أحسنت! تم إنجاز المهمة 💪');
+  saveAll(); renderTasks();
+  const all = tasksList().every(t=>log[t.k]);
+  if(all && !wasAll){
     celebrate();
+    const msg = isF()
+      ? '🎉 ما شاء الله يا بطلة! خلصتِ مهام اليوم بالكامل. شكرًا لالتزامكِ، أنتِ أقوى مما تتخيلين! 💖'
+      : '🎉 ما شاء الله يا بطل! أنجزت مهام اليوم بالكامل. شكرًا لالتزامك، هذا هو الفرق بينك وبين الباقي 💪';
+    toast(msg); confettiTitle();
   }
 }
-function renderWater(){
-  const box = document.getElementById('waterBox');
+function confettiTitle(){
   const log = getLog(todayKey());
-  const n = log.water || 0;
-  let html = '';
-  for(let i=1;i<=8;i++){
-    const filled = i<=n;
-    html += `<button onclick="setWater(${i})" style="background:${filled?'var(--grad)':'var(--p3)'};color:${filled?'#fff':'var(--p1)'};min-width:40px">${i}</button>`;
-  }
-  html += `<button onclick="addWater()" style="background:var(--grad);color:#fff;min-width:40px">+1</button>`;
-  box.innerHTML = html;
+  document.getElementById('progTitle').textContent = tasksList().every(t=>log[t.k]) ? 'يوم كامل ✨' : 'مهام اليوم';
 }
 function setWater(n){
   const log = getLog(todayKey());
-  log.water = n; saveAll(); renderWater(); renderTasks();
+  log.waterN = (log.waterN===n? n-1 : n);
+  if(log.waterN>=8) log.water = true; else log.water=false;
+  saveAll(); renderTasks();
 }
-function addWater(){
-  const log = getLog(todayKey());
-  log.water = (log.water||0)+1; saveAll(); renderWater(); renderTasks();
-  if(log.water>=8) toast(isF()?'وصلتي 8 أكواب! رهيييبة 💖':'وصلت 8 أكواب! ممتاز 💪');
-}
-function renderTodayWorkout(){
-  const p = todayPlan();
-  const box = document.getElementById('todayWorkout');
-  if (p.ms.length===0){
-    box.innerHTML = '<div class="muted">راحة نشطة 🌴 — استمتع بمشي خفيف وإطالة.</div>';
-    return;
+function renderStreak(){
+  let s=0; const d=new Date();
+  for(let i=0;i<400;i++){
+    const k = d.toISOString().slice(0,10);
+    const l = ST.logs[k];
+    const ok = l && (l.workout||l.walk);
+    if(ok){ s++; d.setDate(d.getDate()-1); }
+    else if(i===0){ d.setDate(d.getDate()-1); continue; }
+    else break;
   }
-  let html = '<div class="sec-title"><span class="dot"></span>'+p.f+'</div>';
-  const list = EX.filter(e=>p.ms.includes(e.m));
-  list.forEach(e=>{
-    html += exCard(e);
-  });
-  box.innerHTML = html;
+  document.getElementById('streakChip').textContent = `🔥 ${s} يوم`;
+  document.getElementById('streakBox').innerHTML = `
+    <div class="big">🔥 سلسلتك الحالية: <span style="font-size:1.5em">${s}</span> يوم متتالية</div>
+    <p class="muted">${isF()
+      ? (s===0?'ابدئي اليوم وأنتِ أول يوم في السلسلة الجديدة 🌱':(s>=7?'سلسلة أسبوع كامل! ما شاء الله، لا تكسرينها 🏆':'كل يوم تضيفينه السلسلة أقوى 💖'))
+      : (s===0?'ابدئي اليوم وأنت أول يوم في السلسلة الجديدة 🌱':(s>=7?'سلسلة أسبوع كامل! ما شاء الله، لا تكسرها 🏆':'كل يوم تضيفه للسلسلة يقوّيها 💪'))}</p>`;
 }
 
-/* ================== الجدول الأسبوعي ================== */
+/* ================== تمرين اليوم ================== */
+function renderTodayWorkout(){
+  const plan = todayPlan();
+  const eq = LS.get('wEquip','all'), pl = LS.get('wPlace','all');
+  const list = EX.filter(e => plan.ms.includes(e.m) && matchEx(e,eq,pl));
+  const el = document.getElementById('todayWorkout');
+  if(!plan.ms.length){
+    el.innerHTML = `<div class="big">🛌 اليوم راحة نشطة — تمرين خفيف أو مشي30 دقيقة يكفي</div>`;
+    return;
+  }
+  el.innerHTML = `
+    <div class="big">${new Intl.NumberFormat('ar-EG',{weekday:'long'}).format(new Date())} — ${plan.f} ${isF()?'💖':'💪'}</div>
+    <div class="filters" style="margin-top:10px">
+      <button class="${eq==='weights'?'on':''}" onclick="wSet('wEquip','weights')">🏋️ بالأثقال</button>
+      <button class="${eq==='body'?'on':''}" onclick="wSet('wEquip','body')">🤸 بدون أثقال</button>
+      <button class="${eq==='all'?'on':''}" onclick="wSet('wEquip','all')">الاثنين</button>
+      <button class="${pl==='gym'?'on':''}" onclick="wSet('wPlace','gym')">🏢 نادى</button>
+      <button class="${pl==='home'?'on':''}" onclick="wSet('wPlace','home')">🏠 بيت</button>
+    </div>
+    ${list.length? list.map(exCard).join('') : '<p class="muted">ما فيه تمارين بهذا الاختيار اليوم، بدّل الخيارات 😉</p>'}`;
+}
+function wSet(k,v){ LS.set(k,v); renderTodayWorkout(); }
+
+/* ================== الجدول ================== */
 function renderWeek(){
-  const box = document.getElementById('weekBox');
-  const today = new Date().getDay();
-  let html = '';
-  const plan = TPL[ST.tpl];
-  plan.forEach((p,i)=>{
-    const isToday = i===today;
-    html += `<div class="day ${isToday?'today':''}">
-      <div class="dn">${DAYS[i]}</div>
-      <div>
-        <div class="df">${p.f}</div>
-        <div class="dm">${p.ms.length?p.ms.map(m=>MUSCLES[m].e+' '+MUSCLES[m].n).join(' • '):'🌴 راحة'}</div>
-      </div>
-      ${isToday?'<div class="badge" style="margin-inline-start:auto;background:var(--grad);color:#fff">اليوم</div>':''}
-    </div>`;
-  });
-  box.innerHTML = html;
+  document.getElementById('tplSel').value = ST.tpl;
+  const d = new Date().getDay();
+  document.getElementById('weekBox').innerHTML = TPL[ST.tpl].map((x,i)=>`
+    <div class="day ${i===d?'today':''}">
+      <span class="dn">${DAYS[i]}</span>
+      <div><div class="df">${x.f}</div>
+      <div class="dm">${x.ms.length? x.ms.map(m=>MUSCLES[m].e+MUSCLES[m].n).join(' • ') : 'راحة 💤'}</div></div>
+      ${i===d?'<span class="tag" style="margin-inline-start:auto">اليوم ⭐</span>':''}
+    </div>`).join('');
 }
 
 /* ================== السعرات ================== */
+function calcCal(){
+  const age = +document.getElementById('cAge').value||25;
+  const h = +document.getElementById('cH').value||165;
+  const w = +document.getElementById('cW').value||70;
+  const act = +document.getElementById('cAct').value;
+  const goal = document.getElementById('cGoal').value;
+  const bmr = isF()
+    ? 10*w + 6.25*h - 5*age - 161
+    : 10*w + 6.25*h - 5*age + 5;
+  let tdee = bmr*act, target = tdee;
+  if(goal==='lose') target = tdee*0.8;
+  if(goal==='gain') target = tdee*1.15;
+  const prot = Math.round(w*1.8), fat = Math.round(target*0.27/9), carb = Math.round((target - prot*4 - fat*9)/4);
+  const bmi = (w/((h/100)**2)).toFixed(1);
+  const bmiLbl = bmi<18.5?'نقصان وزن':(bmi<25?'وزن طبيعي':(bmi<30?'زيادة وزن':'سمنة'));
+  ST.calProf = {age,h,w,act,goal,target:Math.round(target),bmi};
+  LS.set('profileW', w); saveAll();
+  document.getElementById('calOut').innerHTML = `
+    <div class="grid g3">
+      <div class="stat"><b>${Math.round(target)}</b><small>سعرة/يوم (هدفك)</small></div>
+      <div class="stat"><b>${Math.round(tdee)}</b><small>احتياجك اليومي TDEE</small></div>
+      <div class="stat"><b>${Math.round(bmr)}</b><small>أيض الأساس BMR</small></div>
+    </div>
+    <div class="card">
+      <div class="sec-title"><span class="dot"></span>التوزيع الغذائي الموصى به</div>
+      <b>بروتين: ${prot}غ</b><div class="bar"><i style="width:30%"></i></div>
+      <b style="display:block;margin-top:8px">كارب: ${carb}غ</b><div class="bar"><i style="width:45%"></i></div>
+      <b style="display:block;margin-top:8px">دهون: ${fat}غ</b><div class="bar"><i style="width:25%"></i></div>
+    </div>
+    <div class="card">
+      <b>مؤشر كتلة الجسم: ${bmi}</b> <span class="tag">${bmiLbl}</span>
+      <p class="muted">${isF()
+        ? (goal==='lose'?'نقصان500-600 سعرة عن احتياجك يعطيكِ نزول0.5كجم أسبوعيًا — مثالي وآمن 💖':(goal==='gain'?'زيادة15% تساعدكِ على بناء عضلات مع تمرين مقاومة 💪':'ثبات الوزن أفضل وضع للحفاظ على نتائجكِ ✨'))
+        : (goal==='lose'?'عجز500-600 سعرة يعطيك نزول0.5كجم أسبوعيًا — ممتاز وآمن 💪':(goal==='gain'?'فائض15% مع بروتين كافي = بناء عضلات نظيف 🔥':'ثبات الوزن أفضل وضع للحفاظ على شكلك 💪'))}</p>
+    </div>`;
+  renderFood();
+}
 function renderFood(){
   const sel = document.getElementById('foodSel');
-  let html = '';
-  MEALS.forEach((m,i)=>{
-    html += `<option value="${i}">${m.e} ${m.n} — ${m.cal} سعرة</option>`;
-  });
-  sel.innerHTML = html;
-  renderFoodLog();
-}
-function addFood(){
-  const sel = document.getElementById('foodSel');
-  const i = parseInt(sel.value);
-  const m = MEALS[i];
-  const log = getLog(todayKey());
-  if(!log.food) log.food = [];
-  log.food.push({n:m.n, cal:m.cal, p:m.p});
-  saveAll(); renderFoodLog(); toast('تم إضافة '+m.n+' ✅');
-}
-function renderFoodLog(){
-  const log = getLog(todayKey());
-  const box = document.getElementById('foodLog');
-  if(!log.food || log.food.length===0){
-    box.innerHTML = '<div class="muted">لم تُضف أي وجبة بعد.</div>';
-    return;
+  if(!sel.options.length){
+    sel.innerHTML = FOODS.map((f,i)=>`<option value="${i}">${f.n} — ${f.cal} سعرة</option>`).join('');
   }
-  let total=0, prot=0;
-  let html = '<div class="logrow"><span>المجموع</span><b style="color:var(--p1)">'+log.food.reduce((s,f)=>s+f.cal,0)+' سعرة</b><span>'+log.food.reduce((s,f)=>s+f.p,0)+' غ بروتين</span></div>';
-  log.food.forEach((f,idx)=>{
-    html += `<div class="logrow"><span>${f.n}</span><span>${f.cal} سعرة • ${f.p}غ</span><button class="x" onclick="rmFood(${idx})">✕</button></div>`;
-  });
-  box.innerHTML = html;
+  const k = todayKey();
+  const list = ST.eaten[k]||[];
+  const total = list.reduce((a,b)=>a+b.cal,0);
+  const target = ST.calProf? ST.calProf.target : 2000;
+  const left = target-total;
+  document.getElementById('foodLog').innerHTML = `
+    <div class="grid g3" style="margin-top:12px">
+      <div class="stat"><b>${target}</b><small>هدفك</small></div>
+      <div class="stat"><b>${total}</b><small>الأكلته</small></div>
+      <div class="stat"><b style="color:${left<0?'#e04a78':'var(--ok)'}">${left}</b><small>المتبقي</small></div>
+    </div>
+    <div class="bar" style="margin:12px 0"><i style="width:${Math.min(100,total/target*100)}%;background:${left<0?'#e04a78':'var(--grad)'}"></i></div>
+    ${list.map((f,i)=>`<div class="logrow"><span>${f.n}</span><b>${f.cal}</b><button class="x" onclick="rmFood(${i})">حذف</button></div>`).join('') || '<p class="muted">لم تسجّل أي وجبة اليوم بعد… ابدأ من هنا 👇</p>'}`;
+}
+const FOODS = [
+  {n:'صحن أرز بني',cal:300},{n:'صدر دجاج مشوي (٢٠٠غ)',cal:220},{n:'بيض مسلوق',cal:70},
+  {n:'موزة',cal:105},{n:'تفاحة',cal:95},{n:'كوب حليب',cal:120},{n:'كوب شوفان مطبوخ',cal:150},
+  {n:'صحن فول',cal:250},{n:'برجر دجاج كامل',cal:550},{n:'شريحة بيتزا',cal:280},
+  {n:'قهوة سادة',cal:5},{n:'شاي بحليب وسكر',cal:90},{n:'كرواسون',cal:230},{n:'سلطة خضار بزيت',cal:80},
+  {n:'علبة تونة بالماء',cal:130},{n:'٣٠غ مكسرات',cal:180},{n:'كوب آيس كريم',cal:200},
+  {n:'مشروب غازي',cal:150},{n:'قطعة كيك',cal:350},{n:'شاورما دجاج',cal:450},{n:'خبز أسمر شريحة',cal:70}
+];
+function addFood(){
+  const f = FOODS[+document.getElementById('foodSel').value];
+  const k = todayKey();
+  if(!ST.eaten[k]) ST.eaten[k]=[];
+  ST.eaten[k].push(f); saveAll(); renderFood();
+  toast(`تمت إضافة ${f.n} (${f.cal} سعرة)`);
 }
 function rmFood(i){
-  const log = getLog(todayKey());
-  log.food.splice(i,1); saveAll(); renderFoodLog();
-}
-function calcCal(){
-  const age = parseInt(document.getElementById('cAge').value)||25;
-  const h = parseInt(document.getElementById('cH').value)||165;
-  const w = parseInt(document.getElementById('cW').value)||70;
-  const act = parseFloat(document.getElementById('cAct').value)||1.55;
-  const goal = document.getElementById('cGoal').value;
-  const sex = isF()? -161 : 5;
-  const bmr = 10*w + 6.25*h - 5*age + sex;
-  const tdee = bmr * act;
-  let target = tdee;
-  if(goal==='lose') target = tdee - 400;
-  if(goal==='gain') target = tdee + 300;
-  const protein = Math.round(w * 1.8);
-  const fat = Math.round(target*0.27/9);
-  const carbs = Math.round((target - protein*4 - fat*9)/4);
-  const bmi = (w/((h/100)**2)).toFixed(1);
-  const bmiCat = bmi<18.5?'نحافة':(bmi<25?'وزن طبيعي':(bmi<30?'زيادة وزن':'سمنة'));
-  const box = document.getElementById('calOut');
-  box.innerHTML = `
-  <div class="grid g2" style="margin-top:12px">
-    <div class="stat"><b>${Math.round(bmr)}</b><small>سعرات الاستراحة (BMR)</small></div>
-    <div class="stat"><b>${Math.round(tdee)}</b><small>الاحتياج اليومي (TDEE)</small></div>
-    <div class="stat"><b>${Math.round(target)}</b><small>الهدف اليومي</small></div>
-    <div class="stat"><b>${bmi}</b><small>مؤشر كتلة الجسم (${bmiCat})</small></div>
-  </div>
-  <div class="card" style="margin-top:12px">
-    <b>توزيع الماكروز</b>
-    <div class="row" style="margin-top:10px">
-      <div class="stat"><b>${protein}غ</b><small>بروتين</small></div>
-      <div class="stat"><b>${carbs}غ</b><small>كارب</small></div>
-      <div class="stat"><b>${fat}غ</b><small>دهون</small></div>
-    </div>
-  </div>`;
-  ST.calProf = {age,h,w,act,goal}; saveAll();
+  const k = todayKey();
+  (ST.eaten[k]||[]).splice(i,1); saveAll(); renderFood();
 }
 
 /* ================== الوجبات ================== */
-let filterMeal = 'all';
+let mealFilter='all';
 function renderMeals(){
-  const box = document.getElementById('mealList');
-  const list = MEALS.filter(m=>filterMeal==='all'||m.ty===filterMeal);
-  let html = '';
-  list.forEach(m=>{
-    html += `<div class="meal">
-      <div class="mh" onclick="this.parentElement.classList.toggle('open')">
-        <span class="em">${m.e}</span>
-        <b>${m.n}</b>
-        <span class="cal">${m.cal} سعرة</span>
+  const types = {all:'الكل 🍽️',breakfast:'فطور 🌅',lunch:'غداء ☀️',dinner:'عشاء 🌙',snack:'خفيفة 🍎'};
+  document.getElementById('mealFilters').innerHTML = Object.keys(types).map(k=>
+    `<button class="${mealFilter===k?'on':''}" onclick="setMealFilter('${k}')">${types[k]}</button>`).join('');
+  document.getElementById('mealList').innerHTML = MEALS.filter(m=>mealFilter==='all'||m.ty===mealFilter).map((m,i)=>`
+    <div class="meal" id="meal${i}">
+      <div class="mh" onclick="document.getElementById('meal${i}').classList.toggle('open')">
+        <span class="em">${m.e}</span><b>${m.n}</b>
+        <span class="cal">${m.cal} سعرة • بروتين ${m.p}غ</span>
+        <span style="color:var(--muted)">▾</span>
       </div>
       <div class="mb">
-        <h4>المكونات:</h4>
-        <ul>${m.ing.map(i=>'<li>'+i+'</li>').join('')}</ul>
-        <h4>طريقة التحضير:</h4>
-        <ol>${m.st.map(s=>'<li>'+s+'</li>').join('')}</ol>
+        <h4>المكونات</h4><ul>${m.ing.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <h4>طريقة التحضير</h4><ol>${m.st.map(x=>`<li>${x}</li>`).join('')}</ol>
       </div>
-    </div>`;
-  });
-  box.innerHTML = html;
+    </div>`).join('');
+  renderCheat();
 }
-function setMealFilter(f){
-  filterMeal=f;
-  document.querySelectorAll('#mealFilters button').forEach(b=>b.classList.toggle('on', b.textContent.includes(f==='all'?'الكل':f)));
-  renderMeals();
+function setMealFilter(k){ mealFilter=k; renderMeals(); }
+function weekDiscipline(){
+  let done=0, poss=0;
+  for(let i=0;i<7;i++){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    const l = ST.logs[d.toISOString().slice(0,10)];
+    const ts = l && l.weigh ? 4 : 3;
+    poss += ts;
+    if(l) done += ['workout','walk','water','weigh'].filter(k=>l[k]).length;
+  }
+  return poss? Math.round(done/poss*100):0;
 }
 function renderCheat(){
-  const box = document.getElementById('cheatBox');
-  const log = getLog(todayKey());
-  const t = todayKey();
-  const weekStart = new Date(); weekStart.setDate(weekStart.getDate() - weekStart.getDay());
-  let done=0, total=0;
-  for(let i=0;i<7;i++){
-    const d = new Date(); d.setDate(d.getDate() - d.getDay() + i);
-    const key = d.toISOString().slice(0,10);
-    const l = getLog(key);
-    const tasks = ['workout','walk','water'];
-    if(weighToday()) tasks.push('weigh');
-    const dn = tasks.filter(k=>l[k]).length;
-    if(dn>=3) done++;
-    total++;
-  }
-  const pct = Math.round(done/total*100);
-  if(pct>=80){
-    const ch = CHEATS[Math.floor(Math.random()*CHEATS.length)];
-    box.innerHTML = `<div style="font-size:30px">${ch.e}</div><b style="font-size:1.1em">${ch.n}</b><div class="muted">${ch.d}</div>
-    <button class="primary" style="width:100%;margin-top:10px" onclick="openCheat()">استمتع بها 🍽️</button>`;
-  } else {
-    box.innerHTML = `<div style="font-size:30px">🔒</div><b style="font-size:1.1em">وجبة الأسبوع مقفلة</b><div class="muted">أكمل 80%+ من مهام هذا الأسبوع عشان تنفتح وجبة المكافأة.</div><div class="bar" style="margin-top:8px"><i style="width:${pct}%"></i></div><div class="muted" style="text-align:center">${pct}%</div>`;
-  }
+  const pct = weekDiscipline();
+  const ok = pct>=80;
+  const wk = Math.floor(Date.now()/604800000) % CHEATS.length;
+  const c = CHEATS[wk];
+  document.getElementById('cheatBox').innerHTML = ok
+    ? `<b style="font-size:1.1em">🎉 مكافأة الانضباط!</b>
+       <p class="muted">الالتزام هذا الأسبوع: <b>${pct}%</b> — ${isF()? 'استحققتِ وجبة مفتوحة!':'استحققت وجبة مفتوحة!'}</p>
+       <div style="font-size:1.3em;font-weight:900">${c.e} ${c.n}</div>
+       <p class="muted">${c.d}</p>
+       <button class="primary" onclick="renderCheatRandom()">اقتراح وجبة أخرى 🔄</button>`
+    : `<b>🍽️ وجبة الأسبوع المفتوحة</b>
+       <p class="muted">التزامك هذا الأسبوع: <b>${pct}%</b> — ${isF()? 'تحتاجين 80% فأكثر':'تحتاج 80% فأكثر'} عشان تنفتح وجبة المكافأة 😊</p>
+       <p class="muted">${isF()? 'كملي مهام الأسبوع وبطلعلك وجبة لذيذة 💖':'كمّل مهام الأسبوع وبطلعلك وجبة لذيذة 💪'}</p>`;
 }
-function openCheat(){
-  const ch = CHEATS[Math.floor(Math.random()*CHEATS.length)];
-  toast(ch.e+' '+ch.n+' — استمتع! 😋');
-  celebrate(['🍔','🍕','🌯','🍣','🥞']);
-}
+let cheatShift = 0;
+function renderCheatRandom(){ cheatShift++; const c = CHEATS[(Math.floor(Date.now()/604800000)+cheatShift)%CHEATS.length]; renderCheat(); toast(c.e+' '+c.n); }
 
 /* ================== التذكيرات ================== */
 function renderRem(){
-  const box = document.getElementById('remBox');
-  let html = '';
-  const rem = ST.reminders;
-  html += `<div class="rem"><span style="font-size:24px">🏋️</span><b>وقت التمرين</b><input type="time" value="${rem.workout.t}" onchange="setRemTime('workout',this.value)" style="width:120px"><div class="sw ${rem.workout.on?'on':''}" onclick="toggleRem('workout')"></div></div>`;
-  html += `<div class="rem"><span style="font-size:24px">🚶</span><b>وقت المشي</b><input type="time" value="${rem.walk.t}" onchange="setRemTime('walk',this.value)" style="width:120px"><div class="sw ${rem.walk.on?'on':''}" onclick="toggleRem('walk')"></div></div>`;
-  html += `<div class="rem"><span style="font-size:24px">⚖️</span><b>يوم قياس الوزن</b><select onchange="setRemDay(this.value)" style="width:140px">${DAYS.map((d,i)=>`<option value="${i}" ${rem.weigh.day===i?'selected':''}>${d}</option>`).join('')}</select><input type="time" value="${rem.weigh.t}" onchange="setRemTime('weigh',this.value)" style="width:120px"><div class="sw ${rem.weigh.on?'on':''}" onclick="toggleRem('weigh')"></div></div>`;
-  box.innerHTML = html;
+  const r = ST.reminders;
+  document.getElementById('remBox').innerHTML = `
+    <div class="rem"><b>🏋️ التمرين</b>
+      <input type="time" value="${r.workout.t}" onchange="setRem('workout','t',this.value)" style="max-width:130px">
+      <span class="sw ${r.workout.on?'on':''}" onclick="setRem('workout','on',!${r.workout.on})"></span></div>
+    <div class="rem"><b>${isF()? '🚶‍♀️' : '🚶‍♂️'} المشي30د</b>
+      <input type="time" value="${r.walk.t}" onchange="setRem('walk','t',this.value)" style="max-width:130px">
+      <span class="sw ${r.walk.on?'on':''}" onclick="setRem('walk','on',!${r.walk.on})"></span></div>
+    <div class="rem"><b>⚖️ قياس الوزن</b>
+      <select onchange="setRem('weigh','day',+this.value)" style="max-width:120px">
+        ${DAYS.map((d,i)=>`<option value="${i}" ${r.weigh.day===i?'selected':''}>${d}</option>`).join('')}
+      </select>
+      <input type="time" value="${r.weigh.t}" onchange="setRem('weigh','t',this.value)" style="max-width:120px">
+      <span class="sw ${r.weigh.on?'on':''}" onclick="setRem('weigh','on',!${r.weigh.on})"></span></div>`;
+  renderWeights();
+  updateNextRem();
 }
-function toggleRem(k){
-  ST.reminders[k].on = !ST.reminders[k].on; saveAll(); renderRem();
-}
-function setRemTime(k,t){
-  ST.reminders[k].t = t; saveAll();
-}
-function setRemDay(d){
-  ST.reminders.weigh.day = parseInt(d); saveAll();
+function setRem(k,f,v){
+  ST.reminders[k][f]=v; saveAll(); renderRem();
+  toast('تم حفظ التذكير ✅');
 }
 function askNotify(){
-  if(!('Notification' in window)){
-    toast('متصفحك لا يدعم الإشعارات');
-    return;
-  }
+  if(!('Notification' in window)){ toast('متصفحك ما يدعم التنبيهات'); return; }
   Notification.requestPermission().then(p=>{
-    if(p==='granted') toast('تم! بنذكرك بالتمارين والمشي وقياس الوزن 💪');
-    else toast('لم يتم تفعيل التنبيهات');
+    toast(p==='granted' ? 'تم تفعيل التنبيهات 🔔' : 'ما تم تفعيل التنبيهات 😕');
+    if(p==='granted') notify('رياضتي','تم! بنذكرك بالتمارين والمشي وقياس الوزن 💪');
   });
+}
+function notify(title, body){
+  try{ new Notification(title,{body, icon:'icon-192.png'}); }catch(e){}
+  toast(title+': '+body);
 }
 function checkReminders(){
   const now = new Date();
-  const hh = now.getHours().toString().padStart(2,'0');
-  const mm = now.getMinutes().toString().padStart(2,'0');
-  const time = hh+':'+mm;
-  const rem = ST.reminders;
-  if(rem.workout.on && rem.workout.t===time) fireNotif('حان وقت التمرين! 💪');
-  if(rem.walk.on && rem.walk.t===time) fireNotif('وقت المشي! 🚶');
-  if(rem.weigh.on && rem.weigh.t===time && rem.weigh.day===now.getDay()) fireNotif('حان وقت قياس الوزن! ⚖️');
-}
-function fireNotif(msg){
-  toast(msg);
-  if(Notification.permission==='granted'){
-    new Notification('رياضتي 🏃', {body: msg});
+  const hm = String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  const d = now.getDay(), k = todayKey()+hm;
+  const r = ST.reminders;
+  if(ST.fired[k]) return;
+  const msgs = [];
+  if(r.workout.on && r.workout.t===hm) msgs.push(isF()? 'وقت التمرين يا بطلة! 💪 لبسي ملابسك وابدئي' : 'وقت التمرين يا بطل! 💪 لبسك جاهز، يلا');
+  if(r.walk.on && r.walk.t===hm) msgs.push(isF()? 'تذكير المشي 🚶‍♀️ نص ساعة برا = صحة ونفسيتكِ أفضل' : 'تذكير المشي 🚶 نص ساعة برا = صحة ونفسيتك أفضل');
+  if(r.weigh.on && r.weigh.day===d && r.weigh.t===hm) msgs.push('⚖️ وقت قياس الوزن! سجّله في التذكيرات عشان نتابع تقدمك');
+  if(msgs.length){
+    ST.fired[k]=true;
+    msgs.forEach(m=>notify('رياضتي 🏃', m));
+    celebrate();
   }
-  celebrate();
+  updateNextRem();
+}
+function updateNextRem(){
+  const r = ST.reminders;
+  const now = new Date();
+  const nowM = now.getHours()*60+now.getMinutes();
+  let best = null;
+  const cands = [];
+  if(r.workout.on) cands.push({t:r.workout.t, n:'تمرين 🏋️', add:0});
+  if(r.walk.on) cands.push({t:r.walk.t, n: isF()? 'مشي 🚶‍♀️' : 'مشي 🚶‍♂️', add:0});
+  if(r.weigh.on){
+    const [h,mm]=r.weigh.t.split(':').map(Number);
+    let diff = (r.weigh.day - now.getDay()+7)%7;
+    cands.push({mins:((diff*24*60)+h*60+mm)-nowM, n:'قياس وزن ⚖️'});
+  }
+  cands.forEach(c=>{
+    if(c.mins===undefined){ const [h,mm]=c.t.split(':').map(Number); c.mins = (h*60+mm)-nowM; }
+    if(c.mins<0) c.mins += 7*24*60;
+    if(!best || c.mins<best.mins) best=c;
+  });
+  const el = document.getElementById('nextRem');
+  if(!best){ el.textContent=''; return; }
+  const h = Math.floor(best.mins/60), m = best.mins%60;
+  el.textContent = `⏰ التذكير القادم: ${best.n} بعد ${h>0? h+' ساعة و ':''}${m} دقيقة`;
+}
+setInterval(checkReminders, 20000);
+
+/* ================== الوزن ================== */
+function saveWeight(){
+  const v = parseFloat(document.getElementById('wIn').value);
+  if(isNaN(v)){ toast('اكتب وزنك أولًا 😊'); return; }
+  ST.weights.push({d:todayKey(), kg:v});
+  const log = getLog(todayKey()); log.weigh=true; log.weighKg=v;
+  saveAll(); renderWeights(); renderTasks();
+  toast(isF()? `تم تسجيل ${v} كجم يا بطلة 📉 استمرري!` : `تم تسجيل ${v} كجم يا بطل 📉 واصل!`);
 }
 function renderWeights(){
   const box = document.getElementById('wHist');
-  if(ST.weights.length===0){
-    box.innerHTML = '<div class="muted">لم تسجّل أي وزن بعد.</div>';
-    return;
-  }
-  let html = '';
-  ST.weights.slice(-7).reverse().forEach(w=>{
-    html += `<div class="logrow"><span>${w.d}</span><b style="color:var(--p1)">${w.w} كجم</b></div>`;
-  });
-  box.innerHTML = html;
-}
-function saveWeight(){
-  const inp = document.getElementById('wIn');
-  const val = parseFloat(inp.value);
-  if(!val){ toast('من فضلك أدخل وزنًا صحيحًا'); return; }
-  const d = todayKey();
-  const idx = ST.weights.findIndex(x=>x.d===d);
-  if(idx>=0) ST.weights[idx].w = val;
-  else ST.weights.push({d, w:val});
-  saveAll(); renderWeights(); toast('تم تسجيل الوزن ✅');
-  inp.value='';
+  const w = ST.weights.slice(-8);
+  if(!w.length){ box.innerHTML='<p class="muted">ما سجّلت أي وزن بعد — ابدأ اليوم وتابع تقدمك 📉</p>'; return; }
+  const last = w[w.length-1], prev = w[w.length-2];
+  const diff = prev? (last.kg-prev.kg).toFixed(1) : null;
+  box.innerHTML = `
+    <div class="grid g3">
+      <div class="stat"><b>${last.kg}</b><small>آخر وزن (كجم)</small></div>
+      <div class="stat"><b>${w.length}</b><small>عدد القياسات</small></div>
+      <div class="stat"><b style="color:${diff>0?'#e04a78':'var(--ok)'}">${diff===null?'—':(diff>0?'+':'')+diff}</b><small>التغير الأخير</small></div>
+    </div>
+    <div style="margin-top:10px">${w.slice().reverse().map(x=>`<div class="logrow"><span>${x.d}</span><b>${x.kg} كجم</b></div>`).join('')}</div>`;
 }
 
-/* ================== إنجازي ================== */
+/* ================== الإنجازات والمكافآت ================== */
 function renderAch(){
   const now = new Date();
-  const daysInMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
-  const grid = document.getElementById('monthGrid');
-  let html = '';
-  let totalDone=0, totalTasks=0, fullDays=0;
-  for(let i=1;i<=daysInMonth;i++){
-    const d = new Date(now.getFullYear(), now.getMonth(), i);
-    const key = d.toISOString().slice(0,10);
-    const log = getLog(key);
-    const tasks = ['workout','walk','water'];
-    if(weighToday()) tasks.push('weigh');
-    const done = tasks.filter(k=>log[k]).length;
-    totalDone += done;
-    totalTasks += tasks.length;
-    if(done>=tasks.length) fullDays++;
-    const cls = done===0?'d0':(done===1?'d1':(done===2?'d2':(done>=3?'d3':'')));
-    const star = done>=tasks.length?'⭐':'';
-    html += `<div class="md ${cls}">${i}${star}</div>`;
-  }
-  grid.innerHTML = html;
-  document.getElementById('monthName').textContent = now.toLocaleDateString('ar-SA',{month:'long',year:'numeric'});
-  const pct = totalTasks? Math.round(totalDone/totalTasks*100):0;
-  const statsBox = document.getElementById('achStats');
-  statsBox.innerHTML = `
-    <div class="stat"><b>${totalDone}</b><small>مهمة منجزة</small></div>
-    <div class="stat"><b>${fullDays}</b><small>يوم كامل</small></div>
-    <div class="stat"><b>${pct}%</b><small>نسبة الإنجاز</small></div>`;
-  const streak = calcStreak();
-  const streakBox = document.getElementById('streakBox');
-  streakBox.innerHTML = `<div class="big">🔥 ${streak} يوم متتالي</div><div class="muted" style="text-align:center">استمر يا ${isF()?'بطلة':'بطل'}!</div>`;
-  document.getElementById('streakChip').textContent = '🔥 '+streak+' يوم';
-  const rewardBox = document.getElementById('rewardBox');
-  if(pct>=85){
-    const mKey = now.getFullYear()+'-'+now.getMonth();
-    if(!ST.monthReward[mKey]){
-      rewardBox.innerHTML = `<div class="reward"><div style="font-size:40px">🎁</div><b style="font-size:1.2em">تهانينا! حصلت على مكافأة الشهر</b><div style="margin-top:8px">${isF()?'اشتري لنفسكِ شيئًا تحبينه — فستان، عطر، أو جلسة سبا 💖':'كافئ نفسك — حذاء رياضي جديد، ساعة، أو جلسة لعب مع الأصدقاء 💪'}</div><button class="primary" style="width:100%;margin-top:12px;background:#fff;color:var(--p1)" onclick="claimReward('${mKey}')">استلم المكافأة 🎉</button></div>`;
-    } else {
-      rewardBox.innerHTML = '<div class="muted">تم استلام مكافأة هذا الشهر 🎁</div>';
+  const y = now.getFullYear(), m = now.getMonth();
+  const daysIn = new Date(y, m+1, 0).getDate();
+  const firstDow = new Date(y, m, 1).getDay();
+  const monthName = new Intl.DateTimeFormat('ar-EG',{month:'long',year:'numeric'}).format(now);
+  document.getElementById('monthName').textContent = monthName;
+  let perfect=0, half=0, none=0, score=0;
+  let cells='';
+  for(let i=0;i<firstDow;i++) cells+='<div></div>';
+  for(let d=1; d<=daysIn; d++){
+    const key = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const future = d>now.getDate();
+    const l = ST.logs[key];
+    const ts = l && l.weigh?4:3;
+    const done = l? ['workout','walk','water','weigh'].filter(k=>l[k]).length : 0;
+    if(!future){
+      const ratio = ts? done/ts : 0;
+      score += ratio;
+      if(ratio===1) perfect++; else if(ratio>=.5) half++; else none++;
     }
-  } else {
-    rewardBox.innerHTML = `<div class="muted">أكمل 85% من مهام هذا الشهر عشان تحصل على المكافأة 🎁</div>`;
+    const cls = future? '' : (done>=ts?'df':(done>=Math.ceil(ts*.75)?'d3':(done>=Math.ceil(ts*.5)?'d2':(done>0?'d1':'d0'))));
+    cells += `<div class="md ${cls}" title="${key}: ${done}/${ts}">${d}</div>`;
   }
-}
-function calcStreak(){
-  let streak = 0;
-  const now = new Date();
-  for(let i=0;i<30;i++){
-    const d = new Date(); d.setDate(d.getDate()-i);
-    const key = d.toISOString().slice(0,10);
-    const log = getLog(key);
-    const tasks = ['workout','walk','water'];
-    if(weighToday()) tasks.push('weigh');
-    const done = tasks.filter(k=>log[k]).length;
-    if(done>=3) streak++;
-    else if(i>0) break;
-  }
-  return streak;
-}
-function claimReward(k){
-  ST.monthReward[k] = true; saveAll(); toast('تم استلام المكافأة! 🎉'); celebrate(['🎁','🎉','🎊']);
-  renderAch();
-}
+  const elapsed = now.getDate();
+  const possScore = elapsed;
+  const pct = Math.round(score/possScore*100);
+  document.getElementById('achStats').innerHTML = `
+    <div class="stat"><b>${pct}%</b><small>إنجاز الشهر</small></div>
+    <div class="stat"><b>${perfect}</b><small>أيام كاملة ⭐</small></div>
+    <div class="stat"><b>${half}</b><small>أيام جيدة</small></div>`;
+  document.getElementById('monthGrid').innerHTML = cells;
 
-/* ================== التشغيل ================== */
-function renderAll(){
-  renderTasks(); renderWater(); renderTodayWorkout(); renderWeek(); renderCheat(); renderRem(); renderWeights(); renderAch(); renderFood(); renderMeals(); renderMuscleFilters(); renderExList();
-  document.getElementById('quoteEm').textContent = '✨';
-  document.getElementById('quoteTxt').textContent = Q[isF()?'f':'m'][Math.floor(Math.random()*12)];
-  const today = new Date();
-  const dayName = DAYS[today.getDay()];
-  document.getElementById('heroMsg').textContent = isF()? 'مرحبًا يا بطلة! اليوم '+dayName : 'مرحبًا يا بطل! اليوم '+dayName;
-  document.getElementById('heroSub').textContent = isF()? 'كل تمرين اليوم خطوة أقرب لجسم أقوى' : 'كل تمرين اليوم خطوة أقرب لجسم أقوى';
-  document.getElementById('progSub').textContent = isF()? 'أنجزي مهامك اليوم وابدئي السلسلة 💖' : 'أنجز مهامك اليوم وابدأ السلسلة 💪';
-  updateProgress();
-}
-function updateProgress(){
-  const t = todayKey();
-  const log = getLog(t);
-  const tasks = ['workout','walk','water'];
-  if(weighToday()) tasks.push('weigh');
-  const done = tasks.filter(k=>log[k]).length;
-  const pct = Math.round(done/tasks.length*100);
-  const ring = document.getElementById('ringBar');
-  const r = 40;
-  const c = 2*Math.PI*r;
-  ring.style.strokeDasharray = c;
-  ring.style.strokeDashoffset = c - (pct/100)*c;
-  document.getElementById('ringVal').textContent = pct+'%';
-}
-function renderNextRem(){
-  const now = new Date();
-  const rem = ST.reminders;
-  const items = [
-    {k:'workout', t:rem.workout.t, on:rem.workout.on, e:'🏋️'},
-    {k:'walk', t:rem.walk.t, on:rem.walk.on, e:'🚶'},
-    {k:'weigh', t:rem.weigh.t, on:rem.weigh.on, day:rem.weigh.day, e:'⚖️'}
+  const unlocked = pct>=85;
+  const mk = `${y}-${m}`;
+  if(unlocked && !ST.monthReward[mk]){
+    ST.monthReward[mk]=true; saveAll();
+    celebrate();
+    setTimeout(()=>toast(isF()? '🏆 مبروك! أنجزتِ الشهر بشكل ممتاز — وقتكِ في المكافأة!' : '🏆 مبروك! أنجزت الشهر بشكل ممتاز — وقتك في المكافأة!'),900);
+  }
+  const rewards = isF()? [
+    '🎁 وجبة مفضلة بدون حساب سعرات (يوم واحد)',
+    '🛍️ مشتريات صغيرة تحبينها لنفسك',
+    '🛁 جلسة سبا أو استرخاء كامل في المنزل',
+    '👗 قطعة لباس رياضي جديد للاحتفال',
+    '🌸 يوم راحة كامل بدون أي شعور بالذنب',
+    '📸 صورة "قبل وبعد" واحتفظي بها كذكرى تفخرين فيها'
+  ] : [
+    '🎁 وجبة مشاوي أو برجر ضخم بدون حساب سعرات (يوم واحد)',
+    '🎮 جلسة ألعاب أو ترفيه كاملة بدون أي التزام',
+    '👟 حذاء رياضي جديد أو ساعة/سوار رياضي للاحتفال',
+    '📺 مسلسل أو فيلم مع فطور فاخر — يوم لك وحدك',
+    '🛌 يوم راحة كامل بدون أي شعور بالذنب',
+    '📸 صورة "قبل وبعد" — دليل تفخر فيه وتحطها خلفية جوالك'
   ];
-  let best=null, bestDiff=Infinity;
-  items.forEach(i=>{
-    if(!i.on) return;
-    if(i.k==='weigh' && i.day!==now.getDay()) return;
-    const [h,m] = i.t.split(':').map(Number);
-    const target = new Date(now); target.setHours(h,m,0,0);
-    let diff = target - now;
-    if(diff<0) diff += 24*3600*1000;
-    if(diff<bestDiff){ bestDiff=diff; best=i; }
-  });
-  if(best){
-    const hrs = Math.floor(bestDiff/3600000);
-    const mins = Math.floor((bestDiff%3600000)/60000);
-    document.getElementById('nextRem').textContent = best.e+' بعد '+hrs+' س '+mins+' د';
-  } else {
-    document.getElementById('nextRem').textContent = '';
-  }
+  document.getElementById('rewardBox').innerHTML = unlocked
+    ? `<div class="reward" style="background:${isF()?'linear-gradient(135deg,#ff5fa2,#ffb3d4)':'linear-gradient(135deg,#2f7dfd,#7fb3ff)'}">
+        <div style="font-size:44px">🏆</div>
+        <h3>شهر كامل من الانضباط!</h3>
+        <p style="font-weight:700;margin:.5em 0">${isF()? 'ما شاء الله يا بطلة، أنتِ من فئة القليل اللي يكملون 🌟':'ما شاء الله يا بطل، أنت من فئة القليل اللي يكملون 🌟'}</p>
+      </div>
+      <div style="margin-top:12px">${rewards.map(r=>`<span class="badge">${r}</span>`).join('')}</div>
+      <p class="muted" style="margin-top:10px">${isF()? 'اختر مكافأة وحدة واحتفل فيها — أنتِ تستاهل 💖':'اختر مكافأة وحدة واحتفل فيها — أنت تستاهل 💪'}</p>`
+    : `<p class="muted">أكمل85% من مهام الشهر عشان تفتح مكافأة الشهر 🎁
+       <br>الحالي: <b style="color:var(--p1)">${pct}%</b></p>
+       <div class="bar"><i style="width:${pct}%"></i></div>
+       <div style="margin-top:10px">${rewards.map(r=>`<span class="badge" style="opacity:.55">${r}</span>`).join('')}</div>`;
+  renderStreak();
 }
-function init(){
-  if(!ST.g){
-    document.getElementById('setup').style.display='flex';
-    document.getElementById('setupTitle').textContent = 'أهلًا فيك في "رياضتي"';
-    return;
-  }
-  applyGender(); renderAll();
-  setInterval(()=>{checkReminders(); renderNextRem();}, 60000);
-  renderNextRem();
-}
-init();
 
-if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+/* ================== الرسوم المتحركة للتمارين ==================
+   كل رسم عبارة عن شخص بسيط (SVG) يأدي حركة التمرين.
+   البنية: {type:'down-up'|'hold'|'cardio', ...} */
+const SKIN='#f2b98c', SKIN2='#e0a074', HAIR='#3a2b28';
+
+// شخص واقف/مستلقٍ — n: وضعية البداية، rot: لزاوية الجسم
+function figStanding(extra=''){
+  return `<g class="fig">
+    <circle class="head" cx="150" cy="70" r="20" fill="${SKIN}"/>
+    <path d="M130 62 q20 -22 40 0" fill="${HAIR}"/>
+    <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)"/>
+    <g class="armL"><rect x="126" y="94" width="12" height="46" rx="6" fill="${SKIN2}"/></g>
+    <g class="armR"><rect x="162" y="94" width="12" height="46" rx="6" fill="${SKIN2}"/></g>
+    <g class="legL"><rect x="139" y="140" width="12" height="56" rx="6" fill="#4a5568"/></g>
+    <g class="legR"><rect x="157" y="140" width="12" height="56" rx="6" fill="#4a5568"/></g>
+    ${extra}
+  </g>`;
 }
+// شخص مستلقي على ظهره (للضغط ورفع الأثقال)
+function figLying(extra=''){
+  return `<g class="fig">
+    <circle class="head" cx="60" cy="120" r="18" fill="${SKIN}"/>
+    <rect class="torso" x="78" y="108" width="110" height="24" rx="10" fill="var(--p1)"/>
+    <g class="armL"><rect x="96" y="86" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
+    <g class="armR"><rect x="126" y="86" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
+    <g class="legL"><rect x="184" y="106" width="12" height="50" rx="6" fill="#4a5568" transform="rotate(30 190 112)"/></g>
+    <g class="legR"><rect x="196" y="106" width="12" height="50" rx="6" fill="#4a5568" transform="rotate(30 202 112)"/></g>
+    ${extra}
+  </g>`;
+}
+// شخص على أربعة أذرع (للسكوات/اللانج نستخدم واقف، للبلانك/الماونتن)
+function figPlank(extra=''){
+  return `<g class="fig">
+    <circle class="head" cx="60" cy="90" r="16" fill="${SKIN}"/>
+    <rect class="torso" x="76" y="80" width="120" height="22" rx="10" fill="var(--p1)" transform="rotate(6 136 91)"/>
+    <g class="armL"><rect x="66" y="98" width="11" height="46" rx="6" fill="${SKIN2}"/></g>
+    <g class="legL"><rect x="192" y="96" width="12" height="50" rx="6" fill="#4a5568"/></g>
+    ${extra}
+  </g>`;
+}
+function ground(){ return '<rect x="20" y="196" width="260" height="6" rx="3" fill="#d8c3d0"/>'; }
+function bench(x=90,y=150,w=110){ return `<rect x="${x}" y="${y}" width="${w}" height="12" rx="4" fill="#8a6f84"/><rect x="${x+8}" y="${y+12}" width="10" height="34" fill="#8a6f84"/><rect x="${x+w-18}" y="${y+12}" width="10" height="34" fill="#8a6f84"/>`; }
+function dumbbell(cx,cy){ return `<g><rect x="${cx-22}" y="${cy-3}" width="44" height="6" fill="#555"/><rect x="${cx-30}" y="${cy-9}" width="8" height="18" rx="3" fill="#333"/><rect x="${cx+22}" y="${cy-9}" width="8" height="18" rx="3" fill="#333"/></g>`; }
+
+/* كل تعريف: title, sub, build(HTML ثابت), frames: array of keyframe CSS per frame,
+   form (نقاط صحيحة/خاطئة), steps (خطوات) */
+const ANIM = {};
+
+// ---- ضغط صدر (Push-up) : أنماط قياس قياسي وقلب -----
+function mk(name, def){ ANIM[name]=def; }
+
+mk('down-up', { // نموذج عام: نزول ورفع
+  build:()=> `<g transform="translate(0,10)">${figStanding()}${ground()}</g>`,
+  kf:{
+    '.armL, .armR':'',
+    '.torso':'',
+  }
+});
+
+/* نبني تعريفات حسب نوع الحركة: نوع + محاور جزء الجسم */
+const DEFS = {
+  /* ===== صدر ===== */
+  'ضغط صدر (رفعة كاملة)':{
+    kind:'pushup',
+    sub:'صدر • ترايسبس • أمام الكتف',
+    stages:['الوضعية العليا (ذراعان ممدودتان)','النزول (صدر يقترب من الأرض)'],
+    form:[['yes','ظهر مستقيم من الرأس للعقب'],['yes','المرفقان بزاوية ~45° للجسم'],['no','رفع المؤخرة للأعلى'],['no','هبوط سريع بدون تحكم']],
+    steps:['ادخل وضعية الضغط: اليدين بعرض الكتفين، الجسم خط مستقيم.','انزل ببطء حتى يقترب صدرك من الأرض (١-٢ ثانية).','ادفع الأرض بكففك وارفع بقوة (١ ثانية).','شدّ بطنك طوال الحركة وتنفّس صح.'] },
+  'ضغط مع رفع الرجل':{ kind:'pushup', sub:'صدر علوي • توازن', stages:['وضعية الضغط','النزول مع رجل مرفوعة'], form:[['yes','ثبّت الرجل المرفوعة'],['no','هبوط الحوض للأسفل'],['yes','بطن مشدود']], steps:['ارفع رجلك فوق كرسي قبل البدء.','انزل ببطء كما في الضغط العادي.','حافظ على توازنك وثبات الحوض.','أكمل العدد ثم بدّل الرجل.'] },
+  'ضغط ضيق (Diamond)':{ kind:'pushup', sub:'ترايسبس • صدر داخلي', stages:['اليدان متقابلتان بشكل مثلث','النزول'], form:[['no','مرفقان متباعدان'],['yes','اليدان تحت الصدر مباشرة']], steps:['ضع يديك بشكل مثلث مباشرة تحت صدرك.','انزل ببطء مع إبقاء المرفقين ملتصقين بالجسم.','ادفع للأعلى وشد الترايسبس.'] },
+  'دمبل بنش (مقعد مستوٍ)':{ kind:'benchpress', sub:'صدر • أمام الكتف', stages:['الدمبلان فوق الصدر','النزول لمستوى الكتف'], form:[['yes','الكتفان ملتصقان بالمقعد'],['no','دفع الدمبل بالركل'],['yes','ثبات وتحكم بالحركة']], steps:['استلقِ والكتفان ملتصقان بالمقعد.','انزل الدمبل ببطء حتى مستوى الكتف.','ادفع للأعلى بدون تصفير المرفقين.'] },
+  'دمبل بنش مائل':{ kind:'benchpress', sub:'صدر علوي', stages:['المقعد مائل ٤٥°','الرفع'], form:[['yes','زاوية المقعد ثابتة'],['no','دفع بأقدامك بالقوة']], steps:['اضبط المقعد على زاوية ٤٥ درجة.','انزل الدمبل لصدرك العلوي.','ارفع بثبات مع شد الصدر.'] },
+  'سكاي بنش بأرضية':{ kind:'benchpress', sub:'صدر • تثبيت', stages:['استلقاء على الأرض والدمبل للأعلى','النزول'], form:[['yes','أسفل الظهر على الأرض'],['no','رفع الظهر عن الأرض']], steps:['استلقِ على ظهرك ودمك ممدودان للأعلى.','انزل الدمبل حتى يلمس المرفق الأرض.','ارفع بقوة مع الحفاظ على ثبات الجذع.'] },
+  'كابل كروس أوفر':{ kind:'cable', sub:'صدر داخلي • شد', stages:['اليدان متباعدتان','الجمع أمام الصدر'], form:[['no','سحب بالجسد بالكامل'],['yes','ثبات الجذع وحركة من الكتف']], steps:['قف واثبت جذعك، الكتفان للخلف.','اسحب الحبال ببطء لتلتقي يداك أمام صدرك.','ثبّت ثانيتين عند الشدّ ثم عد ببطء.'] },
+
+  /* ===== ظهر ===== */
+  'سحب علوي (Lat Pulldown)':{ kind:'pulldown', sub:'الظهر العريض • بايسبس', stages:['السحب لصدرك','العودة للأعلى بتحكم'], form:[['no','الانحناء بالظهر'],['yes','فتح الصدر والسحب للصدر']], steps:['امسك العارضة بعرض أوسع من كتفك.','اسحبها ببطء لمستوى صدرك مع فتح الصدر.','عُد للأعلى ببطء مع تحكم كامل.'] },
+  'تجديف (Row)':{ kind:'row', sub:'الظهر • سمك العضلة', stages:['الشدّ نحو البطن','العودة الأمامية'], form:[['no','تقليب الظهر'],['yes','ظهر مستقيم وتثبيت']], steps:['أمسك المقبض وظهرك مستقيم.','اسحب نحو بطنك مع تثبيت الجذع.','أعد ببطء مع إبقاء الشدّ على الظهر.'] },
+  'درفلة رومانية':{ kind:'deadlift', sub:'ظهر سفلي • أوتار الركبة', stages:['الوقوف مستقيمًا','الانحناء من الورك'], form:[['no','تقليب الظهر (قوس)'],['yes','الظهر مسطّح والحركة من الورك']], steps:['قف والظهر مسطّح وكتفاك للخلف.','انحنِ من الورك مع نزول الوزن على الساقين.','ارفع بالورك وشدّ المؤخرة في الأعلى.'] },
+  'سوبرمان':{ kind:'superman', sub:'ظهر سفلي • توازن', stages:['استلقاء على البطن','رفع اليدين والرجلين'], form:[['yes','النظر للأرض (رقبة محايدة)'],['no','رفع أعلى من اللازم']], steps:['استلقِ على بطنك ويمدّ يديك للأمام.','ارفع ذراعيك ورجليك عن الأرض معًا.','اثبت ثانيتين ثم انزل ببطء.'] },
+  'بيرد دوج':{ kind:'birddog', sub:'ظهر • توازن', stages:['وضعية الأربعة','رفع اليد والرجل المتقابلين'], form:[['yes','الجذع ثابت لا يميل'],['no','الدوران بالحوض']], steps:['خذ وضعية الأربعة وظهرك مستقيم.','ارفع اليد اليمنى واليسرى معًا حتى يستويان.','اثبت ثم بدّل الجانب.'] },
+  'سحب بحمالة أو حبل':{ kind:'row', sub:'ظهر • بديل منزلي', stages:['الشدّ للجسم','العودة'], form:[['yes','ثبات الجذع'],['no','الانحناء بالظهر']], steps:['امسك الحبل أو الحقيبة بظهر مستقيم.','اسحبها لبطنك مع ثبات الجذع.','عُد ببطء دون إرخاء الظهر.'] },
+  'دِدليفت (Deadlift)':{ kind:'deadlift', sub:'ظهر • أرجل • قوة', stages:['الرفع من الأرض','النزول المسيطر'], form:[['yes','الظهر مسطّح'],['no','قوس الظهر'],['yes','الوزن قريب من الجسم']], steps:['قف أمام الوزن والقدمان بعرض الورك.','امسك والظهر مسطّح والبطن مشدود.','ارفع بالورك مع إبقاء الوزن قريبًا من الجسم.'] },
+
+  /* ===== أرجل ===== */
+  'سكوات بدون أثقال':{ kind:'squat', sub:'فخذ • مؤخرة', stages:['الوقوف','النزول حتى موازي'], form:[['yes','الركبتان باتجاه أصابع القدم'],['no','الهبوط بظهر مقوّس'],['yes','الصدر مرفوع']], steps:['قف والقدمان بعرض الكتفين.','انزل بمؤخرتك للخلف كما تجلس على كرسي.','انزل حتى موازي ثم ادفع بالأرض وقف.'] },
+  'سكوات جانبي':{ kind:'squat', sub:'الفخذ الجانبي', stages:['الوقوف','خطوة جانبية ونزول'], form:[['yes','ثبات القدم الأخرى'],['no','ميل الجذع للأمام بكثرة']], steps:['قف معتدلًا وخذ خطوة جانبية.','انزل في السكوات مع بقاء الساق الأخرى ممدودة.','ادفع للعودة وكرر بالجهة المقابلة.'] },
+  'لانج (خطوة أمامية)':{ kind:'lunge', sub:'فخذ • مؤخرة • توازن', stages:['الوقوف','الخطوة والنزول'], form:[['yes','الركبة الأمامية فوق الكعب'],['no','الركبة تتجاوز الأصابع'],['yes','الظهر مستقيم']], steps:['خذ خطوة أمامية كبيرة.','انزل حتى تقترب ركبك الخلفية من الأرض.','ادفع بكعبك الأمامي للعودة.'] },
+  'سكوات بحمل (غولط)':{ kind:'squat', sub:'فخذ • حمل', stages:['الحمل عند الصدر','النزول'], form:[['yes','الحمل مثبّت عند الصدر'],['no','الانحناء للأمام']], steps:['احمل الغولط عند صدرك.','انزل ببطء كما في السكوات.','ادفع بالأرض مع الحفاظ على استقامة الظهر.'] },
+  'ديدليفت روماني بالأحمال':{ kind:'deadlift', sub:'أوتار الركبة • خلف الفخذ', stages:['الوقوف','الانحناء مع ساقين شبه ممتدتين'], form:[['no','ثني الركبتين كثيرًا'],['yes','الحركة من الورك']], steps:['قف والوزن أمام فخذيك.','انحنِ من الورك مع إبقاء ساقيك شبه ممتدتين.','شعر بالشدّ خلف الفخذ ثم ارفع.'] },
+  'رفع ربلة (Calf Raise)':{ kind:'calf', sub:'الربلة (ساق)', stages:['الوقوف','رفع الكعبين'], form:[['yes','ثبات وتحكم بالأعلى'],['no','الهبوط السريع']], steps:['قف على أطراف أقدامك.','ارفع كعبيك ببطء للأعلى.','اثبت ثانيتين ثم انزل بالتحكم.'] },
+  'جلسة أرجل (Leg Press)':{ kind:'legpress', sub:'فخذ • حمل', stages:['دفع الحمل','العودة بالتحكم'], form:[['no','قفل الركبتين تمامًا'],['yes','ثني جزئي مع تحكم']], steps:['اضبط مقعدك بحيث لا تنزل كثيرًا.','ادفع الحمل بكفي قدميك.','لا تُقفل ركبتك تمامًا في الأعلى.'] },
+
+  /* ===== أكتاف ===== */
+  'ضغط علوي بدمبل':{ kind:'overhead', sub:'أكتاف • ترايسبس', stages:['الدمبلان فوق الرأس','النزول لجانبي الرأس'], form:[['no','قوس الظهر'],['yes','البطن مشدود والجذع ثابت']], steps:['ارفع الدمبلين فوق رأسك.','انزلهما ببطء حتى مستوى أذنيك.','ادفع للأعلى مع شد البطن لحماية ظهرك.'] },
+  'أجنحة جانبية':{ kind:'lateral', sub:'الكتف الجانبي', stages:['النزول بجانبك','الرفع حتى مستوى الكتف'], form:[['no','الرفع أعلى من الكتف'],['no','استخدام تحريك الجسد']], steps:['قف والذراعان بجانبك مع ميل خفيف.','ارفع حتى مستوى الكتف فقط.','انزل ببطء وتحكم.'] },
+  'ضغط برية (Plank Shoulder Tap)':{ kind:'shouldertap', sub:'كتف • استقرار', stages:['وضعية البلانك','المس الكتف المقابل'], form:[['yes','الحوض ثابت لا يميل'],['no','تأرجح الجسد']], steps:['خذ وضعية الضغط العلوي.','المس كتفك المقابل بيديك.','ثبّت الحوض وأعد بالجهة المقابلة.'] },
+  'فرنط بدمبل (Face Pull)':{ kind:'facepull', sub:'الكتف الخلفي • وضعية', stages:['الشدّ نحو الوجه','العودة'], form:[['yes','سحب الكتفين للخلف'],['no','الحجز بالساعد فقط']], steps:['امسك الحبل بمستوى عينيك.','اسحبه نحو وجهك مع فتح الكتفين.','ثبّت ثم عد ببطء.'] },
+
+  /* ===== ذراعات ===== */
+  'كيرل بدمبل (بايسبس)':{ kind:'curl', sub:'بايسبس', stages:['الذراع ممدودة','الرفع والشدّ'], form:[['no','تقلب الجسد للمساعدة'],['yes','المرفق مثبّت بجانبك']], steps:['قف والذراعان بجانبك والمرفقان مثبتان.','ارفع الوزن ببطء مع شدّ البايسبس.','أنزل ببطء حتى استواء الذراعين.'] },
+  'ضغط ترايسبس على أرضية':{ kind:'pushup', sub:'ترايسبس', stages:['اليدان بعرض الكتف','النزول'], form:[['yes','المرفقان ملتصقان بالجسم'],['no','تباعد المرفقين']], steps:['ضع يديك بعرض كتفك مباشرة تحت الكتفين.','انزل مع إبقاء المرفقين ملتصقين بالجسم.','ادفع للأعلى وشدّ الترايسبس.'] },
+  'دِيبز على كرسي':{ kind:'dips', sub:'ترايسبس', stages:['الاستناد على الكرسي','النزول والرفع'], form:[['no','النزول عميق جدًا'],['yes','ثني جزئي مع تحكم']], steps:['استند على كرسي ثابت وقدمك أمامك.','انزل ببطء حتى يثني مرفقك ~90°.','ادفع بالمرفقين للعودة.'] },
+  'إكستنشن ترايسبس بالكيبل':{ kind:'triceps', sub:'ترايسبس', stages:['المرفق ثابت','الإمتداد'], form:[['no','حركة المرفق'],['yes','المرفق مثبّت']], steps:['أمسك الحبل ومرفقك مثبت بجانبك.','أمدّ ذراعك للأسفل مع شد الترايسبس.','أعد ببطء دون تحريك المرفق.'] },
+  'مطرقة بدمبل (Hammer)':{ kind:'hammer', sub:'ساعد • بايسبس', stages:['القبض للداخل','الرفع'], form:[['yes','المرفق مثبّت'],['no','الرفع بالاندفاع']], steps:['امسك الدمبل بقبضة مطرقة (اليد للداخل).','ارفع مع إبقاء المرفق ثابتًا.','أنزل ببطء.'] },
+
+  /* ===== بطن ===== */
+  'بلانك':{ kind:'plank', sub:'البطن • استقرار', stages:['الوضعية المثالية (خط مستقيم)'], form:[['no','رفع المؤخرة'],['no','هبوط الحوض'],['yes','الجسم خط مستقيم']], steps:['ادعِ على ساقيك ومرفقيك.','اجعل جسمك خطًا مستقيمًا من الرأس للعقب.','شدّ بطنك وتنفّس بانتظام واثبت.'] },
+  'كراونش':{ kind:'crunch', sub:'البطن العلوي', stages:['الاستلقاء','رفع الكتفين'], form:[['yes','رفع الكتفين فقط'],['no','شد الرقبة باليد']], steps:['استلقِ وركبتكما مثنيتان.','ارفع كتفك عن الأرض فقط بشهيق.','أعد ببطء دون سحب رقبتك.'] },
+  'ليج ريز (رفع أرجل)':{ kind:'legraise', sub:'البطن السفلي', stages:['الاستلقاء','رفع الركبتين للصدر'], form:[['no','قوس أسفل الظهر'],['yes','الظهر ملتصق بالأرض']], steps:['استلقِ وظهرك ملتصق بالأرض.','ارفع رجليك ببطء حتى 90°.','أنزل ببطء دون لمس الأرض.'] },
+  'ماونتن كليمر':{ kind:'climber', sub:'بطن • كارديو', stages:['وضعية الضغط','سحب الركبة للصدر'], form:[['yes','الحوض ثابت'],['no','رفع المؤخرة']], steps:['خذ وضعية الضغط العلوي.','اسحب ركبتك نحو صدرك بالتناوب.','حافظ على سرعة متوسطة وحوض ثابت.'] },
+  'جسر ورك':{ kind:'bridge', sub:'مؤخرة • بطن', stages:['الاستلقاء','رفع الحوض'], form:[['yes','الضغط بالكعبين'],['no','القوس الزائد للظهر']], steps:['استلقِ وركبتكما مثنيتان.','ارفع حوضك حتى يشكل جسمك خطًا مستقيمًا.','اثبت ثم انزل ببطء.'] },
+  'تويست (Russian Twist)':{ kind:'twist', sub:'البطن الجانبي', stages:['الجلسة مائلة للخلف','الدوران للجانب'], form:[['yes','الدوران من الجذع'],['no','الدوران من الذراع فقط']], steps:['اجلس واميل جسمك للخلف قليلًا.','ارفع قدميك إن أمكن.','دور جذعك لليمين ثم لليسار.'] },
+
+  /* ===== كارديو ===== */
+  'مشي سريع30 دقيقة':{ kind:'walk', sub:'كارديو • صحة عامة', stages:['الخطوة الأمامية','تبادل الخطوة'], form:[['yes','خطوة سريعة مع رفرفة الذراعين'],['no','الوقوف بلا حركة']], steps:['ابدأ بخطوة مريحة دقيقتين.','زد السرعة لخطوة سريعة ترفع نبضك.','حافظ على تبادل الذراعين مع الخطوة.','استمر 30 دقيقة مع تنفّس منتظم.'] },
+  'جري خفيف':{ kind:'walk', sub:'كارديو • تحمل', stages:['الجري','تبادل الخطوة'], form:[['yes','هبوط خفيف على القدم'],['no','الجري بكعب القدم']], steps:['ابدأ بمشي دقيقتين للتسخين.','انتقل لجري خفيف يرفع نبضك.','حافظ على إيقاع ثابت.','اختم بإطالة.'] },
+  'نط الحبل':{ kind:'jump', sub:'كارديو • حرق', stages:['القفز','الهبوط'], form:[['yes','الهبوط بطرف القدم'],['no','القفز عاليًا جدًا']], steps:['قفز خفيفًا مع تدوير الحبل من المعصم.','اهبط بطرف قدميك وركبتان قليلة الانثناء.','حافظ على إيقاع ثابت.'] },
+  'جاكنجمب (Jumping Jacks)':{ kind:'jack', sub:'كارديو •全身', stages:['الوضعية المغلقة','فتح الرجلين والذراعين'], form:[['yes','فتح كامل للذراعين'],['no','رفع الذراعين نصف كفو']], steps:['قف والذراعان بجانبك.','اقفز وافتح رجليك مع رفع ذراعيك فوق رأسك.','اقفز للعودة للوضعية المغلقة.'] },
+  'بيربيز (Burpees)':{ kind:'burpee', sub:'كارديو • متكامل', stages:['الاندفاع للأرض','القفز للأعلى'], form:[['yes','حركة سلسة متتابعة'],['no','القفز بدون تحكم']], steps:['قف ثم اندفاع للوضعية العلوية.','أعد الرجلين للصدر.','اقفز للأعلى مع رفع الذراعين.'] },
+  'دراجة ثابتة':{ kind:'cycle', sub:'كارديو • تحمل', stages:['الدورة الأمامية','الدورة الخلفية'], form:[['yes','مقاومة وسرعة ثابتة'],['no','مقاومة عالية جدًا']], steps:['اختر مقاومة متوسطة.','ثبّت سرعة متساوية.','استمر 20-30 دقيقة مع تنفّس منتظم.'] },
+  'إطالة وتهدئة':{ kind:'stretch', sub:'مرونة • تعافٍ', stages:['الإطالة الجانبية','العودة'], form:[['yes','إطالة ببطء بدون ألم حاد'],['no','التحريك بالركل']], steps:['ثبّت جسمك وتمدد ببطء.','اثبت على نقطة الشدّ 20-30 ثانية.','تنفّس بعمق ولا تتألم.'] }
+};
+
+/* بناء رسم SVG حسب نوع التمرين + توليد إطارات الحركة */
+function buildStage(kind){
+  switch(kind){
+    case 'pushup': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <circle class="head" cx="40" cy="150" r="16" fill="${SKIN}"/>
+        <rect class="torso" x="56" y="138" width="150" height="22" rx="10" fill="var(--p1)"/>
+        <g class="armL" style="transform-origin:66px 160px"><rect x="60" y="152" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
+        <g class="legL"><rect x="196" y="150" width="12" height="46" rx="6" fill="#4a5568"/></g>
+      </g></svg>`;
+    case 'benchpress': return `<svg viewBox="0 0 300 220">${bench(70,140,150)}${ground()}
+      <g id="fig">
+        <circle class="head" cx="66" cy="128" r="16" fill="${SKIN}"/>
+        <rect class="torso" x="82" y="120" width="120" height="22" rx="10" fill="var(--p1)"/>
+        <g class="armL" style="transform-origin:110px 120px"><rect x="104" y="86" width="12" height="40" rx="6" fill="${SKIN2}"/></g>
+        <g class="armR" style="transform-origin:130px 120px"><rect x="124" y="86" width="12" height="40" rx="6" fill="${SKIN2}"/></g>
+        <g id="weight">${dumbbell(120,84)}</g>
+      </g></svg>`;
+    case 'squat': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig" transform="translate(0,0)">${figStanding()}</g></svg>`;
+    case 'lunge': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}</g></svg>`;
+    case 'pulldown': return `<svg viewBox="0 0 300 220">${ground()}
+      <rect x="40" y="20" width="220" height="8" rx="4" fill="#8a6f84"/>
+      <g id="fig">
+        <circle class="head" cx="150" cy="70" r="18" fill="${SKIN}"/>
+        <rect class="torso" x="138" y="90" width="24" height="70" rx="10" fill="var(--p1)"/>
+        <g class="armL" style="transform-origin:142px 92px"><rect x="122" y="30" width="11" height="64" rx="6" fill="${SKIN2}"/></g>
+        <g class="armR" style="transform-origin:158px 92px"><rect x="167" y="30" width="11" height="64" rx="6" fill="${SKIN2}"/></g>
+        <g id="bar"><rect x="116" y="26" width="68" height="6" rx="3" fill="#555"/></g>
+        <g class="legL"><rect x="139" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
+        <g class="legR"><rect x="157" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
+      </g></svg>`;
+    case 'row': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <circle class="head" cx="120" cy="70" r="18" fill="${SKIN}"/>
+        <rect class="torso" x="108" y="90" width="24" height="70" rx="10" fill="var(--p1)" transform="rotate(15 120 125)"/>
+        <g class="armL" style="transform-origin:120px 96px"><rect x="114" y="96" width="11" height="52" rx="6" fill="${SKIN2}"/></g>
+        <g id="weight">${dumbbell(120,150)}</g>
+        <g class="legL"><rect x="112" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
+        <g class="legR"><rect x="128" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
+      </g></svg>`;
+    case 'deadlift': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}<g id="weight">${dumbbell(150,180)}</g></g></svg>`;
+    case 'superman': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <circle class="head" cx="90" cy="150" r="16" fill="${SKIN}"/>
+        <rect class="torso" x="106" y="142" width="110" height="22" rx="10" fill="var(--p1)"/>
+        <g class="armL" style="transform-origin:110px 148px"><rect x="60" y="142" width="48" height="11" rx="6" fill="${SKIN2}"/></g>
+        <g class="legL" style="transform-origin:210px 150px"><rect x="214" y="142" width="52" height="11" rx="6" fill="#4a5568"/></g>
+      </g></svg>`;
+    case 'birddog': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <circle class="head" cx="80" cy="120" r="15" fill="${SKIN}"/>
+        <rect class="torso" x="96" y="112" width="120" height="20" rx="10" fill="var(--p1)"/>
+        <g class="armL" style="transform-origin:100px 118px"><rect x="94" y="120" width="11" height="44" rx="6" fill="${SKIN2}"/></g>
+        <g class="legL" style="transform-origin:212px 118px"><rect x="206" y="120" width="12" height="44" rx="6" fill="#4a5568"/></g>
+        <g class="armR" style="transform-origin:110px 118px"><rect x="104" y="88" width="11" height="40" rx="6" fill="${SKIN}"/></g>
+        <g class="legR" style="transform-origin:200px 118px"><rect x="196" y="90" width="12" height="40" rx="6" fill="#394150"/></g>
+      </g></svg>`;
+    case 'cable': return `<svg viewBox="0 0 300 220">${ground()}
+      <rect x="240" y="20" width="10" height="180" fill="#8a6f84"/>
+      <g id="fig">${figStanding()}<g class="armL" style="transform-origin:130px 96px"><rect x="236" y="96" width="11" height="52" rx="6" fill="${SKIN2}" transform="rotate(-70 240 120)"/></g></g></svg>`;
+    case 'curl': case 'hammer': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}<g id="weight">${dumbbell(126,120)}${dumbbell(174,120)}</g></g></svg>`;
+    case 'overhead': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}<g id="weight">${dumbbell(130,60)}${dumbbell(170,60)}</g></g></svg>`;
+    case 'lateral': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}<g id="weight">${dumbbell(120,120)}${dumbbell(180,120)}</g></g></svg>`;
+    case 'facepull': case 'triceps': return `<svg viewBox="0 0 300 220">${ground()}
+      <rect x="30" y="20" width="10" height="180" fill="#8a6f84"/>
+      <g id="fig">${figStanding()}<g class="armR" style="transform-origin:170px 96px"><rect x="40" y="96" width="11" height="50" rx="6" fill="${SKIN2}"/></g></g></svg>`;
+    case 'dips': return `<svg viewBox="0 0 300 220">${bench(90,140,110)}${ground()}
+      <g id="fig" transform="translate(30,0)">
+        <circle class="head" cx="150" cy="90" r="16" fill="${SKIN}"/>
+        <rect class="torso" x="138" y="106" width="24" height="46" rx="10" fill="var(--p1)"/>
+        <g class="armL" style="transform-origin:136px 110px"><rect x="128" y="106" width="11" height="40" rx="6" fill="${SKIN2}"/></g>
+        <g class="legL"><rect x="139" y="150" width="12" height="46" rx="6" fill="#4a5568" transform="rotate(20 145 160)"/></g>
+      </g></svg>`;
+    case 'plank': case 'shouldertap': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figPlank()}</g></svg>`;
+    case 'crunch': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <g class="head" style="transform-origin:120px 140px"><circle cx="120" cy="140" r="16" fill="${SKIN}"/></g>
+        <rect class="torso" x="136" y="140" width="90" height="22" rx="10" fill="var(--p1)"/>
+        <g class="legL"><rect x="220" y="120" width="12" height="46" rx="6" fill="#4a5568" transform="rotate(-40 226 140)"/></g>
+      </g></svg>`;
+    case 'legraise': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <circle class="head" cx="70" cy="150" r="15" fill="${SKIN}"/>
+        <rect class="torso" x="86" y="140" width="120" height="22" rx="10" fill="var(--p1)"/>
+        <g class="legL" style="transform-origin:204px 150px"><rect x="200" y="106" width="12" height="46" rx="6" fill="#4a5568"/></g>
+      </g></svg>`;
+    case 'climber': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figPlank()}<g class="legR" style="transform-origin:198px 100px"><rect x="182" y="96" width="12" height="40" rx="6" fill="#394150"/></g></g></svg>`;
+    case 'bridge': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <circle class="head" cx="80" cy="152" r="15" fill="${SKIN}"/>
+        <g class="torso" style="transform-origin:150px 150px"><rect x="96" y="140" width="120" height="22" rx="10" fill="var(--p1)"/></g>
+        <g class="legL"><rect x="210" y="118" width="12" height="44" rx="6" fill="#4a5568"/></g>
+      </g></svg>`;
+    case 'twist': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig" style="transform-origin:150px 180px">
+        <circle class="head" cx="150" cy="90" r="16" fill="${SKIN}"/>
+        <g class="torso" style="transform-origin:150px 150px"><rect x="138" y="106" width="24" height="52" rx="10" fill="var(--p1)"/></g>
+        <g class="armR" style="transform-origin:150px 110px"><rect x="162" y="106" width="40" height="11" rx="6" fill="${SKIN2}"/></g>
+        <g class="legL"><rect x="139" y="156" width="12" height="40" rx="6" fill="#4a5568" transform="rotate(-40 145 160)"/></g>
+      </g></svg>`;
+    case 'walk': case 'stretch': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}</g></svg>`;
+    case 'jump': case 'jack': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}</g></svg>`;
+    case 'burpee': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}</g></svg>`;
+    case 'cycle': return `<svg viewBox="0 0 300 220">${ground()}
+      <circle cx="120" cy="160" r="34" fill="none" stroke="#8a6f84" stroke-width="6"/>
+      <g id="fig">${figStanding()}<g class="legR" style="transform-origin:157px 146px"><rect x="152" y="146" width="12" height="40" rx="6" fill="#4a5568"/></g></g></svg>`;
+    case 'calf': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figStanding()}<g id="weight">${dumbbell(126,120)}${dumbbell(174,120)}</g></g></svg>`;
+    case 'legpress': return `<svg viewBox="0 0 300 220">${ground()}
+      <rect x="230" y="60" width="16" height="120" rx="4" fill="#8a6f84"/>
+      <g id="fig" style="transform-origin:120px 160px">
+        <circle class="head" cx="80" cy="120" r="16" fill="${SKIN}"/>
+        <rect class="torso" x="60" y="136" width="90" height="22" rx="10" fill="var(--p1)"/>
+        <g class="legR" style="transform-origin:150px 146px"><rect x="146" y="120" width="70" height="12" rx="6" fill="#4a5568"/></g>
+      </g></svg>`;
+    default: return `<svg viewBox="0 0 300 220">${ground()}${figStanding()}</svg>`;
+  }
+}
+
+/* توليد إطارات الحركة (CSS animation) حسب النوع */
+function animCSS(kind, dur){
+  const D = dur+'s', E='ease-in-out', I='infinite alternate';
+  const base = `#fig{animation-duration:${D};animation-timing-function:${E};animation-iteration-count:${I};}`;
+  switch(kind){
+    case 'pushup': return base+`#fig .torso,#fig .head{animation:pu-torso ${D} ${E} ${I}}
+      #fig .armL{animation:pu-arm ${D} ${E} ${I};transform-origin:66px 160px}`;
+    case 'benchpress': return base+`#fig .armL,#fig .armR,#weight{animation:bp ${D} ${E} ${I}}
+      #fig .armL{transform-origin:110px 120px}#fig .armR{transform-origin:130px 120px}#weight{transform-origin:120px 84px}`;
+    case 'squat': case 'lunge': return base+`#fig{animation:sq ${D} ${E} ${I}}`;
+    case 'pulldown': return base+`#fig .armL,#fig .armR,#bar{animation:pd ${D} ${E} ${I}}
+      #fig .armL{transform-origin:142px 92px}#fig .armR{transform-origin:158px 92px}`;
+    case 'row': return base+`#fig .armL,#weight{animation:rw ${D} ${E} ${I}}#fig .armL{transform-origin:120px 96px}`;
+    case 'deadlift': return base+`#fig,#weight{animation:dl ${D} ${E} ${I}}`;
+    case 'superman': return base+`#fig .armL,#fig .legL,#fig .head,#fig .torso{animation:sm ${D} ${E} ${I}}
+      #fig .armL{transform-origin:110px 148px}#fig .legL{transform-origin:210px 150px}`;
+    case 'birddog': return base+`#fig .armR,#fig .legR{animation:bd ${D} ${E} ${I}}`;
+    case 'curl': case 'hammer': return base+`#weight{animation:cu ${D} ${E} ${I};transform-origin:150px 120px}`;
+    case 'overhead': case 'lateral': return base+`#weight{animation:ov ${D} ${E} ${I};transform-origin:150px 100px}`;
+    case 'plank': return base+`#fig{animation:pl ${D} ${E} ${I}}`;
+    case 'crunch': return base+`#fig .head,#fig .torso{animation:cr ${D} ${E} ${I};transform-origin:150px 150px}`;
+    case 'legraise': return base+`#fig .legL{animation:lr ${D} ${E} ${I};transform-origin:204px 150px}`;
+    case 'climber': return base+`#fig .legL,#fig .legR{animation:cl ${D} ${E} ${I}}`;
+    case 'bridge': return base+`#fig .torso{animation:br ${D} ${E} ${I};transform-origin:150px 150px}`;
+    case 'twist': return base+`#fig .torso,#fig .armR{animation:tw ${D} ${E} ${I};transform-origin:150px 150px}`;
+    case 'walk': return base+`#fig .legL,#fig .armR{animation:wk ${D} ${E} ${I}}#fig .legL{transform-origin:145px 146px}#fig .armR{transform-origin:168px 96px}`;
+    case 'jump': case 'jack': return base+`#fig{animation:jm ${D} ${E} ${I}}`;
+    case 'burpee': return base+`#fig{animation:bp2 ${D} ${E} ${I}}`;
+    case 'cycle': return base+`#fig .legR{animation:cy ${D} ${E} ${I};transform-origin:157px 146px}`;
+    case 'calf': return base+`#fig{animation:cf ${D} ${E} ${I}}`;
+    case 'legpress': return base+`#fig .legR{animation:lp ${D} ${E} ${I};transform-origin:150px 146px}`;
+    case 'stretch': return base+`#fig{animation:st ${D} ${E} ${I}}`;
+    case 'cable': case 'facepull': case 'triceps': return base+`#fig .armL,#fig .armR{animation:cb ${D} ${E} ${I}}`;
+    case 'dips': return base+`#fig{animation:dp ${D} ${E} ${I}}`;
+    case 'shouldertap': return base+`#fig .armR{animation:stap ${D} ${E} ${I};transform-origin:110px 118px}`;
+    default: return base+`#fig{animation:st ${D} ${E} ${I}}`;
+  }
+}
+const KEYFRAMES = `
+@keyframes pu-torso{from{transform:translateY(0)}to{transform:translateY(18px)}}
+@keyframes pu-arm{from{transform:scaleY(1)}to{transform:scaleY(.72)}}
+@keyframes bp{from{transform:translateY(0)}to{transform:translateY(34px)}}
+@keyframes sq{from{transform:translateY(0) scaleY(1)}to{transform:translateY(26px) scaleY(.86)}}
+@keyframes pd{from{transform:translateY(0)}to{transform:translateY(46px)}}
+@keyframes rw{from{transform:translateY(-30px)}to{transform:translateY(0)}}
+@keyframes dl{from{transform:translateY(0) rotate(0)}to{transform:translateY(20px) rotate(24deg)}}
+@keyframes sm{from{transform:translateY(0)}to{transform:translateY(-20px)}}
+@keyframes bd{from{transform:rotate(0)}to{transform:rotate(48deg)}}
+@keyframes cu{from{transform:translateY(46px)}to{transform:translateY(-6px)}}
+@keyframes ov{from{transform:translateY(0)}to{transform:translateY(-38px)}}
+@keyframes pl{from{transform:translateY(0)}to{transform:translateY(4px)}}
+@keyframes cr{from{transform:rotate(0)}to{transform:rotate(-30deg)}}
+@keyframes lr{from{transform:rotate(0)}to{transform:rotate(-70deg)}}
+@keyframes cl{from{transform:translateY(0) translateX(0)}to{transform:translateY(-10px) translateX(-40px)}}
+@keyframes br{from{transform:translateY(0)}to{transform:translateY(-26px)}}
+@keyframes tw{from{transform:rotate(0)}to{transform:rotate(24deg)}}
+@keyframes wk{from{transform:rotate(28deg)}to{transform:rotate(-28deg)}}
+@keyframes jm{from{transform:translateY(0)}to{transform:translateY(-34px)}}
+@keyframes bp2{from{transform:translateY(0) scaleY(1)}to{transform:translateY(30px) scaleY(.7)}}
+@keyframes cy{from{transform:rotate(-30deg)}to{transform:rotate(30deg)}}
+@keyframes cf{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+@keyframes lp{from{transform:translateX(0)}to{transform:translateX(-26px)}}
+@keyframes st{from{transform:rotate(0)}to{transform:rotate(8deg)}}
+@keyframes cb{from{transform:rotate(0)}to{transform:rotate(30deg)}}
+@keyframes dp{from{transform:translateY(0)}to{transform:translateY(24px)}}
+@keyframes stap{from{transform:rotate(0)}to{transform:rotate(50deg)}}
+`;
+// حقن الـ keyframes مرة واحدة
+(function(){ const s=document.createElement('style'); s.textContent=KEYFRAMES; document.head.appendChild(s); })();
+
+/* ===== تشغيل/عرض النافذة ===== */
+let ANIM_STATE={play:true, dur:2.2};
+function openAnim(name){
+  const d = DEFS[name] || {kind:'default', sub:'', stages:['الحركة'], form:[['yes','حركة صحيحة']], steps:['أدِ التمرين ببطء مع التركيز على الشكل.']};
+  _curKind = d.kind || 'default';
+  document.getElementById('animTitle').textContent = name;
+  document.getElementById('animSub').textContent = d.sub || '';
+  document.getElementById('animStage').innerHTML = buildStage(d.kind);
+  const st = document.getElementById('animStages');
+  st.innerHTML = `<div style="display:flex;gap:6px;margin:2px 0 8px">${(d.stages||['حركة']).map((s,i)=>`<span class="tag" style="flex:1;text-align:center">${i+1}. ${s}</span>`).join('')}</div>`;
+  document.getElementById('animForm').innerHTML = (d.form||[]).map(([ok,txt])=>`<div class="${ok}">${ok==='yes'?'✔':'✘'} ${txt}</div>`).join('');
+  document.getElementById('animSteps').innerHTML = (d.steps||[]).map(s=>`<li>${s}</li>`).join('');
+  // تطبيق الحركة
+  applyAnim(d.kind, 2.2, true);
+  document.getElementById('animPlayBtn').textContent='⏸';
+  ANIM_STATE.play=true; ANIM_STATE.dur=2.2;
+  document.getElementById('animModal').classList.add('on');
+}
+function applyAnim(kind, dur, play){
+  const stage = document.getElementById('animStage');
+  // نضع الكلاس على العنصر الموجود
+  const fig = stage.querySelector('#fig') || stage.querySelector('.fig');
+  if(!fig) return;
+  // نبني style ديناميكي
+  let s = stage.querySelector('style');
+  if(!s){ s=document.createElement('style'); stage.appendChild(s); }
+  s.textContent = play? animCSS(kind, dur) : '';
+}
+function animTogglePlay(){
+  const b=document.getElementById('animPlayBtn');
+  ANIM_STATE.play=!ANIM_STATE.play;
+  b.textContent = ANIM_STATE.play?'⏸':'▶';
+  applyAnim(currentAnimKind(), ANIM_STATE.dur, ANIM_STATE.play);
+}
+let _curKind='default';
+function currentAnimKind(){ return _curKind; }
+function animStep(){ // إعادة تشغيل من البداية
+  const stage=document.getElementById('animStage');
+  const fig = stage.querySelector('#fig'); if(!fig){return}
+  fig.style.animation='none'; void fig.offsetWidth; fig.style.animation='';
+  applyAnim(_curKind, ANIM_STATE.dur, ANIM_STATE.play);
+}
+function animSpeed(sp, btn){
+  ANIM_STATE.dur = 2.2/sp;
+  document.querySelectorAll('.animCtl .spd').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  applyAnim(_curKind, ANIM_STATE.dur, ANIM_STATE.play);
+}
+function closeAnim(){ document.getElementById('animModal').classList.remove('on'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAnim(); });
+
+/* ================== تشغيل ================== */
+function renderAll(){
+  document.getElementById('heroMsg').textContent = isF()
+    ? `أهلًا يا بطلة ${ST.name? ST.name : ''} 💖`
+    : `أهلًا يا بطل ${ST.name? ST.name : ''} 💪`;
+  const plan = todayPlan();
+  document.getElementById('heroSub').textContent = isF()
+    ? (plan.ms.length? `تمرين اليوم: ${plan.f} — يلا نبدأ، أنتِ أقوى مما تتخيلين!` : 'يوم راحة نشطة — مشي خفيف وإطالة 🌿')
+    : (plan.ms.length? `تمرين اليوم: ${plan.f} — يلا نبدأ، الوقت ما ينتظر أحد!` : 'يوم راحة نشطة — مشي خفيف وإطالة 🌿');
+  newQuote(); newQuote();
+  renderTasks(); renderTodayWorkout(); renderWeek(); renderMuscleFilters(); renderExList(); renderRem();
+  if(ST.calProf){
+    document.getElementById('cAge').value=ST.calProf.age;
+    document.getElementById('cH').value=ST.calProf.h;
+    document.getElementById('cW').value=ST.calProf.w;
+    document.getElementById('cAct').value=ST.calProf.act;
+    document.getElementById('cGoal').value=ST.calProf.goal;
+    calcCal();
+  } else { renderFood(); }
+  renderMeals(); confettiTitle();
+}
+
+(function init(){
+  document.getElementById('setup').style.display = ST.g? 'none':'flex';
+  if(ST.g){ applyGender(); renderAll(); }
+  document.getElementById('setEquip').addEventListener('change', renderExList);
+  document.getElementById('setPlace').addEventListener('change', renderExList);
+  document.getElementById('tplSel').addEventListener('change', function(){ ST.tpl=this.value; saveAll(); renderWeek(); renderTodayWorkout(); renderTasks(); });
+  if('serviceWorker' in navigator && location.protocol!=='file:'){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+})();
 </script>
 </body>
 </html>
