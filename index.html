@@ -698,11 +698,25 @@ function matchEx(e, equipPref, placePref){
   if(placePref==='home' && e.pl!=='home' && e.pl!=='both') return false;
   return true;
 }
-/* ==== روابط يوتيوب ==== */
-function ytURL(q){ return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q); }
+/* ==== فيديوهات يوتيوب (شرح لكل عضلة) ==== */
+const VID = {
+  chest:     'MI0YF87s3iE', // تمارين الصدر في الجيم — جيم كايرو
+  back:      'io5SROYtU6U', // تمرين ظهر كامل مع الشرح — 4 FITNESS ARABIA
+  legs:      'AuXuSDQwM3Y', // تمرين رجلين كامل للضخامة
+  shoulders: 'gXscay8m8Kk', // تمرين الاكتاف كامل مع الشرح — البرنامج المجاني
+  arms:      'pCcdF0eYsF8', // تمارين الذراع (بايسبس + ترايسبس) مع الشرح
+  abs:       'mPQyLibCsck', // تمارين بطن — بطن مسطحة
+  cardio:    'v2r0zYnFmxo', // كارديو منزلي عالي الشدة
+  stretch:   '1nDGFWVbQ1U'  // إطالة جسم كامل بعد التمرين
+};
+const ytV = id => 'https://www.youtube.com/watch?v=' + id;
 function ytMuscles(ms){
-  const names = (ms||[]).map(m=>MUSCLES[m].n);
-  return ytURL(names.length? ('تمرين ' + names.join(' و ') + ' كامل') : 'تمارين إطالة وراحة نشطة');
+  const m = (ms||[])[0];
+  return ytV(VID[m] || VID.stretch);
+}
+function ytDay(p){
+  if(!p.ms.length || p.f.indexOf('راحة') >= 0) return ytV(VID.stretch);
+  return ytMuscles(p.ms);
 }
 function exCard(e){
   const tags = [];
@@ -713,7 +727,7 @@ function exCard(e){
     <div class="top"><span class="nm">${e.n}</span><span class="sets">${e.s} × ${e.r}</span></div>
     <div class="tags">${tags.join('')}</div>
     <div class="tip">💡 ${e.t}</div>
-    <a class="ytBtn" href="${ytURL('تمرين '+e.n)}" target="_blank" rel="noopener">🎥 فيديو التمرين على يوتيوب</a>
+    <a class="ytBtn" href="${ytMuscles([e.m])}" target="_blank" rel="noopener">🎥 شرح ${MUSCLES[e.m].n} على يوتيوب</a>
   </div>`;
 }
 function renderMuscleFilters(){
@@ -830,7 +844,7 @@ function renderTodayWorkout(){
   }
   el.innerHTML = `
     <div class="big">${new Intl.NumberFormat('ar-EG',{weekday:'long'}).format(new Date())} — ${plan.f} ${isF()?'💖':'💪'}</div>
-    <a class="ytBtn red" href="${ytMuscles(plan.ms)}" target="_blank" rel="noopener">🎥 شاهد تمرين اليوم كامل على يوتيوب (${plan.f})</a>
+    <a class="ytBtn red" href="${ytDay(plan)}" target="_blank" rel="noopener">🎥 فيديو شرح تمرين اليوم (${plan.f})</a>
     <div class="filters" style="margin-top:10px">
       <button class="${eq==='weights'?'on':''}" onclick="wSet('wEquip','weights')">🏋️ بالأثقال</button>
       <button class="${eq==='body'?'on':''}" onclick="wSet('wEquip','body')">🤸 بدون أثقال</button>
@@ -851,7 +865,7 @@ function renderWeek(){
       <span class="dn">${DAYS[i]}</span>
       <div><div class="df">${x.f}</div>
       <div class="dm">${x.ms.length? x.ms.map(m=>MUSCLES[m].e+MUSCLES[m].n).join(' • ') : 'راحة 💤'}</div>
-      <a class="ytLink" href="${ytMuscles(x.ms)}" target="_blank" rel="noopener">🎥 فيديو اليوم</a></div>
+      <a class="ytLink" href="${ytDay(x)}" target="_blank" rel="noopener">🎥 فيديو اليوم</a></div>
       ${i===d?'<span class="tag" style="margin-inline-start:auto">اليوم ⭐</span>':''}
     </div>`).join('');
 }
