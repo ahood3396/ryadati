@@ -1194,46 +1194,63 @@ function renderAch(){
 /* ================== الرسوم المتحركة للتمارين ==================
    كل رسم عبارة عن شخص بسيط (SVG) يأدي حركة التمرين.
    البنية: {type:'down-up'|'hold'|'cardio', ...} */
-const SKIN='#f2b98c', SKIN2='#e0a074', HAIR='#3a2b28';
+const SKIN='#f6c39a', SKIN2='#e8a87c', HAIR='#4a3226', OUT='#374151';
 
-// شخص واقف/مستلقٍ — n: وضعية البداية، rot: لزاوية الجسم
+/* أدوات رسم الشخصية — حدود داكنة تفصل الأطراف بوضوح */
+function hd(cx,cy,r,dir=1){
+  return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${SKIN}" stroke="${OUT}" stroke-width="3"/>`+
+    `<path d="M${cx-r+1} ${cy-r*0.2} a ${r} ${r} 0 0 1 ${2*r-2} 0 z" fill="${HAIR}" stroke="${OUT}" stroke-width="2.5" stroke-linejoin="round"/>`+
+    `<circle cx="${cx+dir*r*0.45}" cy="${cy+r*0.15}" r="2.4" fill="${OUT}"/>`;
+}
+function lb(x,y,w,h,fill,rot=''){
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${Math.min(w,h)/2}" fill="${fill}" stroke="${OUT}" stroke-width="2.6"${rot?` transform="${rot}"`:''}/>`;
+}
+function hand(cx,cy,rot=''){
+  return `<circle cx="${cx}" cy="${cy}" r="6" fill="${SKIN}" stroke="${OUT}" stroke-width="2.6"${rot?` transform="${rot}"`:''}/>`;
+}
+function shoe(cx,cy,rot=''){
+  return `<rect x="${cx-8}" y="${cy-4}" width="16" height="8" rx="4" fill="#222f3e" stroke="${OUT}" stroke-width="2"${rot?` transform="${rot}"`:''}/>`;
+}
+
+// شخص واقف — n: وضعية البداية، rot: لزاوية الجسم
 function figStanding(extra=''){
   return `<g class="fig">
-    <circle class="head" cx="150" cy="70" r="20" fill="${SKIN}"/>
-    <path d="M130 62 q20 -22 40 0" fill="${HAIR}"/>
-    <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)"/>
-    <g class="armL"><rect x="126" y="94" width="12" height="46" rx="6" fill="${SKIN2}"/></g>
-    <g class="armR"><rect x="162" y="94" width="12" height="46" rx="6" fill="${SKIN2}"/></g>
-    <g class="legL"><rect x="139" y="140" width="12" height="56" rx="6" fill="#4a5568"/></g>
-    <g class="legR"><rect x="157" y="140" width="12" height="56" rx="6" fill="#4a5568"/></g>
+    <g class="head">${hd(150,70,20)}</g>
+    <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+    <g class="armL">${lb(126,94,12,46,SKIN2)}${hand(132,142)}</g>
+    <g class="armR">${lb(162,94,12,46,SKIN2)}${hand(168,142)}</g>
+    <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+    <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
     ${extra}
   </g>`;
 }
 // شخص مستلقي على ظهره (للضغط ورفع الأثقال)
 function figLying(extra=''){
   return `<g class="fig">
-    <circle class="head" cx="60" cy="120" r="18" fill="${SKIN}"/>
-    <rect class="torso" x="78" y="108" width="110" height="24" rx="10" fill="var(--p1)"/>
-    <g class="armL"><rect x="96" y="86" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
-    <g class="armR"><rect x="126" y="86" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
-    <g class="legL"><rect x="184" y="106" width="12" height="50" rx="6" fill="#4a5568" transform="rotate(30 190 112)"/></g>
-    <g class="legR"><rect x="196" y="106" width="12" height="50" rx="6" fill="#4a5568" transform="rotate(30 202 112)"/></g>
+    <g class="head">${hd(60,120,18)}</g>
+    <rect class="torso" x="78" y="108" width="110" height="24" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+    <g class="armL">${lb(96,86,12,42,SKIN2)}${hand(102,84)}</g>
+    <g class="armR">${lb(126,86,12,42,SKIN2)}${hand(132,84)}</g>
+    <g class="legL">${lb(184,106,12,50,'#4a5568','rotate(30 190 112)')}${shoe(190,154,'rotate(30 190 112)')}</g>
+    <g class="legR">${lb(196,106,12,50,'#4a5568','rotate(30 202 112)')}${shoe(202,154,'rotate(30 202 112)')}</g>
     ${extra}
   </g>`;
 }
-// شخص على أربعة أذرع (للسكوات/اللانج نستخدم واقف، للبلانك/الماونتن)
+// شخص على وضعية البلانك (للسكوات/اللانج نستخدم واقف، للبلانك/الماونتن)
 function figPlank(extra=''){
   return `<g class="fig">
-    <circle class="head" cx="60" cy="90" r="16" fill="${SKIN}"/>
-    <rect class="torso" x="76" y="80" width="120" height="22" rx="10" fill="var(--p1)" transform="rotate(6 136 91)"/>
-    <g class="armL"><rect x="66" y="98" width="11" height="46" rx="6" fill="${SKIN2}"/></g>
-    <g class="legL"><rect x="192" y="96" width="12" height="50" rx="6" fill="#4a5568"/></g>
+    <g class="head">${hd(60,138,16,-1)}</g>
+    <rect class="torso" x="76" y="128" width="120" height="22" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3" transform="rotate(6 136 139)"/>
+    <g class="armL">${lb(66,146,11,50,SKIN2)}${hand(71,194)}</g>
+    <g class="legL">${lb(198,142,71,12,'#4a5568','rotate(40 198 148)')}${shoe(269,148,'rotate(40 198 148)')}</g>
     ${extra}
   </g>`;
 }
 function ground(){ return '<rect x="20" y="196" width="260" height="6" rx="3" fill="#d8c3d0"/>'; }
-function bench(x=90,y=150,w=110){ return `<rect x="${x}" y="${y}" width="${w}" height="12" rx="4" fill="#8a6f84"/><rect x="${x+8}" y="${y+12}" width="10" height="34" fill="#8a6f84"/><rect x="${x+w-18}" y="${y+12}" width="10" height="34" fill="#8a6f84"/>`; }
-function dumbbell(cx,cy){ return `<g><rect x="${cx-22}" y="${cy-3}" width="44" height="6" fill="#555"/><rect x="${cx-30}" y="${cy-9}" width="8" height="18" rx="3" fill="#333"/><rect x="${cx+22}" y="${cy-9}" width="8" height="18" rx="3" fill="#333"/></g>`; }
+function bench(x=90,y=150,w=110){ return `<rect x="${x}" y="${y}" width="${w}" height="12" rx="4" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/><rect x="${x+8}" y="${y+12}" width="10" height="34" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/><rect x="${x+w-18}" y="${y+12}" width="10" height="34" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/>`; }
+function dumbbell(cx,cy){ return `<g><rect x="${cx-22}" y="${cy-3}" width="44" height="6" rx="3" fill="#555" stroke="${OUT}" stroke-width="2"/><rect x="${cx-30}" y="${cy-9}" width="8" height="18" rx="3" fill="#333" stroke="${OUT}" stroke-width="2"/><rect x="${cx+22}" y="${cy-9}" width="8" height="18" rx="3" fill="#333" stroke="${OUT}" stroke-width="2"/></g>`; }
+function dumbS(cx,cy){ return `<g><rect x="${cx-14}" y="${cy-3}" width="28" height="6" rx="3" fill="#555" stroke="${OUT}" stroke-width="2"/><rect x="${cx-20}" y="${cy-8}" width="7" height="16" rx="3" fill="#333" stroke="${OUT}" stroke-width="2"/><rect x="${cx+13}" y="${cy-8}" width="7" height="16" rx="3" fill="#333" stroke="${OUT}" stroke-width="2"/></g>`; }
+function dumbV(cx,cy){ return `<g><rect x="${cx-3}" y="${cy-22}" width="6" height="44" rx="3" fill="#555" stroke="${OUT}" stroke-width="2"/><rect x="${cx-9}" y="${cy-30}" width="18" height="8" rx="3" fill="#333" stroke="${OUT}" stroke-width="2"/><rect x="${cx-9}" y="${cy+22}" width="18" height="8" rx="3" fill="#333" stroke="${OUT}" stroke-width="2"/></g>`; }
 
 /* كل تعريف: title, sub, build(HTML ثابت), frames: array of keyframe CSS per frame,
    form (نقاط صحيحة/خاطئة), steps (خطوات) */
@@ -1320,130 +1337,255 @@ function buildStage(kind){
   switch(kind){
     case 'pushup': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">
-        <circle class="head" cx="40" cy="150" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="56" y="138" width="150" height="22" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:66px 160px"><rect x="60" y="152" width="12" height="42" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL"><rect x="196" y="150" width="12" height="46" rx="6" fill="#4a5568"/></g>
+        <g class="head">${hd(40,150,16,-1)}</g>
+        <rect class="torso" x="56" y="138" width="150" height="22" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL" style="transform-origin:66px 160px">${lb(60,152,12,42,SKIN2)}${hand(66,195)}</g>
+        <g class="legL">${lb(206,140,66,12,'#4a5568','rotate(47 206 146)')}${shoe(272,146,'rotate(47 206 146)')}</g>
       </g></svg>`;
     case 'benchpress': return `<svg viewBox="0 0 300 220">${bench(70,140,150)}${ground()}
       <g id="fig">
-        <circle class="head" cx="66" cy="128" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="82" y="120" width="120" height="22" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:110px 120px"><rect x="104" y="86" width="12" height="40" rx="6" fill="${SKIN2}"/></g>
-        <g class="armR" style="transform-origin:130px 120px"><rect x="124" y="86" width="12" height="40" rx="6" fill="${SKIN2}"/></g>
+        <g class="head">${hd(66,128,16)}</g>
+        <rect class="torso" x="82" y="120" width="120" height="22" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL" style="transform-origin:110px 120px">${lb(104,86,12,40,SKIN2)}${hand(110,84)}</g>
+        <g class="armR" style="transform-origin:130px 120px">${lb(124,86,12,40,SKIN2)}${hand(130,84)}</g>
         <g id="weight">${dumbbell(120,84)}</g>
       </g></svg>`;
     case 'squat': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig" transform="translate(0,0)">${figStanding()}</g></svg>`;
-    case 'lunge': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}</g></svg>`;
-    case 'pulldown': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="40" y="20" width="220" height="8" rx="4" fill="#8a6f84"/>
       <g id="fig">
-        <circle class="head" cx="150" cy="70" r="18" fill="${SKIN}"/>
-        <rect class="torso" x="138" y="90" width="24" height="70" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:142px 92px"><rect x="122" y="30" width="11" height="64" rx="6" fill="${SKIN2}"/></g>
-        <g class="armR" style="transform-origin:158px 92px"><rect x="167" y="30" width="11" height="64" rx="6" fill="${SKIN2}"/></g>
-        <g id="bar"><rect x="116" y="26" width="68" height="6" rx="3" fill="#555"/></g>
-        <g class="legL"><rect x="139" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
-        <g class="legR"><rect x="157" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armR">${lb(150,92,44,11,SKIN2)}${hand(196,97)}</g>
+        <g class="legL">${lb(139,140,12,28,'#4a5568')}<g class="shinL">${lb(139,166,12,28,'#394150')}${shoe(145,194)}</g></g>
+        <g class="legR">${lb(157,140,12,28,'#4a5568')}<g class="shinR">${lb(157,166,12,28,'#394150')}${shoe(163,194)}</g></g>
+      </g></svg>`;
+    case 'lunge': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <g class="head">${hd(150,60,19)}</g>
+        <rect class="torso" x="138" y="80" width="24" height="54" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL">${lb(126,84,12,44,SKIN2)}${hand(132,132)}</g>
+        <g class="armR">${lb(162,84,12,44,SKIN2)}${hand(168,132)}</g>
+        <g class="legR">${lb(152,136,12,34,'#4a5568','rotate(-30 158 140)')}<g class="shinR">${lb(169,168,12,28,'#394150')}${shoe(175,194)}</g></g>
+        <g class="legL">${lb(140,136,12,32,'#4a5568','rotate(30 146 140)')}${lb(124,166,12,26,'#394150','rotate(15 130 168)')}${shoe(123,192,'rotate(15 130 168)')}</g>
+      </g></svg>`;
+    case 'pulldown': return `<svg viewBox="0 0 300 220">${ground()}
+      <rect x="40" y="20" width="220" height="8" rx="4" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/>
+      <g id="fig">
+        <g class="head">${hd(150,70,18)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="70" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL" style="transform-origin:142px 92px">${lb(122,30,11,64,SKIN2)}${hand(127,28)}</g>
+        <g class="armR" style="transform-origin:158px 92px">${lb(167,30,11,64,SKIN2)}${hand(172,28)}</g>
+        <g id="bar"><rect x="116" y="26" width="68" height="6" rx="3" fill="#555" stroke="${OUT}" stroke-width="2"/></g>
+        <g class="legL">${lb(139,156,12,40,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,156,12,40,'#4a5568')}${shoe(163,194)}</g>
       </g></svg>`;
     case 'row': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">
-        <circle class="head" cx="120" cy="70" r="18" fill="${SKIN}"/>
-        <rect class="torso" x="108" y="90" width="24" height="70" rx="10" fill="var(--p1)" transform="rotate(15 120 125)"/>
-        <g class="armL" style="transform-origin:120px 96px"><rect x="114" y="96" width="11" height="52" rx="6" fill="${SKIN2}"/></g>
-        <g id="weight">${dumbbell(120,150)}</g>
-        <g class="legL"><rect x="112" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
-        <g class="legR"><rect x="128" y="156" width="12" height="40" rx="6" fill="#4a5568"/></g>
+        <g class="head">${hd(146,86,17)}</g>
+        <rect class="torso" x="108" y="90" width="24" height="70" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3" transform="rotate(40 120 125)"/>
+        <g class="armL">${lb(132,104,11,50,SKIN2)}${hand(137,154)}</g>
+        <g id="weight">${dumbbell(138,158)}</g>
+        <g class="legL">${lb(112,156,12,40,'#4a5568','rotate(8 118 160)')}${shoe(118,194,'rotate(8 118 160)')}</g>
+        <g class="legR">${lb(128,156,12,40,'#4a5568','rotate(8 134 160)')}${shoe(134,194,'rotate(8 134 160)')}</g>
       </g></svg>`;
     case 'deadlift': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(150,180)}</g></g></svg>`;
+      <g id="fig">
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+        <g class="hinge" style="transform-origin:150px 140px">
+          <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+          <g class="head">${hd(150,70,20)}</g>
+          <g class="armL" style="transform-origin:138px 96px">${lb(126,94,12,52,SKIN2)}${hand(132,146)}${dumbbell(150,152)}</g>
+          <g class="armR" style="transform-origin:162px 96px">${lb(162,94,12,52,SKIN2)}${hand(168,146)}</g>
+        </g>
+      </g></svg>`;
     case 'superman': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">
-        <circle class="head" cx="90" cy="150" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="106" y="142" width="110" height="22" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:110px 148px"><rect x="60" y="142" width="48" height="11" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL" style="transform-origin:210px 150px"><rect x="214" y="142" width="52" height="11" rx="6" fill="#4a5568"/></g>
+        <g class="head">${hd(90,180,16)}</g>
+        <rect class="torso" x="106" y="172" width="110" height="22" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL" style="transform-origin:110px 178px">${lb(60,172,48,11,SKIN2)}${hand(56,177)}</g>
+        <g class="legL" style="transform-origin:210px 180px">${lb(214,172,52,11,'#4a5568')}${shoe(266,177,'rotate(90 266 177)')}</g>
       </g></svg>`;
     case 'birddog': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">
-        <circle class="head" cx="80" cy="120" r="15" fill="${SKIN}"/>
-        <rect class="torso" x="96" y="112" width="120" height="20" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:100px 118px"><rect x="94" y="120" width="11" height="44" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL" style="transform-origin:212px 118px"><rect x="206" y="120" width="12" height="44" rx="6" fill="#4a5568"/></g>
-        <g class="armR" style="transform-origin:110px 118px"><rect x="104" y="88" width="11" height="40" rx="6" fill="${SKIN}"/></g>
-        <g class="legR" style="transform-origin:200px 118px"><rect x="196" y="90" width="12" height="40" rx="6" fill="#394150"/></g>
+        <g class="head">${hd(80,150,15,-1)}</g>
+        <rect class="torso" x="96" y="142" width="120" height="20" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL" style="transform-origin:100px 148px">${lb(94,150,11,44,SKIN2)}${hand(99,194)}</g>
+        <g class="legL" style="transform-origin:212px 148px">${lb(206,150,12,44,'#4a5568')}${shoe(212,194)}</g>
+        <g class="armR" style="transform-origin:110px 148px">${lb(104,118,11,40,SKIN2)}${hand(109,116)}</g>
+        <g class="legR" style="transform-origin:200px 148px">${lb(196,120,12,40,'#394150')}${shoe(202,120)}</g>
       </g></svg>`;
+
     case 'cable': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="240" y="20" width="10" height="180" fill="#8a6f84"/>
-      <g id="fig">${figStanding()}<g class="armL" style="transform-origin:130px 96px"><rect x="236" y="96" width="11" height="52" rx="6" fill="${SKIN2}" transform="rotate(-70 240 120)"/></g></g></svg>`;
-    case 'curl': case 'hammer': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(126,120)}${dumbbell(174,120)}</g></g></svg>`;
+      <rect x="240" y="20" width="10" height="180" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/>
+      <g id="fig">${figStanding()}<g class="armM" style="transform-origin:240px 120px">${lb(236,96,11,52,SKIN2,'rotate(-70 240 120)')}${hand(241,147,'rotate(-70 240 120)')}</g></g></svg>`;
+    case 'curl': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+        <g class="armL">${lb(126,94,12,30,SKIN2)}<g class="foreL" style="transform-origin:132px 122px">${lb(126,120,12,30,SKIN2)}${hand(132,152)}${dumbbell(132,154)}</g></g>
+        <g class="armR">${lb(162,94,12,30,SKIN2)}<g class="foreR" style="transform-origin:168px 122px">${lb(162,120,12,30,SKIN2)}${hand(168,152)}${dumbbell(168,154)}</g></g>
+      </g></svg>`;
+    case 'hammer': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+        <g class="armL">${lb(126,94,12,30,SKIN2)}<g class="foreL" style="transform-origin:132px 122px">${lb(126,120,12,30,SKIN2)}${hand(132,152)}${dumbV(132,152)}</g></g>
+        <g class="armR">${lb(162,94,12,30,SKIN2)}<g class="foreR" style="transform-origin:168px 122px">${lb(162,120,12,30,SKIN2)}${hand(168,152)}${dumbV(168,152)}</g></g>
+      </g></svg>`;
     case 'overhead': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(130,60)}${dumbbell(170,60)}</g></g></svg>`;
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+        <g class="armL">${lb(126,50,12,46,SKIN2)}${hand(132,48)}</g>
+        <g class="armR">${lb(162,50,12,46,SKIN2)}${hand(168,48)}</g>
+        <g id="weight">${dumbS(132,44)}${dumbS(168,44)}</g>
+      </g></svg>`;
     case 'lateral': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(120,120)}${dumbbell(180,120)}</g></g></svg>`;
-    case 'facepull': case 'triceps': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="30" y="20" width="10" height="180" fill="#8a6f84"/>
-      <g id="fig">${figStanding()}<g class="armR" style="transform-origin:170px 96px"><rect x="40" y="96" width="11" height="50" rx="6" fill="${SKIN2}"/></g></g></svg>`;
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+        <g class="armL" style="transform-origin:138px 96px">${lb(132,96,12,46,SKIN2)}${hand(138,146)}${dumbS(138,150)}</g>
+        <g class="armR" style="transform-origin:162px 96px">${lb(156,96,12,46,SKIN2)}${hand(162,146)}${dumbS(162,150)}</g>
+      </g></svg>`;
+    case 'facepull': return `<svg viewBox="0 0 300 220">${ground()}
+      <rect x="250" y="40" width="10" height="160" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/>
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+        <g class="armL">${lb(150,94,48,11,SKIN2)}${hand(200,99)}</g>
+        <g class="armR">${lb(150,108,48,11,SKIN2)}${hand(200,113)}</g>
+        <rect x="200" y="97" width="52" height="5" rx="2" fill="#666" stroke="${OUT}" stroke-width="1.5"/>
+        <rect x="200" y="111" width="52" height="5" rx="2" fill="#666" stroke="${OUT}" stroke-width="1.5"/>
+      </g></svg>`;
+    case 'triceps': return `<svg viewBox="0 0 300 220">${ground()}
+      <rect x="250" y="30" width="10" height="170" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/>
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+        <g class="armL" style="transform-origin:155px 100px">${lb(148,96,36,11,SKIN2,'rotate(28 155 102)')}${hand(188,120,'rotate(28 155 102)')}</g>
+        <rect x="188" y="80" width="66" height="5" rx="2" fill="#666" stroke="${OUT}" stroke-width="1.5" transform="rotate(-45 220 82)"/>
+      </g></svg>`;
     case 'dips': return `<svg viewBox="0 0 300 220">${bench(90,140,110)}${ground()}
       <g id="fig" transform="translate(30,0)">
-        <circle class="head" cx="150" cy="90" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="138" y="106" width="24" height="46" rx="10" fill="var(--p1)"/>
-        <g class="armL" style="transform-origin:136px 110px"><rect x="128" y="106" width="11" height="40" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL"><rect x="139" y="150" width="12" height="46" rx="6" fill="#4a5568" transform="rotate(20 145 160)"/></g>
+        <g class="head">${hd(150,90,16)}</g>
+        <rect class="torso" x="138" y="106" width="24" height="46" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL" style="transform-origin:136px 110px">${lb(128,106,11,40,SKIN2)}${hand(133,146)}</g>
+        <g class="legL">${lb(139,150,12,46,'#4a5568','rotate(20 145 160)')}${shoe(145,194,'rotate(20 145 160)')}</g>
       </g></svg>`;
-    case 'plank': case 'shouldertap': return `<svg viewBox="0 0 300 220">${ground()}
+    case 'plank': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">${figPlank()}</g></svg>`;
+    case 'shouldertap': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">${figPlank(`<g class="tapArm" style="transform-origin:96px 150px">${lb(90,146,11,46,SKIN2)}${hand(95,194)}</g>`)}</g></svg>`;
     case 'crunch': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">
-        <g class="head" style="transform-origin:120px 140px"><circle cx="120" cy="140" r="16" fill="${SKIN}"/></g>
-        <rect class="torso" x="136" y="140" width="90" height="22" rx="10" fill="var(--p1)"/>
-        <g class="legL"><rect x="220" y="120" width="12" height="46" rx="6" fill="#4a5568" transform="rotate(-40 226 140)"/></g>
+        <g class="head" style="transform-origin:226px 184px">${hd(120,174,16)}</g>
+        <rect class="torso" x="136" y="174" width="90" height="22" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3" style="transform-origin:226px 184px"/>
+        <g class="legL">${lb(220,154,12,46,'#4a5568','rotate(-40 226 174)')}${shoe(226,198,'rotate(-40 226 174)')}</g>
       </g></svg>`;
     case 'legraise': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">
-        <circle class="head" cx="70" cy="150" r="15" fill="${SKIN}"/>
-        <rect class="torso" x="86" y="140" width="120" height="22" rx="10" fill="var(--p1)"/>
-        <g class="legL" style="transform-origin:204px 150px"><rect x="200" y="106" width="12" height="46" rx="6" fill="#4a5568"/></g>
+        <g class="head">${hd(70,184,15)}</g>
+        <rect class="torso" x="86" y="174" width="120" height="22" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legL" style="transform-origin:204px 184px">${lb(200,140,12,46,'#4a5568')}${shoe(206,141)}</g>
       </g></svg>`;
     case 'climber': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figPlank()}<g class="legR" style="transform-origin:198px 100px"><rect x="182" y="96" width="12" height="40" rx="6" fill="#394150"/></g></g></svg>`;
+      <g id="fig">${figPlank()}<g class="legR">${lb(182,144,12,40,'#394150')}${hand(188,182)}</g></g></svg>`;
     case 'bridge': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">
-        <circle class="head" cx="80" cy="152" r="15" fill="${SKIN}"/>
-        <g class="torso" style="transform-origin:150px 150px"><rect x="96" y="140" width="120" height="22" rx="10" fill="var(--p1)"/></g>
-        <g class="legL"><rect x="210" y="118" width="12" height="44" rx="6" fill="#4a5568"/></g>
+        <g class="head">${hd(80,180,15)}</g>
+        <g class="torso">${lb(96,168,120,22,'var(--p1)')}</g>
+        <g class="legL">${lb(210,146,12,44,'#4a5568')}${shoe(216,190)}</g>
       </g></svg>`;
     case 'twist': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig" style="transform-origin:150px 180px">
-        <circle class="head" cx="150" cy="90" r="16" fill="${SKIN}"/>
-        <g class="torso" style="transform-origin:150px 150px"><rect x="138" y="106" width="24" height="52" rx="10" fill="var(--p1)"/></g>
-        <g class="armR" style="transform-origin:150px 110px"><rect x="162" y="106" width="40" height="11" rx="6" fill="${SKIN2}"/></g>
-        <g class="legL"><rect x="139" y="156" width="12" height="40" rx="6" fill="#4a5568" transform="rotate(-40 145 160)"/></g>
+      <g id="fig">
+        <g class="head" style="transform-origin:150px 150px">${hd(150,90,16)}</g>
+        <g class="torso" style="transform-origin:150px 150px">${lb(138,106,24,52,'var(--p1)')}</g>
+        <g class="armR" style="transform-origin:150px 150px">${lb(162,106,40,11,SKIN2)}${hand(204,111)}</g>
+        <g class="legL">${lb(139,156,12,40,'#4a5568','rotate(-40 145 160)')}${shoe(145,194,'rotate(-40 145 160)')}</g>
       </g></svg>`;
-    case 'walk': case 'stretch': return `<svg viewBox="0 0 300 220">${ground()}
+    case 'walk': return `<svg viewBox="0 0 300 220">${ground()}
       <g id="fig">${figStanding()}</g></svg>`;
-    case 'jump': case 'jack': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}</g></svg>`;
+    case 'stretch': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <g class="torso" style="transform-origin:150px 142px">${lb(138,90,24,52,'var(--p1)')}<g class="head">${hd(150,70,20)}</g>
+          <g class="armL">${lb(126,94,12,44,SKIN2)}${hand(132,142)}</g>
+          <g class="armR">${lb(156,50,12,46,SKIN2)}${hand(162,48)}</g>
+        </g>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+      </g></svg>`;
+    case 'jump': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL">${lb(126,48,12,48,SKIN2)}${hand(132,46)}</g>
+        <g class="armR">${lb(162,48,12,48,SKIN2)}${hand(168,46)}</g>
+        <g class="legL">${lb(139,140,12,56,'#4a5568')}${shoe(145,194)}</g>
+        <g class="legR">${lb(157,140,12,56,'#4a5568')}${shoe(163,194)}</g>
+      </g></svg>`;
+    case 'jack': return `<svg viewBox="0 0 300 220">${ground()}
+      <g id="fig">
+        <g class="head">${hd(150,70,20)}</g>
+        <rect class="torso" x="138" y="90" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL" style="transform-origin:138px 96px">${lb(132,96,12,46,SKIN2,'rotate(140 138 96)')}${hand(108,61,'rotate(140 138 96)')}</g>
+        <g class="armR" style="transform-origin:162px 96px">${lb(156,96,12,46,SKIN2,'rotate(-140 162 96)')}${hand(192,61,'rotate(-140 162 96)')}</g>
+        <g class="legL" style="transform-origin:145px 140px">${lb(139,140,12,56,'#4a5568','rotate(18 145 140)')}${shoe(145,194,'rotate(18 145 140)')}</g>
+        <g class="legR" style="transform-origin:163px 140px">${lb(157,140,12,56,'#4a5568','rotate(-18 163 140)')}${shoe(163,194,'rotate(-18 163 140)')}</g>
+      </g></svg>`;
     case 'burpee': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}</g></svg>`;
+      <g id="fig">
+        <g class="head">${hd(150,104,17)}</g>
+        <rect class="torso" x="140" y="122" width="22" height="44" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL">${lb(128,126,11,64,SKIN2)}${hand(133,194)}</g>
+        <g class="armR">${lb(161,126,11,64,SKIN2)}${hand(166,194)}</g>
+        <g class="legL">${lb(136,162,48,12,'#4a5568')}${lb(178,166,12,28,'#394150')}${shoe(184,194)}</g>
+        <g class="legR">${lb(130,172,44,11,'#394150')}${lb(170,176,11,20,'#333')}${shoe(176,194)}</g>
+      </g></svg>`;
     case 'cycle': return `<svg viewBox="0 0 300 220">${ground()}
-      <circle cx="120" cy="160" r="34" fill="none" stroke="#8a6f84" stroke-width="6"/>
-      <g id="fig">${figStanding()}<g class="legR" style="transform-origin:157px 146px"><rect x="152" y="146" width="12" height="40" rx="6" fill="#4a5568"/></g></g></svg>`;
+      <circle cx="95" cy="166" r="30" fill="none" stroke="#8a6f84" stroke-width="6"/>
+      <rect x="142" y="124" width="7" height="42" fill="#8a6f84" stroke="${OUT}" stroke-width="2"/>
+      <rect x="128" y="118" width="32" height="7" rx="3" fill="#8a6f84" stroke="${OUT}" stroke-width="2"/>
+      <rect x="196" y="108" width="7" height="58" fill="#8a6f84" stroke="${OUT}" stroke-width="2"/>
+      <rect x="186" y="104" width="26" height="7" rx="3" fill="#8a6f84" stroke="${OUT}" stroke-width="2"/>
+      <g id="fig">
+        <rect class="torso" x="140" y="96" width="24" height="50" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3" transform="rotate(22 152 146)"/>
+        <g class="head">${hd(176,88,17)}</g>
+        <g class="armR">${lb(165,102,36,11,SKIN2,'rotate(8 168 107)')}${hand(201,112,'rotate(8 168 107)')}</g>
+        <g class="legL">${lb(142,148,42,11,'#394150')}${lb(178,150,11,26,'#333')}${shoe(184,176)}</g>
+        <g class="legR" style="transform-origin:150px 144px">${lb(146,138,42,12,'#4a5568')}<g class="shinR" style="transform-origin:188px 144px">${lb(182,144,12,30,'#394150')}${shoe(188,174)}</g></g>
+      </g></svg>`;
     case 'calf': return `<svg viewBox="0 0 300 220">${ground()}
-      <g id="fig">${figStanding()}<g id="weight">${dumbbell(126,120)}${dumbbell(174,120)}</g></g></svg>`;
+      <g id="fig">
+        <g class="head">${hd(150,66,20)}</g>
+        <rect class="torso" x="138" y="86" width="24" height="52" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="armL">${lb(126,90,12,46,SKIN2)}${hand(132,138)}</g>
+        <g class="armR">${lb(162,90,12,46,SKIN2)}${hand(168,138)}</g>
+        <g class="legL">${lb(139,136,12,54,'#4a5568')}${shoe(145,190,'rotate(28 153 190)')}</g>
+        <g class="legR">${lb(157,136,12,54,'#4a5568')}${shoe(163,190,'rotate(28 171 190)')}</g>
+      </g></svg>`;
     case 'legpress': return `<svg viewBox="0 0 300 220">${ground()}
-      <rect x="230" y="60" width="16" height="120" rx="4" fill="#8a6f84"/>
-      <g id="fig" style="transform-origin:120px 160px">
-        <circle class="head" cx="80" cy="120" r="16" fill="${SKIN}"/>
-        <rect class="torso" x="60" y="136" width="90" height="22" rx="10" fill="var(--p1)"/>
-        <g class="legR" style="transform-origin:150px 146px"><rect x="146" y="120" width="70" height="12" rx="6" fill="#4a5568"/></g>
+      <rect x="230" y="60" width="16" height="120" rx="4" fill="#8a6f84" stroke="${OUT}" stroke-width="2.5"/>
+      <g id="fig">
+        <g class="head">${hd(80,150,16)}</g>
+        <rect class="torso" x="60" y="166" width="90" height="22" rx="10" fill="var(--p1)" stroke="${OUT}" stroke-width="3"/>
+        <g class="legR" style="transform-origin:150px 176px">${lb(146,150,70,12,'#4a5568')}${shoe(214,156,'rotate(90 214 156)')}</g>
       </g></svg>`;
     default: return `<svg viewBox="0 0 300 220">${ground()}${figStanding()}</svg>`;
   }
 }
+
 
 /* توليد إطارات الحركة (CSS animation) حسب النوع */
 function animCSS(kind, dur){
@@ -1454,64 +1596,84 @@ function animCSS(kind, dur){
       #fig .armL{animation:pu-arm ${D} ${E} ${I};transform-origin:66px 160px}`;
     case 'benchpress': return base+`#fig .armL,#fig .armR,#weight{animation:bp ${D} ${E} ${I}}
       #fig .armL{transform-origin:110px 120px}#fig .armR{transform-origin:130px 120px}#weight{transform-origin:120px 84px}`;
-    case 'squat': case 'lunge': return base+`#fig{animation:sq ${D} ${E} ${I}}`;
+    case 'squat': return base+`#fig{animation:sq-b ${D} ${E} ${I}}
+      #fig .legL{animation:sq-l ${D} ${E} ${I};transform-origin:145px 140px}#fig .legR{animation:sq-l ${D} ${E} ${I};transform-origin:163px 140px}
+      #fig .shinL{animation:sq-s ${D} ${E} ${I};transform-origin:145px 166px}#fig .shinR{animation:sq-s ${D} ${E} ${I};transform-origin:163px 166px}`;
+    case 'lunge': return base+`#fig{animation:ln ${D} ${E} ${I}}`;
     case 'pulldown': return base+`#fig .armL,#fig .armR,#bar{animation:pd ${D} ${E} ${I}}
       #fig .armL{transform-origin:142px 92px}#fig .armR{transform-origin:158px 92px}`;
-    case 'row': return base+`#fig .armL,#weight{animation:rw ${D} ${E} ${I}}#fig .armL{transform-origin:120px 96px}`;
-    case 'deadlift': return base+`#fig,#weight{animation:dl ${D} ${E} ${I}}`;
-    case 'superman': return base+`#fig .armL,#fig .legL,#fig .head,#fig .torso{animation:sm ${D} ${E} ${I}}
-      #fig .armL{transform-origin:110px 148px}#fig .legL{transform-origin:210px 150px}`;
+    case 'row': return base+`#fig .armL,#weight{animation:rw ${D} ${E} ${I}}`;
+    case 'deadlift': return base+`#fig .hinge{animation:dl ${D} ${E} ${I}}
+      #fig .hinge .armL{animation:dl-a ${D} ${E} ${I};transform-origin:138px 96px}#fig .hinge .armR{animation:dl-a ${D} ${E} ${I};transform-origin:162px 96px}`;
+    case 'superman': return base+`#fig .armL,#fig .legL,#fig .head,#fig .torso{animation:sm ${D} ${E} ${I}}`;
     case 'birddog': return base+`#fig .armR,#fig .legR{animation:bd ${D} ${E} ${I}}`;
-    case 'curl': case 'hammer': return base+`#weight{animation:cu ${D} ${E} ${I};transform-origin:150px 120px}`;
-    case 'overhead': case 'lateral': return base+`#weight{animation:ov ${D} ${E} ${I};transform-origin:150px 100px}`;
-    case 'plank': return base+`#fig{animation:pl ${D} ${E} ${I}}`;
-    case 'crunch': return base+`#fig .head,#fig .torso{animation:cr ${D} ${E} ${I};transform-origin:150px 150px}`;
-    case 'legraise': return base+`#fig .legL{animation:lr ${D} ${E} ${I};transform-origin:204px 150px}`;
-    case 'climber': return base+`#fig .legL,#fig .legR{animation:cl ${D} ${E} ${I}}`;
-    case 'bridge': return base+`#fig .torso{animation:br ${D} ${E} ${I};transform-origin:150px 150px}`;
-    case 'twist': return base+`#fig .torso,#fig .armR{animation:tw ${D} ${E} ${I};transform-origin:150px 150px}`;
+    case 'cable': return base+`#fig .armM{animation:cb ${D} ${E} ${I}}`;
+    case 'curl': return base+`#fig .foreL{animation:cu ${D} ${E} ${I}}#fig .foreR{animation:cu ${D} ${E} ${I}}`;
+    case 'hammer': return base+`#fig .foreL{animation:cu ${D} ${E} ${I}}#fig .foreR{animation:cu ${D} ${E} ${I};animation-delay:${dur/2}s}`;
+    case 'overhead': return base+`#fig .armL,#fig .armR,#weight{animation:ov ${D} ${E} ${I}}`;
+    case 'lateral': return base+`#fig .armL{animation:latL ${D} ${E} ${I}}#fig .armR{animation:latR ${D} ${E} ${I}}`;
+    case 'facepull': return base+`#fig .armL,#fig .armR{animation:fp ${D} ${E} ${I}}`;
+    case 'triceps': return base+`#fig .armL{animation:ts ${D} ${E} ${I}}`;
     case 'walk': return base+`#fig .legL,#fig .armR{animation:wk ${D} ${E} ${I}}#fig .legL{transform-origin:145px 146px}#fig .armR{transform-origin:168px 96px}`;
-    case 'jump': case 'jack': return base+`#fig{animation:jm ${D} ${E} ${I}}`;
+    case 'stretch': return base+`#fig .torso{animation:st ${D} ${E} ${I}}`;
+    case 'jump': return base+`#fig{animation:jm ${D} ${E} ${I}}`;
+    case 'jack': return base+`#fig{animation:jm2 ${D} ${E} ${I}}`;
     case 'burpee': return base+`#fig{animation:bp2 ${D} ${E} ${I}}`;
-    case 'cycle': return base+`#fig .legR{animation:cy ${D} ${E} ${I};transform-origin:157px 146px}`;
+    case 'plank': return base+`#fig{animation:pl ${D} ${E} ${I}}`;
+    case 'shouldertap': return base+`#fig .tapArm{animation:stap ${D} ${E} ${I}}`;
+    case 'crunch': return base+`#fig .head,#fig .torso{animation:cr ${D} ${E} ${I}}`;
+    case 'legraise': return base+`#fig .legL{animation:lr ${D} ${E} ${I}}`;
+    case 'climber': return base+`#fig .legL,#fig .legR{animation:cl ${D} ${E} ${I}}`;
+    case 'bridge': return base+`#fig .torso{animation:br ${D} ${E} ${I}}`;
+    case 'twist': return base+`#fig .torso,#fig .head,#fig .armR{animation:tw ${D} ${E} ${I}}`;
+    case 'cycle': return base+`#fig .legR{animation:cy ${D} ${E} ${I}}#fig .shinR{animation:cy2 ${D} ${E} ${I}}`;
     case 'calf': return base+`#fig{animation:cf ${D} ${E} ${I}}`;
-    case 'legpress': return base+`#fig .legR{animation:lp ${D} ${E} ${I};transform-origin:150px 146px}`;
-    case 'stretch': return base+`#fig{animation:st ${D} ${E} ${I}}`;
-    case 'cable': case 'facepull': case 'triceps': return base+`#fig .armL,#fig .armR{animation:cb ${D} ${E} ${I}}`;
+    case 'legpress': return base+`#fig .legR{animation:lp ${D} ${E} ${I}}`;
     case 'dips': return base+`#fig{animation:dp ${D} ${E} ${I}}`;
-    case 'shouldertap': return base+`#fig .armR{animation:stap ${D} ${E} ${I};transform-origin:110px 118px}`;
     default: return base+`#fig{animation:st ${D} ${E} ${I}}`;
   }
 }
+
 const KEYFRAMES = `
 @keyframes pu-torso{from{transform:translateY(0)}to{transform:translateY(18px)}}
 @keyframes pu-arm{from{transform:scaleY(1)}to{transform:scaleY(.72)}}
 @keyframes bp{from{transform:translateY(0)}to{transform:translateY(34px)}}
-@keyframes sq{from{transform:translateY(0) scaleY(1)}to{transform:translateY(26px) scaleY(.86)}}
+@keyframes sq-b{from{transform:translateY(0)}to{transform:translateY(20px)}}
+@keyframes sq-l{from{transform:rotate(0)}to{transform:rotate(-40deg)}}
+@keyframes sq-s{from{transform:rotate(0)}to{transform:rotate(103deg)}}
+@keyframes ln{from{transform:translateY(0)}to{transform:translateY(-14px)}}
 @keyframes pd{from{transform:translateY(0)}to{transform:translateY(46px)}}
-@keyframes rw{from{transform:translateY(-30px)}to{transform:translateY(0)}}
-@keyframes dl{from{transform:translateY(0) rotate(0)}to{transform:translateY(20px) rotate(24deg)}}
+@keyframes rw{from{transform:translateY(-34px)}to{transform:translateY(0)}}
+@keyframes dl{from{transform:rotate(0)}to{transform:rotate(58deg)}}
+@keyframes dl-a{from{transform:rotate(0)}to{transform:rotate(-58deg)}}
 @keyframes sm{from{transform:translateY(0)}to{transform:translateY(-20px)}}
 @keyframes bd{from{transform:rotate(0)}to{transform:rotate(48deg)}}
-@keyframes cu{from{transform:translateY(46px)}to{transform:translateY(-6px)}}
-@keyframes ov{from{transform:translateY(0)}to{transform:translateY(-38px)}}
+@keyframes cb{from{transform:rotate(0)}to{transform:rotate(-20deg)}}
+@keyframes cu{from{transform:rotate(0)}to{transform:rotate(-135deg)}}
+@keyframes ov{from{transform:translateY(6px)}to{transform:translateY(-8px)}}
+@keyframes latL{from{transform:rotate(0)}to{transform:rotate(80deg)}}
+@keyframes latR{from{transform:rotate(0)}to{transform:rotate(-80deg)}}
+@keyframes fp{from{transform:translateX(0)}to{transform:translateX(-14px)}}
+@keyframes ts{from{transform:rotate(18deg)}to{transform:rotate(34deg)}}
 @keyframes pl{from{transform:translateY(0)}to{transform:translateY(4px)}}
-@keyframes cr{from{transform:rotate(0)}to{transform:rotate(-30deg)}}
-@keyframes lr{from{transform:rotate(0)}to{transform:rotate(-70deg)}}
+@keyframes stap{from{transform:rotate(0)}to{transform:rotate(50deg)}}
+@keyframes cr{from{transform:rotate(0)}to{transform:rotate(30deg)}}
+@keyframes lr{from{transform:rotate(90deg)}to{transform:rotate(0)}}
 @keyframes cl{from{transform:translateY(0) translateX(0)}to{transform:translateY(-10px) translateX(-40px)}}
 @keyframes br{from{transform:translateY(0)}to{transform:translateY(-26px)}}
 @keyframes tw{from{transform:rotate(0)}to{transform:rotate(24deg)}}
 @keyframes wk{from{transform:rotate(28deg)}to{transform:rotate(-28deg)}}
 @keyframes jm{from{transform:translateY(0)}to{transform:translateY(-34px)}}
-@keyframes bp2{from{transform:translateY(0) scaleY(1)}to{transform:translateY(30px) scaleY(.7)}}
-@keyframes cy{from{transform:rotate(-30deg)}to{transform:rotate(30deg)}}
+@keyframes jm2{from{transform:translateY(0)}to{transform:translateY(-16px)}}
+@keyframes bp2{from{transform:translateY(0)}to{transform:translateY(-30px)}}
+@keyframes cy{from{transform:rotate(-22deg)}to{transform:rotate(18deg)}}
+@keyframes cy2{from{transform:rotate(45deg)}to{transform:rotate(5deg)}}
 @keyframes cf{from{transform:translateY(0)}to{transform:translateY(-10px)}}
 @keyframes lp{from{transform:translateX(0)}to{transform:translateX(-26px)}}
-@keyframes st{from{transform:rotate(0)}to{transform:rotate(8deg)}}
-@keyframes cb{from{transform:rotate(0)}to{transform:rotate(30deg)}}
+@keyframes st{from{transform:rotate(0)}to{transform:rotate(10deg)}}
 @keyframes dp{from{transform:translateY(0)}to{transform:translateY(24px)}}
-@keyframes stap{from{transform:rotate(0)}to{transform:rotate(50deg)}}
 `;
+
 // حقن الـ keyframes مرة واحدة
 (function(){ const s=document.createElement('style'); s.textContent=KEYFRAMES; document.head.appendChild(s); })();
 
