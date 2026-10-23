@@ -1,5 +1,5 @@
 /* خطوتي — Service Worker للعمل كتطبيق بدون إنترنت */
-const CACHE = 'ryadati-v5';
+const CACHE = 'ryadati-v7';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
